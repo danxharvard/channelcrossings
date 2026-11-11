@@ -1,0 +1,91 @@
+{
+ "source": "https://assets.publishing.service.gov.uk/media/6a85c41d3d82f78d5c514551/illegal-entry-routes-to-the-uk-dataset-jun-2026.xlsx",
+ "from": 2018,
+ "latestQuarter": "2025 Q4",
+ "period": "arrivals from 2018 to the end of 2025",
+ "total": {
+  "arrived": 188718,
+  "claimed": 179671,
+  "granted": 81409,
+  "refused": 56391,
+  "withdrawn": 33790,
+  "waiting": 8081,
+  "decided": 137800,
+  "grantRate": 60
+ },
+ "years": [
+  {
+   "year": 2018,
+   "arrived": 285,
+   "claimed": 280,
+   "granted": 145,
+   "refused": 129,
+   "withdrawn": 6,
+   "waiting": 0
+  },
+  {
+   "year": 2019,
+   "arrived": 1833,
+   "claimed": 1813,
+   "granted": 815,
+   "refused": 948,
+   "withdrawn": 45,
+   "waiting": 5
+  },
+  {
+   "year": 2020,
+   "arrived": 8406,
+   "claimed": 8276,
+   "granted": 4166,
+   "refused": 3458,
+   "withdrawn": 581,
+   "waiting": 71
+  },
+  {
+   "year": 2021,
+   "arrived": 28023,
+   "claimed": 25276,
+   "granted": 15872,
+   "refused": 5082,
+   "withdrawn": 4034,
+   "waiting": 288
+  },
+  {
+   "year": 2022,
+   "arrived": 45478,
+   "claimed": 41188,
+   "granted": 17178,
+   "refused": 7093,
+   "withdrawn": 16128,
+   "waiting": 789
+  },
+  {
+   "year": 2023,
+   "arrived": 28200,
+   "claimed": 27610,
+   "granted": 10758,
+   "refused": 10881,
+   "withdrawn": 5358,
+   "waiting": 613
+  },
+  {
+   "year": 2024,
+   "arrived": 35898,
+   "claimed": 35276,
+   "granted": 13732,
+   "refused": 14784,
+   "withdrawn": 4953,
+   "waiting": 1807
+  },
+  {
+   "year": 2025,
+   "arrived": 40595,
+   "claimed": 39952,
+   "granted": 18743,
+   "refused": 14016,
+   "withdrawn": 2685,
+   "waiting": 4508
+  }
+ ],
+ "updatedAt": "2026-10-16T08:04:54Z"
+}

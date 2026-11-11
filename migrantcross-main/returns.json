@@ -1,0 +1,67 @@
+{
+ "source": "https://www.gov.uk/government/publications/the-border-security-commanders-annual-report-data/transfers-into-and-returns-from-the-united-kingdom-under-the-uk-france-agreement-on-the-prevention-of-dangerous-journeys-between-6-august-2025-and-30",
+ "title": "Transfers into and returns from the United Kingdom under the UK-France Agreement on the Prevention of Dangerous Journeys, between 6 August 2025 and 30 June 2026 ",
+ "from": "2025-08-06",
+ "to": "2026-06-30",
+ "months": [
+  {
+   "month": "2025-08",
+   "in": 0,
+   "out": 0
+  },
+  {
+   "month": "2025-09",
+   "in": 3,
+   "out": 17
+  },
+  {
+   "month": "2025-10",
+   "in": 51,
+   "out": 58
+  },
+  {
+   "month": "2025-11",
+   "in": 87,
+   "out": 78
+  },
+  {
+   "month": "2025-12",
+   "in": 104,
+   "out": 64
+  },
+  {
+   "month": "2026-01",
+   "in": 122,
+   "out": 88
+  },
+  {
+   "month": "2026-02",
+   "in": 3,
+   "out": 49
+  },
+  {
+   "month": "2026-03",
+   "in": 73,
+   "out": 109
+  },
+  {
+   "month": "2026-04",
+   "in": 138,
+   "out": 142
+  },
+  {
+   "month": "2026-05",
+   "in": 222,
+   "out": 218
+  },
+  {
+   "month": "2026-06",
+   "in": 314,
+   "out": 264
+  }
+ ],
+ "in": 1117,
+ "out": 1087,
+ "arrivals": 27920,
+ "updatedAt": "2026-10-15T13:11:32Z"
+}

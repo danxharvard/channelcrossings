@@ -1,0 +1,269 @@
+/* Studio: every graph on the site, drawn the way the visitor chooses. Loaded the first time the Studio tab opens.
+   The page uses the site's own cards, segmented controls and large titles; only the marks inside the charts change with the style. */
+.st-wrap{display:grid;grid-template-columns:minmax(0,1fr);gap:34px;min-width:0}
+
+/* the controls along the top: a flat bar that stays under the tabs while you scroll.
+   Styles on the left, each a cluster of its three colours; what to show on the right; the chosen one is filled in solid blue */
+.st-bar{position:sticky;top:calc(env(safe-area-inset-top,0px) + 66px);z-index:5;justify-self:center;max-width:100%;box-sizing:border-box;
+  display:flex;align-items:center;gap:6px;padding:5px;border-radius:999px;
+  background:var(--card);box-shadow:inset 0 0 0 1px var(--sep)}
+.st-row{display:flex;align-items:center;gap:8px;flex:none;padding-left:8px;border-left:.5px solid var(--sep);margin-left:2px}
+.st-row .seg{flex:none;background:none;padding:0}
+.st-row .seg button{height:36px;padding:0 14px;font-size:.8rem;transition:background .25s,box-shadow .25s}
+.st-styles{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;min-width:0;-webkit-overflow-scrolling:touch}
+.st-styles::-webkit-scrollbar{display:none}
+.st-sw{flex:none;display:flex;align-items:center;gap:8px;height:36px;padding:0 13px 0 9px;border:0;border-radius:999px;background:none;color:var(--label);
+  font:600 .8rem/1 -apple-system,BlinkMacSystemFont,"SF Pro Text",var(--font);letter-spacing:-.005em;cursor:pointer;-webkit-tap-highlight-color:transparent;
+  transition:background .25s ease,box-shadow .25s ease,transform .25s cubic-bezier(.3,1.4,.5,1)}
+.st-sw i{display:flex}
+.st-sw i b{display:block;width:14px;height:14px;border-radius:50%;box-shadow:0 0 0 1.5px var(--card)}
+.st-sw i b + b{margin-left:-5px}
+@media (hover:hover){.st-sw:hover,.st-row .seg button:hover{background:var(--fill)}}
+.st-sw:active,.st-row .seg button:active{transform:scale(.96)}
+/* the chosen one: solid blue */
+.st-sw[aria-pressed="true"],.st-row .seg button[aria-pressed="true"]{background:var(--blue);color:#fff;box-shadow:none}
+.st-sw[aria-pressed="true"] i b{box-shadow:0 0 0 1.5px var(--blue)}
+@media (max-width:719px){
+  .st-bar{top:calc(env(safe-area-inset-top,0px) + 60px);justify-self:stretch;flex-direction:column;align-items:stretch;gap:4px;border-radius:26px}
+  .st-row{padding:4px 0 0;margin:0 4px;border-left:0;border-top:.5px solid var(--sep)}
+  .st-row .seg{display:grid;width:100%}
+  .st-sw{height:34px;padding:0 11px 0 8px}.st-row .seg button{height:34px;padding:0 8px;white-space:nowrap}
+}
+.st-sw:focus-visible,.st-forms button:focus-visible,.st-act:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+
+/* the charts */
+.st-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:24px}
+@media (min-width:900px){.st-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.st-grid .st-full{grid-column:1 / -1}}
+/* cards in a pair share a height, so the chart sits in the middle of the space rather than leaving a gap at the bottom */
+.st-card{display:flex;flex-direction:column;gap:12px;min-width:0;padding:18px 18px 16px}
+.st-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.st-card h3{margin:0;font:600 .882rem/1.2 var(--font);color:var(--label2)}
+.st-read{margin-top:4px}
+.st-read b{display:block;font:700 1.65rem/1.1 var(--display,var(--font));letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.st-read span{font-size:.824rem;color:var(--label2)}
+.st-acts{display:flex;gap:6px;flex:none}
+.st-act{appearance:none;border:0;width:32px;height:32px;border-radius:50%;background:var(--fill);color:var(--label);display:grid;place-items:center;cursor:pointer;transition:opacity .2s}
+.st-act:disabled{opacity:.35;cursor:default}
+.st-act svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.st-opts{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.st-opts .seg{max-width:100%;overflow-x:auto;scrollbar-width:none}.st-opts .seg::-webkit-scrollbar{display:none}
+.st-opts .seg button{height:28px;font-size:.735rem;white-space:nowrap}
+/* the chart forms: small labelled pills, so a visitor can see every way a chart can be drawn */
+.st-forms{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin:0 -18px;padding:0 18px}
+.st-forms::-webkit-scrollbar{display:none}
+.st-forms button{flex:none;appearance:none;border:0;height:28px;padding:0 12px;border-radius:999px;background:none;box-shadow:inset 0 0 0 1px var(--sep);
+  color:var(--label2);font:600 .735rem/1 var(--font);cursor:pointer;display:flex;align-items:center;gap:6px}
+.st-forms button svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.st-forms button[aria-pressed="true"]{background:var(--label);color:var(--card);box-shadow:none}
+/* fingers: bigger targets for the small controls */
+@media (pointer:coarse){.st-forms button{height:34px;padding:0 14px}.st-act{width:38px;height:38px}.st-opts .seg button{height:30px}}
+.st-chart{position:relative;min-height:120px;touch-action:pan-y}
+.st-chart svg{display:block;width:100%;height:auto;overflow:visible}
+.st-note{margin:0;font-size:.765rem;line-height:1.4;color:var(--label2)}
+.st-tbl{width:100%;border-collapse:collapse;font-size:.824rem;font-variant-numeric:tabular-nums}
+.st-tbl-wrap{max-height:320px;overflow:auto;border-radius:12px}
+.st-tbl th{position:sticky;top:0;background:var(--card);text-align:left;font-weight:600;color:var(--label2);padding:8px 10px;border-bottom:1px solid var(--sep)}
+.st-tbl td{padding:7px 10px;border-bottom:.5px solid var(--sep)}
+.st-tbl td:not(:first-child),.st-tbl th:not(:first-child){text-align:right}
+.st-legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.765rem;color:var(--label2)}
+.st-legend span{display:flex;align-items:center;gap:6px}
+.st-legend i{width:10px;height:10px;border-radius:3px;display:block}
+
+/* the tooltip that follows the finger or the pointer */
+.st-tip{position:fixed;z-index:60;pointer-events:none;padding:8px 11px;border-radius:12px;font:500 .765rem/1.35 var(--font);color:var(--label);max-width:220px;
+  background:var(--card);box-shadow:inset 0 0 0 1px var(--sep);opacity:0;transform:translateY(4px);transition:opacity .12s ease,transform .12s ease}
+.st-tip.on{opacity:1;transform:none}
+.st-tip b{display:block;font-weight:700;font-size:.882rem;font-variant-numeric:tabular-nums}
+
+
+/* ------------------------------------------------------------ locked: the offer on a solid card over a frosted screen */
+.st-lock{position:relative;display:grid;min-width:0}
+.st-lock > *{grid-area:1 / 1}
+/* the picture fades out on every side, so it has no hard edges */
+.st-peek img{display:block;width:100%;height:auto;min-height:760px;object-fit:cover;object-position:top;
+  -webkit-mask:linear-gradient(90deg,transparent,#000 18%,#000 82%,transparent);mask:linear-gradient(90deg,transparent,#000 18%,#000 82%,transparent)}
+.st-peek{opacity:.75;pointer-events:none;user-select:none;max-height:1100px;overflow:hidden;
+  -webkit-mask:linear-gradient(transparent,#000 8%,#000 40%,transparent);mask:linear-gradient(transparent,#000 8%,#000 40%,transparent)}
+.st-offer{align-self:center;justify-self:center;position:relative;z-index:2;width:min(480px,100%);margin-top:30px;padding:26px 24px 22px;text-align:center;
+  border-radius:30px;background:var(--card);box-shadow:inset 0 0 0 1px var(--sep)}
+/* the offer page: a blank frosted screen over the whole window, with the offer near the top, so nothing needs scrolling */
+.st-lock{position:fixed;inset:0;z-index:48;display:flex!important;flex-direction:column;align-items:center;overflow-y:auto;overscroll-behavior:contain;
+  padding:calc(var(--busy-h,0px) + env(safe-area-inset-top,0px) + 78px) 16px calc(env(safe-area-inset-bottom,0px) + 24px);
+  background:color-mix(in srgb,var(--bg) 62%,transparent);-webkit-backdrop-filter:blur(40px) saturate(160%);backdrop-filter:blur(40px) saturate(160%)}
+.st-lock > *{grid-area:auto}
+.st-lock .st-offer{margin-top:0;padding:22px 22px 18px}
+:root[data-tab="studio"]:has(.st-lock){overflow:hidden}
+:root:not([data-tab="studio"]) .st-lock{display:none!important}
+:root[data-tab="studio"]:has(.st-lock) .busy-note{position:relative;z-index:49}   /* the site notice stays readable above the frost */
+@media (max-width:719px){
+  .st-lock{padding-top:calc(var(--busy-h,0px) + env(safe-area-inset-top,0px) + 66px);padding-bottom:calc(env(safe-area-inset-bottom,0px) + 84px)}
+  .st-lock .st-offer{padding:18px 18px 14px;border-radius:26px}
+  .st-lock .st-offer h3{font-size:1.24rem}
+  .st-lock .st-offer > p{margin-bottom:12px}
+  .st-lock .st-offer > p.st-free{margin-bottom:12px;padding:10px 12px}
+  .st-lock .st-list{gap:6px;margin-bottom:14px}
+}
+@media (min-width:560px){.st-lock .st-list{grid-template-columns:1fr 1fr;gap:9px 14px}}
+/* short screens: the lines tighten and the intro line steps aside, so the whole offer still fits without scrolling */
+@media (max-height:760px) and (max-width:719px){
+  .st-lock .st-offer > p:not([class]){display:none}
+  .st-lock .st-offer h3{margin-bottom:10px}
+  .st-lock .st-offer > p.st-free{font-size:.765rem;padding:9px 11px;margin-bottom:10px}
+  .st-lock .st-list{font-size:.824rem;gap:4px;margin-bottom:12px}
+  .st-lock .st-field{height:42px;margin-bottom:8px}
+  .st-lock .st-buy{height:46px}
+  .st-lock .st-link{padding-top:9px}
+  .st-lock .st-offer > p.st-fine{margin-top:6px}
+  .st-lock .st-offer{padding:14px 16px 10px}
+  .st-lock .st-offer h3{font-size:1.12rem;margin-bottom:8px}
+  .st-lock .st-list{gap:3px}
+}
+@media (max-height:620px) and (max-width:719px){.st-lock .st-offer > p.st-free{display:none}}
+#pg-studio.st-locked .lt-head{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.st-badge{width:58px;height:58px;margin:0 auto 14px;border-radius:16px;display:grid;place-items:center;color:#fff;
+  background:#007AFF}
+.st-badge svg{width:30px;height:30px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.st-offer h3{margin:0 0 6px;font:700 1.41rem/1.15 var(--font);letter-spacing:-.02em;color:var(--label)}
+.st-offer > p{margin:0 0 16px;color:var(--label2);font-size:.882rem;line-height:1.45}
+.st-list{list-style:none;margin:0 0 18px;padding:0;display:grid;gap:9px;text-align:left;font-size:.882rem}
+.st-list li{display:flex;gap:10px;align-items:flex-start}
+.st-list svg{flex:none;width:18px;height:18px;margin-top:1px;fill:none;stroke:var(--blue);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.st-field{display:block;width:100%;height:46px;padding:0 14px;margin:0 0 10px;border:0;border-radius:12px;background:var(--fill);color:var(--label);font:500 1rem/1 var(--font)}
+.st-field:focus{outline:2px solid var(--blue);outline-offset:0}
+.st-buy{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;height:50px;border:0;border-radius:14px;background:var(--blue);color:#fff;
+  font:600 1rem/1 var(--font);cursor:pointer;transition:transform .15s ease,opacity .2s ease}
+.st-buy:active{transform:scale(.98)}
+.st-buy[disabled]{opacity:.5;cursor:default}
+.st-link{appearance:none;border:0;background:none;color:var(--blue);font:600 .824rem/1 var(--font);cursor:pointer;padding:12px 4px 2px}
+.st-offer > p.st-fine,.st-fine{margin:12px 0 0;font-size:.706rem;line-height:1.45;color:var(--label2)}
+.st-offer > p.st-msg,.st-msg{margin:10px 0 0;font-size:.824rem;line-height:1.4;color:var(--label2)}
+.st-msg:empty{display:none}
+.st-msg.err{color:var(--red-t,#D70015)}
+
+/* signed in: a quiet line under the title */
+.st-acct{display:flex;align-items:center;flex-wrap:wrap;gap:4px 10px;margin:0 6px;font-size:.824rem;color:var(--label2)}
+.st-acct button{appearance:none;border:0;background:none;padding:0;color:var(--blue);font:inherit;font-weight:600;cursor:pointer}
+.st-offer > p.st-free{margin:-4px 0 18px;padding:12px 14px;border-radius:14px;background:var(--fill);text-align:left;font-size:.824rem;line-height:1.45;color:var(--label2)}
+.st-free b{color:var(--label);font-weight:600}
+
+/* ------------------------------------------------------------ the welcome, as an iPhone lock screen: a wallpaper of the Channel's water,
+   this year's total in large numerals, and four widgets on solid tiles, all in flat colour */
+.st-hero{--sf:-apple-system,BlinkMacSystemFont,"SF Pro Display","Inter Tight",var(--font);--sfr:-apple-system,BlinkMacSystemFont,"SF Pro Rounded","SF Pro Display","Inter Tight",var(--font);
+  position:relative;isolation:isolate;overflow:hidden;border-radius:34px;color:#fff;
+}
+.st-hero:empty{display:none}
+.st-hero-art{position:absolute;inset:0;z-index:-2}
+.st-hero-art svg{display:block;width:100%;height:100%}
+.st-hero-in{display:flex;flex-direction:column;align-items:center;text-align:center;padding:46px 28px 28px}
+.st-hero-date{margin:0;font:600 1.12rem/1.2 var(--sf);letter-spacing:-.01em;opacity:.95}
+.st-hero-big{margin:2px 0 0;line-height:1}
+.st-hero-big b{display:block;font:700 clamp(4.6rem,13vw,8.6rem)/.95 var(--sfr);letter-spacing:-.045em;font-variant-numeric:tabular-nums;
+  color:#fff}
+.st-hero-sub{margin:10px auto 0;max-width:24em;font:500 1rem/1.35 var(--sf);letter-spacing:-.005em;opacity:.9;text-wrap:balance}
+.st-hero-tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;width:100%;margin-top:clamp(34px,6vw,64px);text-align:left}
+
+/* the widgets: rounded squares of solid colour, as on the Home Screen */
+.st-w{position:relative;min-width:0;display:flex;flex-direction:column;padding:14px 15px 15px;border-radius:24px;overflow:hidden;
+  background:#14235A}
+.st-w-h{display:flex;align-items:center;gap:6px;font:600 .74rem/1.2 var(--sf);letter-spacing:.005em;opacity:.9;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.st-w-ic{flex:none;display:grid;place-items:center;width:20px;height:20px;border-radius:6px;background:rgba(255,255,255,.22)}
+.st-w-ic svg{width:13px;height:13px;fill:none;stroke:#fff;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.w-cal .st-w-ic{background:#FF3B30}.w-cmp .st-w-ic{background:#0A84FF}.w-30 .st-w-ic{background:#30B0C7}.w-pb .st-w-ic{background:#FF9F0A}
+.st-w-v{margin-top:10px;font:700 1.9rem/1 var(--sfr);letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.st-w-f{margin-top:4px;font:500 .74rem/1.3 var(--sf);opacity:.78}
+.st-w-bars{display:flex;flex-direction:column;gap:7px;margin-top:auto;padding-top:12px}
+.st-w-bars span{display:grid;grid-template-columns:auto 1fr;align-items:baseline;gap:5px 8px;font:600 .74rem/1 var(--sf);font-variant-numeric:tabular-nums}
+.st-w-bars em{font-style:normal;opacity:.8}
+.st-w-bars b{justify-self:end;font-weight:700}
+.st-w-bars i{grid-column:1/-1;position:relative;display:block;height:7px;border-radius:4px;background:rgba(255,255,255,.18);overflow:hidden}
+.st-w-bars i::after{content:"";position:absolute;inset:0;width:calc(var(--w) * 100%);border-radius:inherit;background:#fff}
+.st-w-bars .p i::after{background:rgba(255,255,255,.5);box-shadow:none}
+.st-w-calrow{display:flex;align-items:center;gap:12px;margin-top:auto;padding-top:10px}
+.st-w-date{flex:none;display:flex;flex-direction:column;align-items:center;width:62px;padding:7px 0 6px;border-radius:15px;background:#fff;color:#1C1C1E}
+.st-w-date small{font:700 .62rem/1 var(--sf);letter-spacing:.04em;color:#FF3B30}
+.st-w-date small:last-child{margin-top:2px;color:#8E8E93;letter-spacing:0;font-weight:600}
+.st-w-date b{font:600 1.9rem/1.05 var(--sf);letter-spacing:-.03em}
+.st-w-calrow .st-w-v{margin-top:0;font-size:1.6rem}
+.st-w-spark,.st-w-line{display:block;width:100%;height:34px;margin-top:auto;padding-top:10px;box-sizing:content-box;overflow:visible}
+.st-w-spark rect{fill:rgba(255,255,255,.45)}.st-w-spark rect.on{fill:#fff}
+.st-w-line path{fill:none;stroke:#fff;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;opacity:.9}
+.st-w-line circle{fill:#fff;stroke:rgba(255,255,255,.35);stroke-width:5;paint-order:stroke}
+@media (max-width:899px){.st-hero-tiles{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:719px){.st-hero{border-radius:30px}.st-hero-in{padding:34px 14px 14px}.st-hero-date{font-size:1rem}.st-hero-sub{font-size:.92rem}
+  .st-hero-tiles{gap:10px}.st-w{padding:12px 12px 13px;border-radius:22px}.st-w-v{font-size:1.55rem}.st-w-calrow{gap:9px}.st-w-date{width:52px}.st-w-date b{font-size:1.6rem}.st-w-calrow .st-w-v{font-size:1.3rem}}
+@media (prefers-reduced-motion:no-preference){
+  .st-hero-in > *{animation:stRise .8s cubic-bezier(.2,.85,.25,1) both}
+  .st-hero-big{animation-delay:.06s!important}.st-hero-sub{animation-delay:.12s!important}.st-hero-tiles{animation-delay:.2s!important}
+}
+@keyframes stRise{from{opacity:0;transform:translateY(14px) scale(.985)}}
+
+/* charts draw themselves in: bars grow from the baseline, lines trace across, squares and slices appear in a sweep */
+@media (prefers-reduced-motion:no-preference){
+  .st-anim .st-b{transform-box:fill-box;transform-origin:50% 100%;animation:stGrowY .75s cubic-bezier(.2,.9,.25,1) both}
+  .st-anim .st-b.h{transform-origin:0 50%;animation-name:stGrowX}
+  .st-anim .st-b.d{transform-origin:50% 0}
+  .st-anim .st-l{stroke-dasharray:1;animation:stDraw 1.15s cubic-bezier(.45,0,.2,1) both}
+  .st-anim .st-a{animation:stFade .9s ease .3s both}
+  .st-anim .st-d{transform-box:fill-box;transform-origin:50% 50%;animation:stPop .55s cubic-bezier(.2,.9,.3,1.25) both}
+  .st-anim .st-t{animation:stFade .5s ease .75s both}
+}
+@keyframes stGrowY{from{transform:scaleY(0)}}
+@keyframes stGrowX{from{transform:scaleX(0)}}
+@keyframes stDraw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+@keyframes stFade{from{opacity:0}}
+@keyframes stPop{from{opacity:0;transform:scale(.3)}}
+
+/* rows of buttons that run off the edge fade out where there's more to swipe to (studio.js marks them) */
+.st-more-r{-webkit-mask:linear-gradient(90deg,#000 calc(100% - 34px),transparent);mask:linear-gradient(90deg,#000 calc(100% - 34px),transparent)}
+.st-more-l{-webkit-mask:linear-gradient(90deg,transparent,#000 34px);mask:linear-gradient(90deg,transparent,#000 34px)}
+.st-more-l.st-more-r{-webkit-mask:linear-gradient(90deg,transparent,#000 34px,#000 calc(100% - 34px),transparent);mask:linear-gradient(90deg,transparent,#000 34px,#000 calc(100% - 34px),transparent)}
+
+.st-card .st-chart{flex:1 0 auto;display:flex;flex-direction:column;justify-content:center}
+
+/* pull-down menus for phones: each row of buttons folds into a capsule naming the choice, with the up-and-down chevron iOS uses;
+   the system's own menu opens from the <select> laid invisibly over it */
+.st-picks{display:none}
+@media (max-width:719px){
+  .st-picks{display:flex;flex-wrap:wrap;gap:8px}
+  .st-card .st-opts,.st-card .st-forms,.st-bar .st-styles,.st-bar .st-row{display:none!important}
+  .st-bar{flex-direction:row!important;align-items:center;justify-self:start!important;border-radius:999px!important;padding:4px!important}
+  .st-bar .st-picks{gap:2px;flex-wrap:nowrap}
+  .st-bar .st-pick{background:none;box-shadow:none}
+  .st-bar .st-pick + .st-pick{border-left:.5px solid var(--sep);border-radius:0 999px 999px 0}
+  .st-card .st-picks{margin:2px 0 4px}
+}
+.st-pick{position:relative;display:inline-flex;align-items:center;gap:7px;height:36px;padding:0 12px 0 13px;border-radius:999px;background:var(--fill);color:var(--label);
+  font:600 .82rem/1 -apple-system,BlinkMacSystemFont,"SF Pro Text",var(--font);letter-spacing:-.005em;white-space:nowrap;cursor:pointer;-webkit-tap-highlight-color:transparent;
+  transition:transform .2s cubic-bezier(.3,1.4,.5,1)}
+.st-pick:active{transform:scale(.96)}
+.st-pick:focus-within{outline:2px solid var(--blue);outline-offset:2px}
+.st-pick > svg:not(.st-pick-c){width:16px;height:16px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.st-pick i{display:flex}.st-pick i b{display:block;width:13px;height:13px;border-radius:50%;box-shadow:0 0 0 1.5px var(--card)}.st-pick i b + b{margin-left:-5px}
+.st-pick-c{width:8px;height:13px;flex:none;fill:none;stroke:var(--label2);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;margin-left:1px}
+.st-pick select{position:absolute;inset:0;width:100%;height:100%;opacity:0;border:0;margin:0;padding:0;font-size:16px;cursor:pointer;-webkit-appearance:none;appearance:none}
+/* light: the tiles a deeper blue than the water behind */
+:root[data-theme="light"] .st-w{background:#0F4FBF}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .st-w{background:#0F4FBF}}
+
+/* ------------------------------------------------------------ Ask for a chart: a search field, a row of examples, and the one chart that answers */
+.st-ask{gap:14px}
+.st-ask-f{display:flex;align-items:center;gap:8px;height:52px;padding:0 6px 0 16px;border-radius:999px;background:var(--fill);transition:box-shadow .2s}
+.st-ask-f:focus-within{box-shadow:0 0 0 2px var(--blue)}
+.st-ask-f > svg{flex:none;width:19px;height:19px;fill:none;stroke:var(--label2);stroke-width:2.2;stroke-linecap:round}
+.st-ask-f input{flex:1;min-width:0;height:100%;border:0;background:none;color:var(--label);font:500 1.0625rem/1.2 var(--font);outline:none;-webkit-appearance:none;appearance:none}
+.st-ask-f input::placeholder{color:var(--label2);opacity:.85}
+.st-ask-f input::-webkit-search-cancel-button{display:none}
+.st-ask-f button{flex:none;appearance:none;border:0;height:40px;padding:0 18px;border-radius:999px;background:var(--blue);color:#fff;font:600 .9rem/1 var(--font);cursor:pointer;transition:transform .2s cubic-bezier(.3,1.4,.5,1)}
+.st-ask-f button:active{transform:scale(.95)}
+.st-ask-eg{display:flex;flex-wrap:wrap;gap:6px;margin-top:-4px}
+.st-ask-eg button{flex:none;appearance:none;border:0;height:30px;padding:0 12px;border-radius:999px;background:none;box-shadow:inset 0 0 0 1px var(--sep);color:var(--label2);font:500 .78rem/1 var(--font);cursor:pointer;white-space:nowrap}
+@media (hover:hover){.st-ask-eg button:hover{color:var(--label);background:var(--fill)}}
+.st-ask-out{display:flex;flex-direction:column;gap:12px;padding-top:16px;border-top:.5px solid var(--sep)}
+.st-ask-out[hidden]{display:none}
+.st-ask-out h3{color:var(--label)!important;font-size:1rem!important}
+.st-ask-note{margin:0;font-size:.8rem;line-height:1.45;color:var(--label2)}
+.st-ask-note:empty{display:none}
+.st-ask .st-forms:empty{display:none}
+@media (pointer:coarse){.st-ask-eg button{height:34px}}
+@media (max-width:379px){.st-ask-f{padding-left:18px}.st-ask-f > svg{display:none}}
+@media (max-width:719px){.st-ask-f{height:48px}.st-ask-f input{font-size:16px}.st-ask-eg button:nth-child(n+5){display:none}}

@@ -1,0 +1,38 @@
+{
+ "source": "https://assets.publishing.service.gov.uk/media/6a85c41d3d82f78d5c514551/illegal-entry-routes-to-the-uk-dataset-jun-2026.xlsx",
+ "latestQuarter": "2026 Q2",
+ "period": "year ending June 2026",
+ "lastYear": {
+  "sex": {
+   "Male": 26973,
+   "Female": 5260,
+   "Unknown": 1141
+  },
+  "age": {
+   "17 and under": 4993,
+   "18 to 24": 10637,
+   "25 to 39": 14341,
+   "40 and over": 2263,
+   "Unknown": 1140
+  },
+  "adultMen": 23110,
+  "total": 33374
+ },
+ "since2018": {
+  "sex": {
+   "Male": 174171,
+   "Female": 26077,
+   "Unknown": 4269
+  },
+  "age": {
+   "17 and under": 32306,
+   "18 to 24": 66808,
+   "25 to 39": 86529,
+   "40 and over": 14924,
+   "Unknown": 3950
+  },
+  "adultMen": 148786,
+  "total": 204517
+ },
+ "updatedAt": "2026-09-27T18:15:08Z"
+}

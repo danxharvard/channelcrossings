@@ -1,0 +1,40 @@
+{
+ "source": "https://assets.publishing.service.gov.uk/media/6a85c41d3d82f78d5c514551/illegal-entry-routes-to-the-uk-dataset-jun-2026.xlsx",
+ "latestQuarter": "2026 Q2",
+ "period": "year ending June 2026",
+ "total": 33374,
+ "top": [
+  {
+   "name": "Eritrea",
+   "n": 5875,
+   "pc": 17.6,
+   "change": -2
+  },
+  {
+   "name": "Sudan",
+   "n": 4191,
+   "pc": 12.6,
+   "change": 11
+  },
+  {
+   "name": "Afghanistan",
+   "n": 4042,
+   "pc": 12.1,
+   "change": -37
+  },
+  {
+   "name": "Somalia",
+   "n": 3901,
+   "pc": 11.7,
+   "change": 76
+  },
+  {
+   "name": "Iran",
+   "n": 3657,
+   "pc": 11.0,
+   "change": -15
+  }
+ ],
+ "other": 11708,
+ "updatedAt": "2026-09-30T09:55:56Z"
+}
