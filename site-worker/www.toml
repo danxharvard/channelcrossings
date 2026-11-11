@@ -1,0 +1,9 @@
+# www.channelcrossings.world: sends everyone on to the same page on channelcrossings.world. Deployed by .github/workflows/deploy.yml.
+name = "channelcrossings-www"
+main = "www.js"
+compatibility_date = "2026-09-01"
+workers_dev = false
+
+[[routes]]
+pattern = "www.channelcrossings.world"
+custom_domain = true

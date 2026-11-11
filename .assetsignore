@@ -1,0 +1,14 @@
+# Files in the repo that aren't part of the website, so Cloudflare doesn't serve them (same rules as .gitignore)
+.git
+.github
+.gitignore
+.assetsignore
+.wrangler
+node_modules
+site-worker
+scripts
+__pycache__
+*.pyc
+requirements.txt
+README.md
+CNAME

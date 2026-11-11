@@ -40,14 +40,17 @@ A one-page site showing how many people cross the English Channel in small boats
 - `vendor/leaflet/` – the Leaflet map library (BSD licence)
 - `.github/workflows/update.yml` and `scripts/gate.py` – from 12 noon UK time, check for new figures every 15 minutes until they're in, then stop until noon the next day
 
-## Put it online with GitHub Pages
+## Put it online with Cloudflare
 
-1. Create a new **public** repository on GitHub.
-2. Upload everything in this folder, keeping the folder structure (including the `.github` folder).
-   On a Mac, press Cmd+Shift+. in Finder to see the hidden `.github` folder.
-3. In the repository, go to **Settings → Pages**, choose **Deploy from a branch**, select `main` and `/ (root)`, and save.
+The site is served by Cloudflare Workers (free plan), not GitHub Pages: `site-worker/wrangler.toml` serves this folder's
+files at channelcrossings.world (`.assetsignore` keeps the scripts and workflows off the site), and `site-worker/www.toml`
+sends www.channelcrossings.world on to it. `.github/workflows/deploy.yml` deploys on every push to main and after every data update.
+
+1. In Cloudflare, add channelcrossings.world to your account (Websites → Add a domain) and switch the domain's nameservers to the two Cloudflare shows.
+2. In Cloudflare → My Profile → API Tokens, create a token from the **Edit Cloudflare Workers** template, with your account and the channelcrossings.world zone.
+3. In the repository, go to **Settings → Secrets and variables → Actions** and add `CLOUDFLARE_API_TOKEN` (that token) and `CLOUDFLARE_ACCOUNT_ID` (shown on the Cloudflare dashboard's home page), plus the data secrets: `TG_API_ID`, `TG_API_HASH`, `TG_SESSION`, `AISSTREAM_KEY`, `FB_PAGE_ID`, `FB_PAGE_TOKEN`.
 4. Go to **Settings → Actions → General → Workflow permissions**, select **Read and write permissions**, and save.
-5. Go to the **Actions** tab, open **Update crossing figures**, and click **Run workflow** once to load the full history.
+5. In the domain's DNS records in Cloudflare, delete any A, AAAA or `www` CNAME records that point at GitHub, then run **Deploy to Cloudflare** from the **Actions** tab.
 
 The site expects to be served from the root of its own domain (set in `CNAME`): the sitemap, robots.txt, canonical links and IndexNow all name channelcrossings.world, and `404.html` sends visitors to `/`. After that, the figures update themselves every day.
 

@@ -1,0 +1,42 @@
+name: Deploy to Cloudflare
+
+# The site is served by Cloudflare (site-worker/), not GitHub Pages. It goes live on every push to main, and after each
+# data update: those commits are pushed by the workflows' own token, which GitHub never lets start another push run.
+on:
+  push:
+    branches: [main]
+  workflow_run:
+    workflows: ["Update breaking news", "Update crossing figures", "Update rescue and patrol boats"]
+    types: [completed]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# one deploy at a time; a newer one replaces any that's still waiting, and each deploys the latest main
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: main
+
+      - name: Deploy to Cloudflare, at channelcrossings.world
+        working-directory: site-worker
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ] || [ -z "$CLOUDFLARE_ACCOUNT_ID" ]; then echo "::error title=Site not deployed::Add CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID under Settings > Secrets and variables > Actions."; exit 1; fi
+          if ! npx --yes wrangler@4 deploy; then
+            sed -i '/^\[\[routes\]\]/,+2d' wrangler.toml
+            npx --yes wrangler@4 deploy
+            echo "::warning title=Connect channelcrossings.world::The site is live on its workers.dev address only. In Cloudflare > channelcrossings.world > DNS, delete the A records for channelcrossings.world (they point at GitHub), then run this again."
+          fi
+          npx --yes wrangler@4 deploy -c www.toml || echo "::warning title=Connect www.channelcrossings.world::In Cloudflare > channelcrossings.world > DNS, delete the www CNAME record (it points at GitHub), then run this again."
