@@ -1,0 +1,14 @@
+# Files in the repo that aren't part of the website: deploy.yml leaves these out of the copy it hands to Cloudflare
+.git
+.github
+.gitignore
+.wrangler
+_site
+node_modules
+site-worker
+scripts
+__pycache__
+*.pyc
+requirements.txt
+README.md
+CNAME

@@ -27,6 +27,9 @@ jobs:
         with:
           ref: main
 
+      - name: Copy the site's files, leaving out the scripts and workflows
+        run: rsync -a --exclude-from=site-worker/exclude.txt ./ _site/
+
       - name: Deploy to Cloudflare, at channelcrossings.world
         working-directory: site-worker
         env:

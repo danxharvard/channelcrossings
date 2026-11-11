@@ -1,12 +1,12 @@
 # channelcrossings.world: the site's files served as static assets on Cloudflare Workers (free plan), in place of
 # GitHub Pages since the old GitHub account was lost. Deployed by .github/workflows/deploy.yml.
-# The files are the repo's root folder; .assetsignore at the root keeps the scripts and workflows off the site.
+# The files are the repo root, minus the scripts and workflows (site-worker/exclude.txt).
 name = "channelcrossings-site"
 compatibility_date = "2026-09-01"
 workers_dev = true
 
 [assets]
-directory = ".."
+directory = "../_site"   # the site files, copied there by deploy.yml without site-worker/exclude.txt
 html_handling = "auto-trailing-slash"   # /how-it-works opens how-it-works.html, as on GitHub Pages
 not_found_handling = "404-page"         # 404.html, which sends visitors on to the homepage
 

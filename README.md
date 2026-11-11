@@ -43,7 +43,7 @@ A one-page site showing how many people cross the English Channel in small boats
 ## Put it online with Cloudflare
 
 The site is served by Cloudflare Workers (free plan), not GitHub Pages: `site-worker/wrangler.toml` serves this folder's
-files at channelcrossings.world (`.assetsignore` keeps the scripts and workflows off the site), and `site-worker/www.toml`
+files at channelcrossings.world (leaving out what's listed in `site-worker/exclude.txt`, such as the scripts and workflows), and `site-worker/www.toml`
 sends www.channelcrossings.world on to it. `.github/workflows/deploy.yml` deploys on every push to main and after every data update.
 
 1. In Cloudflare, add channelcrossings.world to your account (Websites → Add a domain) and switch the domain's nameservers to the two Cloudflare shows.
