@@ -43,20 +43,3 @@ jobs:
           git commit -m "$msg"
           for i in 1 2 3; do git pull --rebase && git push && exit 0; git rebase --abort 2>/dev/null || true; sleep 5; done
           exit 1   # three failed pushes fail the step instead of passing silently
-      - name: Post to Facebook
-        # Posts each new day's figures once (fb.json remembers the last one). Does nothing until the
-        # FB_PAGE_ID and FB_PAGE_TOKEN secrets are set. Runs after publishing, so a failed post never
-        # holds up the figures, and a failure emails you (usually an expired Page token). Skipped if the
-        # figures failed to push, so a post never runs ahead of the site.
-        if: steps.gate.outputs.run == 'true'
-        env:
-          FB_PAGE_ID: ${{ secrets.FB_PAGE_ID }}
-          FB_PAGE_TOKEN: ${{ secrets.FB_PAGE_TOKEN }}
-        run: |
-          python scripts/facebook.py
-          [ -f fb.json ] || exit 0
-          git add fb.json
-          git diff --cached --quiet && exit 0
-          git commit -m "Posted the latest figures to Facebook"
-          for i in 1 2 3; do git pull --rebase && git push && exit 0; git rebase --abort 2>/dev/null || true; sleep 5; done
-          exit 1   # three failed pushes fail the step instead of passing silently

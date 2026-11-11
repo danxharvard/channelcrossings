@@ -31,9 +31,7 @@ A one-page site showing how many people cross the English Channel in small boats
 - `scripts/update.py` – fetches the latest figures from GOV.UK and updates `data.json`
 - `scripts/news.py`, `news.json`, `.github/workflows/news.yml` – breaking news about small boats from UK news feeds, every 15 minutes (create `news-override.json` to hide or pin a story)
 - `scripts/build-towns.js`, `towns.json` – the extra town names on the homepage map (GeoNames, CC BY 4.0), shown more as you zoom in; rebuilt by hand, not on a schedule
-- `scripts/facebook.py`, `fb.json` – posts each day's figures to the Facebook Page once they're published (needs the `FB_PAGE_ID` and `FB_PAGE_TOKEN` secrets; `fb.json` remembers the last day posted)
 - `scripts/vessels.py`, `vessels.json` – every 15 minutes, the positions of lifeboats, Border Force, navy ships and rescue aircraft in the Strait from live AIS, drawn on the map (needs the free `AISSTREAM_KEY` secret from [aisstream.io](https://aisstream.io/))
-- `scripts/tg_login.py` – run once by hand to make the `TG_SESSION` secret; with `TG_API_ID`, `TG_API_HASH` and `TG_SESSION` set, `news.py` reads the live sightings channels through Telegram's API
 - `.github/workflows/vessels.yml` – runs `scripts/vessels.py` every 15 minutes
 - `3c699a48e42e6f3a4c6573138dd6fc80.txt` – the IndexNow key; `update.py` pings search engines with it when new figures arrive, so keep it
 - `CNAME` – the custom domain, channelcrossings.world
@@ -48,7 +46,7 @@ sends www.channelcrossings.world on to it. `.github/workflows/deploy.yml` deploy
 
 1. In Cloudflare, add channelcrossings.world to your account (Websites → Add a domain) and switch the domain's nameservers to the two Cloudflare shows.
 2. In Cloudflare → My Profile → API Tokens, create a token from the **Edit Cloudflare Workers** template, with your account and the channelcrossings.world zone.
-3. In the repository, go to **Settings → Secrets and variables → Actions** and add `CLOUDFLARE_API_TOKEN` (that token) and `CLOUDFLARE_ACCOUNT_ID` (shown on the Cloudflare dashboard's home page), plus the data secrets: `TG_API_ID`, `TG_API_HASH`, `TG_SESSION`, `AISSTREAM_KEY`, `FB_PAGE_ID`, `FB_PAGE_TOKEN`.
+3. In the repository, go to **Settings → Secrets and variables → Actions** and add `CLOUDFLARE_API_TOKEN` (that token) and `CLOUDFLARE_ACCOUNT_ID` (shown on the Cloudflare dashboard's home page), plus `AISSTREAM_KEY` for the rescue and patrol boat positions.
 4. Go to **Settings → Actions → General → Workflow permissions**, select **Read and write permissions**, and save.
 5. In the domain's DNS records in Cloudflare, delete any A, AAAA or `www` CNAME records that point at GitHub, then run **Deploy to Cloudflare** from the **Actions** tab.
 
