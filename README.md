@@ -19,8 +19,6 @@ A one-page site showing how many people cross the English Channel in small boats
 - `data.csv` – the same daily figures as a spreadsheet download, linked from the footer
 - `how-it-works.html` – where the figures come from
 - `embed.html` – the small "latest figure" box other sites can embed
-- `studio.js`, `studio.css` – Studio, the paid fourth tab: every graph in six styles and many chart forms, plus Ask for a chart (`studio-ask.js`), unlocked for £1.99; loaded only when the tab opens
-- `scripts/studio-worker.js` – the Cloudflare Worker behind Studio's accounts and payments (an account is an email address; Stripe is the only record of who has paid)
 - `404.html` – shown for any address that doesn't exist (including the retired beta, classic and Beach Radar pages); sends visitors to the homepage
 - `sw.js` – offline mode: keeps a copy of the site on visitors' devices
 - `robots.txt`, `sitemap.xml` – help search engines find and index the site
@@ -55,14 +53,3 @@ The site expects to be served from the root of its own domain (set in `CNAME`): 
 ## About the data
 
 Source: [Small boat activity in the English Channel](https://www.gov.uk/government/publications/migrants-detected-crossing-the-english-channel-in-small-boats) (Home Office, Open Government Licence v3.0). Figures are provisional and can be revised. The daily page covers the last 7 days; the time-series spreadsheet, updated on Fridays, goes back to 2018.
-
-## Studio: switching on payments
-
-Studio stays hidden until the worker is running. To switch it on:
-
-1. **Stripe.** Make an account at stripe.com and stay in **test mode** to start. Copy the secret key (`sk_test_…`) from Developers → API keys.
-2. **Resend.** Make an account at resend.com, add `channelcrossings.world` under Domains and add the DNS records it shows at your domain provider, then create an API key.
-3. **Cloudflare.** Make a free account, go to Workers & Pages → Create → Worker, paste in `scripts/studio-worker.js` and deploy. Under Settings → Variables and Secrets, add `STRIPE_KEY`, `RESEND_KEY` and `SECRET` (any long random string) as secrets, and `SITE` = `https://channelcrossings.world`, `MAIL_FROM` = `Channel Crossings <studio@channelcrossings.world>`, `PRICE_PENCE` = `199` as text.
-4. Put the worker's address (for example `https://studio.yourname.workers.dev`) into `window.CC_STUDIO_API` in `index.html`. The Studio tab still only appears on devices that have opened `https://channelcrossings.world/?studio=preview#studio`, so you can test privately.
-5. Try it with Stripe's test card 4242 4242 4242 4242, any future date and any CVC. Nothing is charged in test mode.
-6. When you're happy, activate your Stripe account, swap `STRIPE_KEY` in Cloudflare for the live key (`sk_live_…`), and set `STUDIO_LIVE = true` in `index.html` to show the tab to everyone.

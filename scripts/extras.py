@@ -2,7 +2,6 @@
 
   gender.json        small boat arrivals by sex and age (Home Office quarterly dataset)
   nationalities.json small boat arrivals by nationality (the same quarterly dataset)
-  natyears.json      the same, for every year since 2018 (Studio's Ask for a chart)
   perboat.json       average people per boat, worked out from the daily figures
   returns.json       UK-France "one in, one out" transfers and returns (Home Office monthly table)
   petitions.json     open UK Parliament petitions about small boat crossings
@@ -196,63 +195,6 @@ def update_nationalities():
         "updatedAt": now_iso(),
     })
     print(f"Nationalities: saved, top {ranked[0]} for {year_ending(quarters[-1])}")
-
-
-def update_nat_years():
-    """Small boat arrivals by nationality for every year since records began (natyears.json), for Studio's Ask for a chart.
-    The 20 largest nationalities over all the years, plus any that were in a year's top five; the rest is the gap to the total."""
-    url = dataset_url()
-    if unchanged("natyears.json", url):
-        print("Nationalities by year: dataset unchanged")
-        return
-    head, rows = find_table(("quarter", "method of entry", "nationality"))
-    qc, mc, nc = head.index("quarter"), head.index("method of entry"), head.index("nationality")
-    num = next(i for i, c in enumerate(head) if "number" in c)
-    counts, quarters = {}, set()                       # (year, nationality) -> people
-    for r in rows:
-        if r is None or len(r) <= num or r[qc] is None or "small boat" not in str(r[mc]).lower():
-            continue
-        q = str(r[qc]).strip()
-        if not re.fullmatch(r"\d{4} Q[1-4]", q):
-            continue
-        try:
-            n = int(r[num] or 0)
-        except (TypeError, ValueError):
-            continue
-        quarters.add(q)
-        k = (q[:4], str(r[nc]).strip())
-        counts[k] = counts.get(k, 0) + n
-    years = sorted({y for y, _ in counts})
-    if len(years) < 3:
-        raise ValueError(f"only {len(years)} years found")
-    total = [sum(n for (y, _), n in counts.items() if y == yr) for yr in years]
-    unknown = re.compile(r"unknown|not (currently )?recorded|not known|other", re.I)
-    names = {k for _, k in counts if not unknown.search(k)}
-    overall = sorted(names, key=lambda k: -sum(counts.get((y, k), 0) for y in years))
-    keep = set(overall[:20])
-    for y in years:
-        keep |= set(sorted(names, key=lambda k: -counts.get((y, k), 0))[:5])
-    nats = [{"name": k, "n": [counts.get((y, k), 0) for y in years]} for k in overall if k in keep]
-    if sum(total) < 10000:
-        raise ValueError("figures look wrong")
-    last_q = max(quarters)
-    in_last = sum(1 for q in quarters if q.startswith(last_q[:4]))
-    save("natyears.json", {
-        "source": url,
-        "latestQuarter": last_q,
-        "years": years,
-        "partial": {last_q[:4]: in_last} if in_last < 4 else {},   # the latest year, when its quarters aren't all in
-        "total": total,
-        "nats": nats,
-        "updatedAt": now_iso(),
-    })
-    print(f"Nationalities by year: saved {years[0]} to {last_q}")
-
-
-# ------------------------------------------------------------ what happened to their asylum claims
-
-GROUPS = {"grant of protection": "granted", "grant of other leave": "granted", "refused": "refused",
-          "withdrawn": "withdrawn", "administrative outcome": "withdrawn", "awaiting initial decision": "waiting"}
 
 
 def update_asylum():
@@ -518,7 +460,6 @@ def update_all(days=None):
     days = days or []
     for name, job in (("sex and age", update_gender),
                       ("nationalities", update_nationalities),
-                      ("nationalities by year", update_nat_years),
                       ("asylum outcomes", update_asylum),
                       ("small boat returns", lambda: update_boat_returns(days)),
                       ("people per boat", lambda: update_perboat(days)),

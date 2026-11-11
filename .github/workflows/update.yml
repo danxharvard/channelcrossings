@@ -36,7 +36,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data.json recent.json data.csv og-image.png week-card.png index.html sitemap.xml gender.json nationalities.json natyears.json asylum.json boatreturns.json perboat.json returns.json petitions.json status.json
+          git add data.json recent.json data.csv og-image.png week-card.png index.html sitemap.xml gender.json nationalities.json asylum.json boatreturns.json perboat.json returns.json petitions.json status.json
           git diff --cached --quiet && exit 0
           # status.json changes on every check; the message says whether anything else did
           if git diff --cached --name-only | grep -qv '^status.json$'; then msg="Update crossing figures"; else msg="Checked for new figures"; fi

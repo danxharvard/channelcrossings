@@ -875,12 +875,11 @@ button.chip{position:relative}button.chip::after{content:"";position:absolute;in
 @media (min-width:760px) and (hover:hover) and (pointer:fine){.mb.area-rep{display:block}}
 .toast{position:fixed;left:50%;bottom:max(24px, calc(env(safe-area-inset-bottom, 0px) + 16px));transform:translate(-50%,8px);background:var(--glass);-webkit-backdrop-filter:blur(24px) saturate(180%);backdrop-filter:blur(24px) saturate(180%);box-shadow:0 2px 6px rgba(0,0,0,.05),0 18px 44px rgba(0,0,0,.12);color:var(--label);font-size:.882rem;font-weight:600;padding:12px 20px;border-radius:22px;opacity:0;pointer-events:none;transition:opacity .2s ease,transform .2s ease;z-index:10}
 .toast.show{opacity:1;transform:translate(-50%,0)}
-/* free visitors: new figures are announced, and a refresh shows them (Studio updates the page live) */
+/* new figures are announced, and a refresh shows them */
 .new-fig{position:fixed;left:50%;transform:translateX(-50%);bottom:max(24px, calc(env(safe-area-inset-bottom, 0px) + 16px));z-index:11;display:flex;align-items:center;flex-wrap:wrap;justify-content:center;gap:6px 12px;
   width:max-content;max-width:calc(100vw - 32px);padding:10px 10px 10px 18px;border-radius:24px;background:var(--glass);-webkit-backdrop-filter:blur(24px) saturate(180%);backdrop-filter:blur(24px) saturate(180%);
   box-shadow:0 2px 6px rgba(0,0,0,.05),0 18px 44px rgba(0,0,0,.16),0 0 0 .5px var(--sep);color:var(--label);font-size:.882rem;font-weight:600}
 .new-fig button{border:0;border-radius:999px;background:var(--blue);color:#fff;font:600 .882rem/1 var(--font);padding:0 16px;height:36px;cursor:pointer}
-.new-fig a{color:var(--blue);font-size:.824rem;text-decoration:none;padding:6px 4px}
 .mb .petitions li{grid-template-columns:1fr auto;gap:2px 12px;padding:12px 0}
 .mb .petitions a.pt{color:var(--label);text-decoration:none;font-size:.882rem;font-weight:600;line-height:1.3}
 .mb .petitions a.pt:hover{color:var(--blue)}
@@ -1067,36 +1066,6 @@ button.chip{position:relative}button.chip::after{content:"";position:absolute;in
 @media (hover:hover){.tb-x:hover{background:var(--fill)}}
 /* Appearance */
 .th-pop{width:min(300px,calc(100vw - 24px))}
-/* Studio's sign-out: the door button only on the Studio page, and a small flat alert under it, as macOS asks before signing out */
-:root:not([data-tab="studio"]) #outBtn{display:none}
-.tb-out .ar{transition:transform .35s cubic-bezier(.3,1.5,.5,1)}
-@media (hover:hover){.tb-out:hover .ar{transform:translateX(1.6px)}}
-.tb-btn[aria-expanded="true"].tb-out{background:color-mix(in srgb,#FF3B30 15%,transparent);color:#FF3B30}
-.tb-btn[aria-expanded="true"] .ic-door .ar{animation:tbOutDoor .6s cubic-bezier(.3,1.5,.5,1) both}
-@keyframes tbOutDoor{0%{transform:none}45%{transform:translateX(3px)}100%{transform:none}}
-.out-pop{width:min(290px,calc(100vw - 24px));padding:22px 16px 14px!important;text-align:center}
-#outPop{background:var(--card)!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;box-shadow:inset 0 0 0 1px var(--sep)!important}
-.out-ic{display:grid;place-items:center;width:52px;height:52px;margin:0 auto 12px;border-radius:50%;color:#fff;
-  background:#FF3B30}
-.out-ic svg{width:24px;height:24px}
-.out-pop h2{font-size:1.12rem!important}
-.out-who{margin:6px 4px 16px;color:var(--label2);font-size:.8rem;line-height:1.4;overflow-wrap:anywhere}
-.out-who:empty{display:none}
-.out-no{display:block;width:100%;min-height:44px;margin:8px 0 0;padding:0 16px;border:0;border-radius:999px;appearance:none;font:600 .94rem/1 var(--font);cursor:pointer;
-  color:var(--label);background:var(--fill);transition:transform .2s cubic-bezier(.3,1.4,.5,1),filter .2s}
-@media (hover:hover){.out-no:hover{filter:brightness(1.06)}}
-.out-no:active{transform:scale(.97)}
-.out-no:focus-visible,.out-knob:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
-/* slide to sign out, as on the iPhone's lock screen: drag the knob to the end of the track (a tap only nudges it; the keyboard presses it) */
-.out-slide{--x:0px;position:relative;height:56px;padding:4px;border-radius:999px;background:var(--fill);overflow:hidden;user-select:none;-webkit-user-select:none}
-.out-fill{position:absolute;left:4px;top:4px;bottom:4px;width:calc(48px + var(--x));border-radius:999px;background:#FF3B30;opacity:.22}
-.out-txt{position:absolute;inset:0 0 0 52px;display:grid;place-items:center;font:500 .94rem/1 var(--font);letter-spacing:-.01em;opacity:calc(1 - var(--p, 0) * 1.6);
-  color:var(--label2)}
-.out-knob{position:relative;display:grid;place-items:center;width:48px;height:48px;padding:0;border:0;border-radius:50%;appearance:none;cursor:grab;touch-action:none;color:#fff;
-  background:#FF3B30;transform:translateX(var(--x))}
-.out-knob svg{width:22px;height:22px}
-.out-slide:not(.drag) .out-knob,.out-slide:not(.drag) .out-fill{transition:transform .45s cubic-bezier(.3,1.35,.5,1),width .45s cubic-bezier(.3,1.35,.5,1)}
-.out-slide.drag .out-knob{cursor:grabbing}
 .th-list{display:grid;gap:2px;margin:0 -8px}
 .th-list button{display:flex;align-items:center;gap:12px;width:100%;padding:8px;border:0;border-radius:10px;background:none;color:var(--label);text-align:left;font:inherit;cursor:pointer}
 @media (hover:hover){.th-list button:hover{background:var(--fill)}}
@@ -1415,13 +1384,6 @@ main .hero{border-radius:32px}
 /* graphs: the scale sits on the trailing side, so the bars line up with the card's leading edge */
 .chart text{font-variant-numeric:tabular-nums}
 
-/* Studio is flat: on its page the tab bar, the toolbar buttons and their pop-ups are solid colour, with no glass and no blur behind them */
-:root[data-tab="studio"] :is(.tabs,.top-act,.tb-pop){background:var(--card)!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;box-shadow:inset 0 0 0 1px var(--sep)!important}
-:root[data-tab="studio"] .edge-b{display:none}
-:root[data-tab="studio"] .edge-t{background:var(--bg);-webkit-mask-image:none;mask-image:none;-webkit-backdrop-filter:none;backdrop-filter:none;height:calc(env(safe-area-inset-top,0px) + 62px)}
-@media (max-width:719px){:root[data-tab="studio"] .edge-t{height:calc(env(safe-area-inset-top,0px) + 56px)}}
-:root[data-tab="studio"] .tabs::before{display:none}
-:root[data-tab="studio"] .tab-ind{background:var(--fill)!important;box-shadow:none!important}
 /* accessibility settings: Reduce Transparency makes the glass solid; Increase Contrast gives it a clear edge */
 @media (prefers-reduced-transparency:reduce){
   .tabs,.top-act,.tb-pop,.hero-in,.map-news,.ves-list{background:var(--card)!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
@@ -1518,7 +1480,7 @@ main .hero{border-radius:32px}
 </aside>
 
 <!-- the bar at the top: the logo, the tabs (a floating bar at the bottom on phones) and the round buttons -->
-<div class="top-row"><div class="top-brand"><a class="lt-logo" href="./" aria-label="Channel Crossings, back to the top"><svg viewBox="0 0 400 400" aria-hidden="true"><circle cx="200" cy="200" r="200" fill="#007AFF"></circle><path d="M302.9 149.1 A72 72 0 1 0 302.9 250.9" fill="none" stroke="#FF9F0A" stroke-width="30" stroke-linecap="round"></path><path d="M218.9 149.1 A72 72 0 1 0 209.3 259.0" fill="none" stroke="#FFFFFF" stroke-width="30" stroke-linecap="round"></path><path d="M239.5 270.9 A72 72 0 0 1 184.3 224.6" fill="none" stroke="#007AFF" stroke-width="44" stroke-linecap="butt"></path><path d="M243.2 271.5 A72 72 0 0 1 183.1 221.1" fill="none" stroke="#FF9F0A" stroke-width="30" stroke-linecap="butt"></path></svg></a><span class="inline-title" id="inlineTitle" aria-hidden="true">Channel Crossings</span></div><nav class="tabbar" aria-label="Pages"><div class="tabs" role="tablist" id="tabs"><span class="tab-ind" id="tabInd" aria-hidden="true"></span><button type="button" role="tab" id="tab-today" data-tab="today" aria-selected="true" aria-controls="pg-today"><svg class="i-o" viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 8.5c1.6-1.4 3.2-1.4 4.8 0s3.2 1.4 4.7 0 3.2-1.4 4.7 0 3.2 1.4 4.8 0M2.5 13c1.6-1.4 3.2-1.4 4.8 0s3.2 1.4 4.7 0 3.2-1.4 4.7 0 3.2 1.4 4.8 0M2.5 17.5c1.6-1.4 3.2-1.4 4.8 0s3.2 1.4 4.7 0 3.2-1.4 4.7 0 3.2 1.4 4.8 0"/></svg><svg class="i-f" viewBox="0 0 24 24" aria-hidden="true"><path class="thick" d="M2.5 8.5c1.6-1.4 3.2-1.4 4.8 0s3.2 1.4 4.7 0 3.2-1.4 4.7 0 3.2 1.4 4.8 0M2.5 13c1.6-1.4 3.2-1.4 4.8 0s3.2 1.4 4.7 0 3.2-1.4 4.7 0 3.2 1.4 4.8 0M2.5 17.5c1.6-1.4 3.2-1.4 4.8 0s3.2 1.4 4.7 0 3.2-1.4 4.7 0 3.2 1.4 4.8 0"/></svg><span>Today</span></button><button type="button" role="tab" id="tab-trends" data-tab="trends" aria-selected="false" aria-controls="pg-trends" tabindex="-1"><svg class="i-o" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="12" width="4" height="8.5" rx="1.3"/><rect x="10" y="7.5" width="4" height="13" rx="1.3"/><rect x="16.5" y="3.5" width="4" height="17" rx="1.3"/></svg><svg class="i-f" viewBox="0 0 24 24" aria-hidden="true"><rect class="solid" x="3" y="11.5" width="5" height="9.5" rx="1.6"/><rect class="solid" x="9.5" y="7" width="5" height="14" rx="1.6"/><rect class="solid" x="16" y="3" width="5" height="18" rx="1.6"/></svg><span>Trends</span></button><button type="button" role="tab" id="tab-people" data-tab="people" aria-selected="false" aria-controls="pg-people" tabindex="-1"><svg class="i-o" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.4"/><path d="M2.8 19.5c.6-3.4 3.1-5.4 6.2-5.4s5.6 2 6.2 5.4z"/><path d="M15.6 4.9a3.3 3.3 0 0 1 0 6.3M17.6 14.4c2 .7 3.3 2.4 3.6 5.1"/></svg><svg class="i-f" viewBox="0 0 24 24" aria-hidden="true"><circle class="solid" cx="9" cy="8" r="3.8"/><path class="solid" d="M2.4 20c.5-3.9 3.2-6.3 6.6-6.3s6.1 2.4 6.6 6.3a.8.8 0 0 1-.8.9H3.2a.8.8 0 0 1-.8-.9z"/><circle class="solid" cx="16.3" cy="8.3" r="3"/><path class="solid" d="M16.9 13.3c2.6.3 4.4 2.3 4.8 5.6a.8.8 0 0 1-.8.9h-3.7c-.2-2.6-1.4-4.8-3.3-6.1.9-.3 1.9-.5 3-.4z"/></svg><span>People</span></button><button type="button" role="tab" id="tab-studio" data-tab="studio" aria-selected="false" aria-controls="pg-studio" tabindex="-1"><svg class="i-o" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5v8.5h8.5A8.5 8.5 0 1 1 12 3.5z"/><path d="M15 2.6a7 7 0 0 1 6.4 6.4H15z"/></svg><svg class="i-f" viewBox="0 0 24 24" aria-hidden="true"><path class="solid" d="M11 3.1v9.9h9.9A9.3 9.3 0 1 1 11 3.1z"/><path class="solid" d="M14.2 1.8a8.2 8.2 0 0 1 8 8h-8z"/></svg><span>Studio</span></button></div></nav><div class="top-act"><button type="button" class="tb-btn" id="thBtn" aria-haspopup="menu" aria-controls="thPop" aria-expanded="false" aria-label="Appearance" title="Appearance"><span id="thIc" style="display:contents"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.6" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M12 3.4a8.6 8.6 0 0 1 0 17.2z" fill="currentColor"/></svg></span></button><button type="button" class="tb-btn" id="scBtn" aria-haspopup="dialog" aria-controls="scPop" aria-expanded="false" aria-label="Report Channel Crossing" title="Report Channel Crossing"><svg class="ic-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></button><button type="button" class="tb-btn" id="otBtn" aria-haspopup="dialog" aria-controls="otPop" aria-expanded="false" aria-label="On This Day" title="On This Day" hidden><svg class="ic-cal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="3.2"/><path d="M3.5 10h17M8 3v4M16 3v4"/><circle cx="12" cy="15.2" r="1.1" fill="currentColor" stroke="none"/></svg></button><button type="button" class="tb-btn tb-share" id="shareBtn" aria-label="Share Channel Crossings" title="Share" aria-haspopup="dialog" aria-controls="shareSheet" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 14.5V3M8 6.6L12 2.7l4 3.9"/><path d="M8.5 9.5H6.8a1.8 1.8 0 0 0-1.8 1.8v8.4a1.8 1.8 0 0 0 1.8 1.8h10.4a1.8 1.8 0 0 0 1.8-1.8v-8.4a1.8 1.8 0 0 0-1.8-1.8h-1.7"/></svg></button><button type="button" class="tb-btn tb-out" id="outBtn" aria-haspopup="dialog" aria-controls="outPop" aria-expanded="false" aria-label="Sign out of Studio" title="Sign out" hidden><svg class="ic-door" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.5 3.5H7.2a1.8 1.8 0 0 0-1.8 1.8v13.4a1.8 1.8 0 0 0 1.8 1.8h6.3"/><path class="ar" d="M11 12h9.5M17.2 8.6l3.4 3.4-3.4 3.4"/></svg></button></div></div>
+<div class="top-row"><div class="top-brand"><a class="lt-logo" href="./" aria-label="Channel Crossings, back to the top"><svg viewBox="0 0 400 400" aria-hidden="true"><circle cx="200" cy="200" r="200" fill="#007AFF"></circle><path d="M302.9 149.1 A72 72 0 1 0 302.9 250.9" fill="none" stroke="#FF9F0A" stroke-width="30" stroke-linecap="round"></path><path d="M218.9 149.1 A72 72 0 1 0 209.3 259.0" fill="none" stroke="#FFFFFF" stroke-width="30" stroke-linecap="round"></path><path d="M239.5 270.9 A72 72 0 0 1 184.3 224.6" fill="none" stroke="#007AFF" stroke-width="44" stroke-linecap="butt"></path><path d="M243.2 271.5 A72 72 0 0 1 183.1 221.1" fill="none" stroke="#FF9F0A" stroke-width="30" stroke-linecap="butt"></path></svg></a><span class="inline-title" id="inlineTitle" aria-hidden="true">Channel Crossings</span></div><nav class="tabbar" aria-label="Pages"><div class="tabs" role="tablist" id="tabs"><span class="tab-ind" id="tabInd" aria-hidden="true"></span><button type="button" role="tab" id="tab-today" data-tab="today" aria-selected="true" aria-controls="pg-today"><svg class="i-o" viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 8.5c1.6-1.4 3.2-1.4 4.8 0s3.2 1.4 4.7 0 3.2-1.4 4.7 0 3.2 1.4 4.8 0M2.5 13c1.6-1.4 3.2-1.4 4.8 0s3.2 1.4 4.7 0 3.2-1.4 4.7 0 3.2 1.4 4.8 0M2.5 17.5c1.6-1.4 3.2-1.4 4.8 0s3.2 1.4 4.7 0 3.2-1.4 4.7 0 3.2 1.4 4.8 0"/></svg><svg class="i-f" viewBox="0 0 24 24" aria-hidden="true"><path class="thick" d="M2.5 8.5c1.6-1.4 3.2-1.4 4.8 0s3.2 1.4 4.7 0 3.2-1.4 4.7 0 3.2 1.4 4.8 0M2.5 13c1.6-1.4 3.2-1.4 4.8 0s3.2 1.4 4.7 0 3.2-1.4 4.7 0 3.2 1.4 4.8 0M2.5 17.5c1.6-1.4 3.2-1.4 4.8 0s3.2 1.4 4.7 0 3.2-1.4 4.7 0 3.2 1.4 4.8 0"/></svg><span>Today</span></button><button type="button" role="tab" id="tab-trends" data-tab="trends" aria-selected="false" aria-controls="pg-trends" tabindex="-1"><svg class="i-o" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="12" width="4" height="8.5" rx="1.3"/><rect x="10" y="7.5" width="4" height="13" rx="1.3"/><rect x="16.5" y="3.5" width="4" height="17" rx="1.3"/></svg><svg class="i-f" viewBox="0 0 24 24" aria-hidden="true"><rect class="solid" x="3" y="11.5" width="5" height="9.5" rx="1.6"/><rect class="solid" x="9.5" y="7" width="5" height="14" rx="1.6"/><rect class="solid" x="16" y="3" width="5" height="18" rx="1.6"/></svg><span>Trends</span></button><button type="button" role="tab" id="tab-people" data-tab="people" aria-selected="false" aria-controls="pg-people" tabindex="-1"><svg class="i-o" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.4"/><path d="M2.8 19.5c.6-3.4 3.1-5.4 6.2-5.4s5.6 2 6.2 5.4z"/><path d="M15.6 4.9a3.3 3.3 0 0 1 0 6.3M17.6 14.4c2 .7 3.3 2.4 3.6 5.1"/></svg><svg class="i-f" viewBox="0 0 24 24" aria-hidden="true"><circle class="solid" cx="9" cy="8" r="3.8"/><path class="solid" d="M2.4 20c.5-3.9 3.2-6.3 6.6-6.3s6.1 2.4 6.6 6.3a.8.8 0 0 1-.8.9H3.2a.8.8 0 0 1-.8-.9z"/><circle class="solid" cx="16.3" cy="8.3" r="3"/><path class="solid" d="M16.9 13.3c2.6.3 4.4 2.3 4.8 5.6a.8.8 0 0 1-.8.9h-3.7c-.2-2.6-1.4-4.8-3.3-6.1.9-.3 1.9-.5 3-.4z"/></svg><span>People</span></button></div></nav><div class="top-act"><button type="button" class="tb-btn" id="thBtn" aria-haspopup="menu" aria-controls="thPop" aria-expanded="false" aria-label="Appearance" title="Appearance"><span id="thIc" style="display:contents"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.6" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M12 3.4a8.6 8.6 0 0 1 0 17.2z" fill="currentColor"/></svg></span></button><button type="button" class="tb-btn" id="scBtn" aria-haspopup="dialog" aria-controls="scPop" aria-expanded="false" aria-label="Report Channel Crossing" title="Report Channel Crossing"><svg class="ic-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></button><button type="button" class="tb-btn" id="otBtn" aria-haspopup="dialog" aria-controls="otPop" aria-expanded="false" aria-label="On This Day" title="On This Day" hidden><svg class="ic-cal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="3.2"/><path d="M3.5 10h17M8 3v4M16 3v4"/><circle cx="12" cy="15.2" r="1.1" fill="currentColor" stroke="none"/></svg></button><button type="button" class="tb-btn tb-share" id="shareBtn" aria-label="Share Channel Crossings" title="Share" aria-haspopup="dialog" aria-controls="shareSheet" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 14.5V3M8 6.6L12 2.7l4 3.9"/><path d="M8.5 9.5H6.8a1.8 1.8 0 0 0-1.8 1.8v8.4a1.8 1.8 0 0 0 1.8 1.8h10.4a1.8 1.8 0 0 0 1.8-1.8v-8.4a1.8 1.8 0 0 0-1.8-1.8h-1.7"/></svg></button></div></div>
 
 <div class="info-pop fu-pop" id="popFU" role="dialog" aria-label="Figure updates" data-nosnippet hidden>
   <svg class="fu-clock" viewBox="4 4 112 112" aria-hidden="true"><defs><radialGradient id="fuFace" cx="40%" cy="35%" r="75%"><stop offset="0" stop-color="var(--card)"/><stop offset="1" stop-color="var(--fill)"/></radialGradient></defs>
@@ -1568,13 +1530,6 @@ main .hero{border-radius:32px}
     <div><h3 id="otdK">A year ago</h3><div class="val num otd-v" id="otdV">–</div><div class="sub" id="otdS">&nbsp;</div></div>
   </div>
   <div class="otd-years" id="otdYears" role="group" aria-label="The same date in earlier years"></div>
-</div>
-<div class="tb-pop out-pop" id="outPop" tabindex="-1" role="dialog" aria-labelledby="outH" data-nosnippet hidden>
-  <div class="out-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.5 3.5H7.2a1.8 1.8 0 0 0-1.8 1.8v13.4a1.8 1.8 0 0 0 1.8 1.8h6.3"/><path class="ar" d="M11 12h9.5M17.2 8.6l3.4 3.4-3.4 3.4"/></svg></div>
-  <h2 id="outH">Sign out of Studio?</h2>
-  <p class="out-who" id="outWho"></p>
-  <div class="out-slide" id="outSlide"><span class="out-fill" aria-hidden="true"></span><span class="out-txt" aria-hidden="true">slide to sign out</span><button type="button" class="out-knob" id="outGo" aria-label="Sign out. Slide to the right, or press to confirm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6.5l5.5 5.5-5.5 5.5"/></svg></button></div>
-  <button type="button" class="out-no" id="outNo">Cancel</button>
 </div>
 <div class="tb-pop th-pop" id="thPop" role="menu" aria-labelledby="thH" hidden>
   <div class="tb-head"><h2 id="thH">Appearance</h2></div>
@@ -1968,18 +1923,9 @@ main .hero{border-radius:32px}
     </div>
   </div>
 </div>
-<!-- ============================================================ STUDIO: every graph, drawn the way the visitor chooses. Unlocked with a one-off payment;
-     studio.js and studio.css load the first time the tab opens, so the rest of the site never waits for them. -->
-<div class="page" id="pg-studio" data-page="studio" role="tabpanel" aria-labelledby="tab-studio">
-    <div class="lt-head">
-      <p class="lt-eyebrow">Every chart, your way</p>
-      <h2 class="lt-title" data-title="Studio">Studio</h2>
-    </div>
-    <div id="studioApp"></div>
-</div>
 </main>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
-<div class="new-fig" id="newFig" role="status" hidden><span>New figures are in.</span><button type="button" id="newFigGo">Refresh</button><a href="#studio" id="newFigLive">Live updates with Studio</a></div>
+<div class="new-fig" id="newFig" role="status" hidden><span>New figures are in.</span><button type="button" id="newFigGo">Refresh</button></div>
 
 
 <footer>
@@ -2052,23 +1998,6 @@ main .hero{border-radius:32px}
 
   matchMedia("(prefers-color-scheme: dark)").addEventListener("change", showTheme);   // Auto: the icon follows the device
   tbMenu($("thBtn"), $("thPop"), () => $("thPop").querySelector('[aria-checked="true"]').focus({preventScroll:true}));
-  // Studio's sign-out: a round door button beside the others while Studio is open and someone is signed in (studio.js shows it and does the signing out)
-  const outMenu = tbMenu($("outBtn"), $("outPop"), () => $("outNo").focus({preventScroll:true}));
-  $("outNo").addEventListener("click", () => outMenu.set(false));
-  {
-    const track = $("outSlide"), knob = $("outGo");
-    let x0 = null, x = 0, moved = false;
-    const max = () => track.clientWidth - knob.offsetWidth - 8;
-    const put = v => { x = Math.max(0, Math.min(max(), v)); track.style.setProperty("--x", x + "px"); track.style.setProperty("--p", (x / max()).toFixed(3)); };
-    const done = () => { put(max()); setTimeout(() => { outMenu.set(false); if(window.ccSignOut) window.ccSignOut(); setTimeout(() => put(0), 400); }, 220); };
-    knob.addEventListener("pointerdown", e => { if(e.button) return; x0 = e.clientX - x; moved = false; track.classList.add("drag"); knob.setPointerCapture(e.pointerId); });
-    knob.addEventListener("pointermove", e => { if(x0 === null) return; if(Math.abs(e.clientX - x0 - x) > 2) moved = true; put(e.clientX - x0); });
-    const up = () => { if(x0 === null) return; x0 = null; track.classList.remove("drag");
-      if(x >= max() * .88) return done();
-      put(0); if(!moved && !reduced){ put(28); setTimeout(() => put(0), 180); } };   // a tap nudges the knob to show it slides
-    knob.addEventListener("pointerup", up); knob.addEventListener("pointercancel", up);
-    knob.addEventListener("click", e => { if(e.detail === 0) done(); });   // Enter or Space: the keyboard can't slide, so a press signs out
-  }
   modeBtns.forEach(b => b.addEventListener("click", () => {
     const n = b.dataset.mode;
     ccTheme(n);
@@ -2925,14 +2854,11 @@ main .hero{border-radius:32px}
   /* ---------------------------------------------------- automatic updates */
   // The site's heartbeat (status.json) says when new or revised figures were published: checked every
   // 15 minutes in the background. Conditions refresh every 30 minutes.
-  // Live updates are part of Studio: for an account that has paid (window.ccLive, called from the tab script and
-  // studio.js) the figures, weather, news and boats refresh on the page by themselves. Everyone else gets what was
-  // current when the page opened, and a note when new figures are out, which a refresh brings in.
+  // The page shows what was current when it opened, and a note when new figures are out, which a refresh brings in.
+  // (With live set, the figures, weather, news and boats would refresh on the page by themselves.)
   const MIN = 6e4, openedAt = Date.now();
   let statusAt = 0, wxAt = 0, today = ukToday(), live = false;
-  window.ccLive = on => { if(on === live) return; live = on; if(on){ $("newFig").hidden = true; statusAt = wxAt = newsAt = vesselsAt = 0; if(gridAt) gridAt = 1; tick(); } };
   $("newFigGo").addEventListener("click", () => location.reload());
-  $("newFigLive").addEventListener("click", () => { $("newFig").hidden = true; });
   async function checkStatus(){
     statusAt = Date.now();
     try{
@@ -2951,7 +2877,7 @@ main .hero{border-radius:32px}
     if(ukToday() !== today){ today = ukToday(); renderAll(); }   // "Yesterday" and On This Day move on at midnight
     liveUi();
     if(Date.now() - statusAt >= 15 * MIN) checkStatus();
-    // the weather is refreshed for Studio accounts; for everyone, a load that failed is tried again, as the outlook promises
+    // a weather load that failed is tried again, as the outlook promises
     if((live || wxFailed) && Date.now() - wxAt >= 30 * MIN) loadWeather();
     if(!live) return;
     if(gridAt && Date.now() - gridAt >= 60 * MIN) loadGrid();   // the weather map's forecast: hourly is plenty
@@ -3310,7 +3236,7 @@ main .hero{border-radius:32px}
   }
 
   /* ---------------------------------------------------- who is crossing, per boat, returns */
-  // the flag shown beside each nationality, here and in Studio
+  // the flag shown beside each nationality
   const FLAGS = window.CC_FLAGS = {Eritrea:"🇪🇷", Sudan:"🇸🇩", Afghanistan:"🇦🇫", Iran:"🇮🇷", Iraq:"🇮🇶", Syria:"🇸🇾", Vietnam:"🇻🇳", "Viet Nam":"🇻🇳", Somalia:"🇸🇴", Ethiopia:"🇪🇹", Egypt:"🇪🇬", Albania:"🇦🇱", Turkey:"🇹🇷", "Türkiye":"🇹🇷", Kuwait:"🇰🇼", Yemen:"🇾🇪", Chad:"🇹🇩", "South Sudan":"🇸🇸", Libya:"🇱🇾", India:"🇮🇳", Pakistan:"🇵🇰", Bangladesh:"🇧🇩", "Sri Lanka":"🇱🇰", Georgia:"🇬🇪", Nigeria:"🇳🇬", Morocco:"🇲🇦", Algeria:"🇩🇿", Tunisia:"🇹🇳", Palestine:"🇵🇸", Jordan:"🇯🇴", Lebanon:"🇱🇧", Guinea:"🇬🇳", Mali:"🇲🇱", Senegal:"🇸🇳", Gambia:"🇬🇲", "Ivory Coast":"🇨🇮", Cameroon:"🇨🇲", "DR Congo":"🇨🇩", Burundi:"🇧🇮", China:"🇨🇳", Ukraine:"🇺🇦", Romania:"🇷🇴", Poland:"🇵🇱", Brazil:"🇧🇷", Nepal:"🇳🇵", Myanmar:"🇲🇲"};
   function onReveal(el, fn){ const c = el.closest(".rv"); if(c.classList.contains("on") || reduced) fn(); else c.addEventListener("reveal", fn, {once:true}); }
   function renderWho(g, nat){
@@ -4321,19 +4247,6 @@ if("serviceWorker" in navigator){ addEventListener("load", () => navigator.servi
 (function(){
   const $ = id => document.getElementById(id), root = document.documentElement, main = $("main");
   const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  // Studio, the paid tab: the address of its worker (scripts/studio-worker.js; see the README), and whether the tab is open
-  // to everyone (Stripe is on the live key). Until STUDIO_LIVE is true the tab only shows on devices that opened the preview link (?studio=preview#studio),
-  // which test the real payment flow (Stripe in test mode); with no worker address, the preview simply unlocks Studio.
-  window.CC_STUDIO_API = "https://studio.danseacroft.workers.dev";
-  const STUDIO_LIVE = true;
-  let studioPreview = false;
-  try{ if(/[?&]studio=preview\b/.test(location.search)) localStorage.setItem("cc-studio-preview", "1"); studioPreview = localStorage.getItem("cc-studio-preview") === "1"; }catch(e){}
-  window.CC_STUDIO_PREVIEW = studioPreview && !window.CC_STUDIO_API;
-  if(!(STUDIO_LIVE && window.CC_STUDIO_API) && !studioPreview){ $("tab-studio").remove(); $("pg-studio").remove(); }
-  // a Studio account gets the page updating live from the start, whichever tab it opens on (only the worker's answer counts)
-  try{ const a = JSON.parse(localStorage.getItem("cc-studio-acct") || "null");
-    if(a && a.token && window.CC_STUDIO_API && window.ccLive) fetch(window.CC_STUDIO_API + "/me", {headers:{Authorization:"Bearer " + a.token}})
-      .then(r => r.ok ? r.json() : null).then(j => { if(j && j.studio) window.ccLive(true); }).catch(() => {}); }catch(e){}
   const tabs = [...document.querySelectorAll("#tabs [role=tab]")], ind = $("tabInd"), names = tabs.map(t => t.dataset.tab);
   const pages = {}; names.forEach(n => pages[n] = $("pg-" + n));
   const saved = {};   // each tab keeps its own place on the page, as in an app
@@ -4366,8 +4279,7 @@ if("serviceWorker" in navigator){ addEventListener("load", () => navigator.servi
       t.setAttribute("aria-selected", on); t.tabIndex = on ? 0 : -1;
     });
     if(opts.first) pages[name].classList.add("first");
-    document.documentElement.dataset.tab = name;   // for buttons that belong to one page, such as Studio's sign-out
-    if(name === "studio") loadStudio();
+    document.documentElement.dataset.tab = name;
     placeInd(!opts.first);
     scrollTo({top:saved[name] || 0, behavior:"instant"});
     if(!opts.first){
@@ -4378,13 +4290,6 @@ if("serviceWorker" in navigator){ addEventListener("load", () => navigator.servi
     document.title = (name === "today" ? "" : name[0].toUpperCase() + name.slice(1) + " · ") + baseTitle;
   }
   const baseTitle = document.title;
-  // Studio's own script and styles, fetched the first time its tab opens
-  let studioOn = false;
-  function loadStudio(){
-    if(studioOn) return; studioOn = true;
-    const l = document.createElement("link"); l.rel = "stylesheet"; l.href = "studio.css"; document.head.appendChild(l);
-    const sc = document.createElement("script"); sc.src = "studio.js"; l.onload = l.onerror = () => document.head.appendChild(sc);
-  }
   tabs.forEach((t, i) => {
     t.addEventListener("click", () => show(t.dataset.tab));
     t.addEventListener("keydown", e => {   // arrow keys move along the tabs, Home and End to the first and last

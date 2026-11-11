@@ -14,7 +14,7 @@ Outputs (see publish()):
   data.csv     the full history as a spreadsheet download
   index.html   an up-to-date description, link-preview picture and dataset dates for Google
   og-image.png link preview picture; week-card.png weekly summary picture
-  gender.json, nationalities.json, natyears.json, asylum.json, boatreturns.json, perboat.json, returns.json, petitions.json: see scripts/extras.py
+  gender.json, nationalities.json, asylum.json, boatreturns.json, perboat.json, returns.json, petitions.json: see scripts/extras.py
   status.json  tiny heartbeat the page polls: when we last checked, and which build of the figures is current
 """
 import io

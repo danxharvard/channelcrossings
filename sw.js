@@ -1,10 +1,10 @@
 /* Channel Crossings offline mode.
-   Pages, figures and the site's own scripts and styles (studio.js, studio.css): fetched fresh from the
+   Pages, figures and the site's own scripts and styles: fetched fresh from the
    network first, with the saved copy used when there is no connection or the network is very slow (the
    page then looks for newer figures by itself a minute later). Fetching them fresh keeps a new page from
    running with last week's script. Icons, fonts and vendor/ files: served from the saved copy straight
-   away and refreshed in the background. Other sites (weather, map, Studio's worker) are never touched. */
-const CACHE = "cc-v35";
+   away and refreshed in the background. Other sites (weather, map) are never touched. */
+const CACHE = "cc-v36";
 const CORE = [
   "./", "index.html", "how-it-works.html", "privacy.html",
   "favicon.svg", "manifest.webmanifest", "icon-192.png", "apple-touch-icon.png",
