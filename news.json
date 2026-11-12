@@ -1,25 +1,32 @@
 {
- "checkedAt": "2026-11-12T15:50:58Z",
+ "checkedAt": "2026-11-12T16:53:46Z",
  "items": [
+  {
+   "title": "Activist Daniel Thomas admits criminal damage after slashing migrant dinghy in Channel",
+   "url": "https://www.bbc.co.uk/news/articles/c6x20x380z12o?at_medium=RSS&at_campaign=rss",
+   "source": "BBC News",
+   "published": "2026-11-12T16:44:25Z",
+   "breaking": true
+  },
+  {
+   "title": "Minister McGovern's social care speech at the NCASC conference",
+   "url": "https://www.gov.uk/government/speeches/minister-mcgoverns-social-care-speech-at-the-ncasc-conference",
+   "source": "GOV.UK",
+   "published": "2026-11-12T16:12:04Z",
+   "breaking": true
+  },
+  {
+   "title": "Defence Secretary Wes Streeting speech at Atlantic Future Forum",
+   "url": "https://www.gov.uk/government/speeches/defence-secretary-wes-streeting-speech-at-atlantic-future-forum",
+   "source": "GOV.UK",
+   "published": "2026-11-12T16:06:27Z",
+   "breaking": true
+  },
   {
    "title": "Ban on living on Chagos Islands is LAWFUL, court rules months after nine landed on outer islets",
    "url": "https://www.gbnews.com/news/world/chagos-islands-ban-living-lawful-court-nine-landed",
    "source": "GB News",
    "published": "2026-11-12T14:41:07Z",
-   "breaking": true
-  },
-  {
-   "title": "Ukraine set to be focus of EPC summit as UK sanctions Russia's top ten oil producers",
-   "url": "https://www.gov.uk/government/news/ukraine-set-to-be-focus-of-epc-summit-as-uk-sanctions-russias-top-ten-oil-producers",
-   "source": "GOV.UK",
-   "published": "2026-11-12T13:38:51Z",
-   "breaking": true
-  },
-  {
-   "title": "Some under-25s should get fewer benefits, Milburn review to say",
-   "url": "https://www.bbc.co.uk/news/articles/cwn70l1628l0o?at_medium=RSS&at_campaign=rss",
-   "source": "BBC News",
-   "published": "2026-11-12T13:16:59Z",
    "breaking": true
   }
  ],
