@@ -1,18 +1,25 @@
 {
- "checkedAt": "2026-11-12T04:04:00Z",
+ "checkedAt": "2026-11-12T05:10:30Z",
  "items": [
+  {
+   "title": "Russian ambassador to US 'suddenly' dies, Moscow says",
+   "url": "https://www.gbnews.com/news/world/russian-ambassador-to-us-suddenly-dies",
+   "source": "GB News",
+   "published": "2026-11-12T04:41:45Z",
+   "breaking": true
+  },
+  {
+   "title": "Government could force media industry to improve safeguards after Walliams allegations",
+   "url": "https://www.bbc.co.uk/news/articles/cm3egj20v5x4o?at_medium=RSS&at_campaign=rss",
+   "source": "BBC News",
+   "published": "2026-11-12T04:01:50Z",
+   "breaking": true
+  },
   {
    "title": "SAS heroes 'thinking twice' about going on kill missions for fear of being prosecuted",
    "url": "https://www.gbnews.com/news/sas-kill-missions-fear-being-prosecuted-afghanistan-inquiry",
    "source": "GB News",
    "published": "2026-11-12T02:25:44Z",
-   "breaking": true
-  },
-  {
-   "title": "British woman, 80, fighting for life after being 'set alight' outside block of flats",
-   "url": "https://www.gbnews.com/news/watford-news-british-woman-80-set-alight-outside-block-of-flats",
-   "source": "GB News",
-   "published": "2026-11-12T01:10:16Z",
    "breaking": true
   }
  ],
