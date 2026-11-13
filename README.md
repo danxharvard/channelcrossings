@@ -4,7 +4,8 @@ A one-page site showing how many people cross the English Channel in small boats
 
 ## Files
 
-- `index.html` – the page
+- `index.html` – the page: the "Bridge" instrument panel (radar of the Strait, year total, daily log, vessels, news)
+- `previous.html` – the earlier map homepage, kept for reference and linked from the footer (not indexed by search engines)
 - `privacy.html` – the Privacy Policy and Terms of Use, linked from the page footer
 - `favicon.svg` – the CC logo shown in the browser tab
 - `apple-touch-icon.png` – the icon used when someone adds the site to their iPhone home screen
@@ -25,7 +26,7 @@ A one-page site showing how many people cross the English Channel in small boats
 - `week-card.png` – the "Week in numbers" picture, redrawn daily for the last full week
 - `manifest.webmanifest`, `icon-192.png`, `icon-512.png` – let visitors add the site to their home screen as an app
 - Report Channel Crossing (the eye button) is a private form sent through Web3Forms; the access key `RS_KEY` in `index.html` decides which inbox reports go to
-- `vendor/inter/`, `vendor/inter-tight/` – the Inter and Inter Tight fonts (SIL Open Font License), used on every device: Inter for text, Inter Tight for headings and big figures
+- `vendor/inter/`, `vendor/inter-tight/`, `vendor/jetbrains-mono/` – the Inter, Inter Tight and JetBrains Mono fonts (SIL Open Font License): JetBrains Mono for the homepage's panels, Inter Tight for its big figures
 - `scripts/update.py` – fetches the latest figures from GOV.UK and updates `data.json`
 - `scripts/news.py`, `news.json`, `.github/workflows/news.yml` – breaking news about small boats from UK news feeds, every 15 minutes (create `news-override.json` to hide or pin a story)
 - `scripts/build-towns.js`, `towns.json` – the extra town names on the homepage map (GeoNames, CC BY 4.0), shown more as you zoom in; rebuilt by hand, not on a schedule
