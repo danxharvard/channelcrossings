@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#E9EFED" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#050807" media="(prefers-color-scheme: dark)">
+<script>/* Night is the default; Day or Auto only when chosen */
+function ccTheme(t){var r=document.documentElement;if(t==="auto")r.removeAttribute("data-theme");else r.setAttribute("data-theme",t);
+  var c=t==="auto"?null:(t==="light"?"#E9EFED":"#050807");document.querySelectorAll('meta[name="theme-color"]').forEach(function(m){if(!m.dataset.c)m.dataset.c=m.content;m.content=c||m.dataset.c;});}
+try{var t=localStorage.getItem("cc-theme");ccTheme(t==="light"||t==="auto"?t:"dark")}catch(e){ccTheme("dark")}</script>
+<meta name="description" content="Small boat crossings of the Channel every day since 2018: records, running totals by year, patterns, quiet spells and the arrival outlook.">
+<title>Trends · Channel Crossings</title>
+<link rel="canonical" href="https://channelcrossings.world/trends.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Channel Crossings">
+<meta property="og:title" content="Trends · Channel Crossings">
+<meta property="og:description" content="Small boat crossings of the Channel every day since 2018: records, running totals by year, patterns, quiet spells and the arrival outlook.">
+<meta property="og:url" content="https://channelcrossings.world/trends.html">
+<meta property="og:image" content="https://channelcrossings.world/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="bridge.css">
+<style>
+.readout{display:flex;align-items:baseline;gap:12px;margin:-2px 0 6px;min-height:30px}
+.readout b{font:600 26px/1 var(--sans);color:var(--hot)}
+.readout span{color:var(--dim);font-size:12px}
+.dates{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pred{display:grid;gap:10px}
+.pred article{border:1px solid var(--line);padding:10px 12px}
+.pred h3{font-size:10.5px;font-weight:400;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);display:flex;justify-content:space-between}
+.pred .lv{font:600 20px/1.2 var(--sans);margin-top:4px}
+.pred .lv.high{color:var(--red)}.pred .lv.medium{color:var(--amber)}.pred .lv.low{color:var(--hot)}
+.pred .est{font-size:12px;margin-top:2px}
+.pred .wx{display:flex;gap:14px;color:var(--dim);font-size:11.5px;margin-top:6px}
+.pred .wx b{color:var(--ink)}
+svg.chart .hover{stroke:var(--ink);stroke-width:1}
+#daily{cursor:crosshair;touch-action:pan-y}
+
+</style>
+</head>
+<body>
+<header class="status">
+  <a class="logo" href="./">CHANNEL CROSSINGS</a>
+  <span class="hide-s">UTC <b id="utc">--:--</b></span>
+  <span class="hide-s">Gov.uk data to <b id="dataTo">–</b></span>
+  <span class="sp"></span>
+  <nav class="tabs hide-s" aria-label="Pages"><a href="./">Live</a><a href="trends.html" aria-current="page">Trends</a><a href="people.html">People</a></nav>
+  <nav>
+    <button class="btn hide-s" data-open="dlgReport">Report</button>
+    <button class="btn hide-s" data-open="dlgShare">Share</button>
+    <button class="btn icon" id="theme" aria-label="Switch day or night"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></svg></button>
+    <button class="btn icon" data-open="dlgMore" aria-label="Menu"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  </nav>
+</header>
+<nav class="ptabs" aria-label="Pages"><a href="./">Live</a><a href="trends.html" aria-current="page">Trends</a><a href="people.html">People</a><button data-open="dlgReport">Report</button></nav>
+<main>
+<div class="page-h"><div><h1>Trends</h1><p>Every day since 2018, from the Home Office's daily figures</p></div><p id="pageNote"></p></div>
+<div class="grid">
+  <section class="p s12">
+    <h2><span>Crossings over time · <span id="ddRange">last 3 months</span></span><span class="seg" id="rangeSeg"><button data-r="30">1M</button><button data-r="90" aria-pressed="true">3M</button><button data-r="365">1Y</button><button data-r="0">All</button></span></h2>
+    <div class="readout" id="read"><b class="num">–</b><span></span></div>
+    <svg class="chart" id="daily" height="230" role="img" aria-label="People detected each day"></svg>
+  </section>
+
+  <section class="p s4">
+    <h2><span>At a glance</span></h2>
+    <ul class="list" id="glance"></ul>
+  </section>
+  <section class="p s4">
+    <h2><span>Arrival outlook</span><b>today and tomorrow</b></h2>
+    <div class="pred" id="pred"><p class="note">Loading the forecast…</p></div>
+  </section>
+  <section class="p s4">
+    <h2><span>On this day</span><b id="otdDate"></b></h2>
+    <ul class="list" id="otd"></ul>
+  </section>
+
+  <section class="p s6">
+    <h2><span>People each year</span><b id="yrNote"></b></h2>
+    <ul class="rows" id="years"></ul>
+  </section>
+  <section class="p s6">
+    <h2><span>Running total by year</span><b id="raceKey"></b></h2>
+    <svg class="chart" id="race" height="260" role="img" aria-label="Running total of people for each year"></svg>
+  </section>
+
+  <section class="p s6">
+    <h2><span>Patterns · people a day, on average</span><span class="seg" id="patSeg"><button data-p="m" aria-pressed="true">Month</button><button data-p="w">Weekday</button></span></h2>
+    <svg class="chart" id="pat" height="200" role="img" aria-label="Average people a day"></svg>
+    <p class="note" id="patNote"></p>
+  </section>
+  <section class="p s6">
+    <h2><span>Between two dates</span></h2>
+    <div class="dates"><div><label class="f" for="dFrom">From</label><input type="date" id="dFrom"></div><div><label class="f" for="dTo">To</label><input type="date" id="dTo"></div></div>
+    <div class="kv" style="margin-top:10px">
+      <div><span>People</span><b id="cP">–</b></div>
+      <div><span>Boats</span><b id="cB">–</b></div>
+      <div><span>Per boat</span><b id="cA">–</b></div>
+      <div><span>Days</span><b id="cN">–</b></div>
+      <div><span>Days with crossings</span><b id="cO">–</b></div>
+      <div><span>A day, on average</span><b id="cD">–</b></div>
+    </div>
+    <p class="note" id="cNote"></p>
+  </section>
+
+  <section class="p s4">
+    <h2><span>Records</span></h2>
+    <ul class="list" id="records"></ul>
+  </section>
+  <section class="p s4">
+    <h2><span>Longest quiet spells</span><b>since 2020</b></h2>
+    <ul class="list" id="quiet"></ul>
+  </section>
+  <section class="p s4">
+    <h2><span>Every person, last 30 days</span><b id="repN"></b></h2>
+    <canvas id="dots" style="width:100%;display:block" role="img"></canvas>
+    <p class="note" id="repS"></p>
+  </section>
+</div>
+</main>
+
+<footer class="foot"><span>Figures: <a href="https://www.gov.uk/government/publications/migrants-detected-crossing-the-english-channel-in-small-boats">Home Office</a>, provisional and subject to revision.</span><span><a href="how-it-works.html">How it works</a> · <a href="data.csv" download>Figures (CSV)</a> · <a href="privacy.html">Privacy</a></span></footer>
+<script src="bridge.js"></script>
+<script>
+const $ = (id) => document.getElementById(id), { fmt, plural } = CC;
+const NS = "http://www.w3.org/2000/svg";
+const MON = CC.MONTHS.map((m) => m.slice(0, 3));
+const shortY = (s) => `${CC.short(s)} ${s.slice(0, 4)}`;
+// Redraw a chart whenever its box changes width
+const onResize = (el, fn) => { let w = 0; fn(); if (window.ResizeObserver) new ResizeObserver(() => { if (el.clientWidth !== w) { w = el.clientWidth; fn(); } }).observe(el); };
+const niceStep = (raw) => { const p = Math.pow(10, Math.floor(Math.log10(raw || 1))), n = raw / p; return (n <= 1 ? 1 : n <= 2 ? 2 : n <= 5 ? 5 : 10) * p; };
+const PERIODS = { labour: "2024-07-05", burnham: "2026-07-20" };   // Labour took office; Andy Burnham became PM
+
+CC.load().then((D) => {
+  CCUI.setShare(CCUI.shareFrom(D));
+  $("dataTo").textContent = CC.short(D.latest.date);
+  $("pageNote").textContent = `Figures to ${CC.long(D.latest.date)}`;
+  const days = D.days, L = D.latest;
+
+  /* ---- Crossings over time ---- */
+  let range = 90, pts = [];
+  const svg = $("daily");
+  function drawDaily() {
+    const W = svg.clientWidth, H = 230, l = 40, r = 6, t = 10, b = 22;
+    svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+    let set = range ? days.slice(-range) : days;
+    let weekly = false;
+    if (!range) {   // all: a week to a bar
+      weekly = true; const w = [];
+      for (let i = 0; i < set.length; i += 7) { const c = set.slice(i, i + 7); w.push({ date: c[0].date, to: c[c.length - 1].date, migrants: c.reduce((a, d) => a + d.migrants, 0), boats: c.reduce((a, d) => a + (d.boats || 0), 0) }); }
+      set = w;
+    }
+    const mx = Math.max(1, ...set.map((d) => d.migrants)), step = niceStep(mx / 4), top = Math.ceil(mx / step) * step;
+    const bw = (W - l - r) / set.length, y = (v) => H - b - (v / top) * (H - t - b);
+    let g = "";
+    for (let v = 0; v <= top; v += step) g += `<line class="g" x1="${l}" x2="${W - r}" y1="${y(v)}" y2="${y(v)}"/><text x="${l - 6}" y="${y(v) + 3}" text-anchor="end">${v >= 1000 ? v / 1000 + "k" : v}</text>`;
+    let lastLab = -1e9;
+    set.forEach((d, i) => {
+      const x = l + i * bw, h = d.migrants ? Math.max(1.5, H - b - y(d.migrants)) : 1;
+      g += `<rect class="bar ${d.migrants ? "" : "z"}" x="${(x + (bw > 3 ? 0.5 : 0)).toFixed(1)}" y="${(H - b - h).toFixed(1)}" width="${Math.max(0.6, bw - (bw > 3 ? 1 : 0)).toFixed(1)}" height="${h.toFixed(1)}"/>`;
+      const dt = CC.d8(d.date), first = range === 0 ? i === 0 || d.date.slice(0, 4) !== set[i - 1].date.slice(0, 4) : range > 31 ? dt.getUTCDate() === 1 || i === 0 : dt.getUTCDay() === 1;
+      if (first && x - lastLab > 44) { lastLab = x; g += `<text x="${x}" y="${H - 6}">${range === 0 ? d.date.slice(0, 4) : range > 31 ? MON[dt.getUTCMonth()] : CC.short(d.date)}</text>`; }
+    });
+    g += `<line class="hover" id="hv" x1="-10" x2="-10" y1="${t}" y2="${H - b}" style="opacity:0"/>`;
+    svg.innerHTML = g;
+    pts = set.map((d, i) => ({ x: l + i * bw + bw / 2, d, weekly }));
+    const s = CC.sum(range ? days.slice(-range) : days);
+    read(null, s);
+  }
+  function read(p, s) {
+    const R = $("read");
+    if (!p) { R.innerHTML = `<b class="num">${fmt(s.people)}</b><span>people in ${plural(s.boats, "boat", "boats")} · ${range ? `last ${range} days` : "since January 2018"} · crossings on ${s.on} of ${s.n} days</span>`; return; }
+    const d = p.d;
+    R.innerHTML = `<b class="num">${fmt(d.migrants)}</b><span>${p.weekly ? `week of ${shortY(d.date)}` : CC.long(d.date) + " " + d.date.slice(0, 4)} · ${plural(d.boats || 0, "boat", "boats")}</span>`;
+    const hv = document.getElementById("hv"); hv.setAttribute("x1", p.x); hv.setAttribute("x2", p.x); hv.style.opacity = 1;
+  }
+  const pick = (e) => { const r = svg.getBoundingClientRect(), x = e.clientX - r.left; let best = pts[0]; for (const q of pts) if (Math.abs(q.x - x) < Math.abs(best.x - x)) best = q; read(best); };
+  svg.addEventListener("pointermove", pick); svg.addEventListener("pointerdown", pick);
+  svg.addEventListener("pointerleave", () => { const hv = document.getElementById("hv"); if (hv) hv.style.opacity = 0; read(null, CC.sum(range ? days.slice(-range) : days)); });
+  $("rangeSeg").addEventListener("click", (e) => {
+    const b = e.target.closest("button"); if (!b) return;
+    range = +b.dataset.r; [...$("rangeSeg").children].forEach((x) => x.setAttribute("aria-pressed", x === b));
+    $("ddRange").textContent = range ? `last ${range === 30 ? "month" : range === 90 ? "3 months" : "year"}` : "every week since 2018"; drawDaily();
+  });
+  onResize(svg, drawDaily);
+
+  /* ---- At a glance ---- */
+  const row = (label, s, extra) => `<li><span>${label}</span><span><b>${fmt(s.people)}</b> · ${plural(s.boats, "boat", "boats")}${extra || ""}</span></li>`;
+  const prevYr = CC.between(days, `${D.year - 1}-01-01`, `${D.year - 1}-${L.date.slice(5)}`);
+  $("glance").innerHTML = [
+    row("Last 7 days", CC.sum(D.last7)),
+    row("Last 30 days", CC.sum(D.last30)),
+    row(`${D.year} so far`, CC.sum(D.cur.days), ` · <span class="${D.change < 0 ? "down" : "up"}">${D.change < 0 ? "↓" : "↑"}${Math.abs(Math.round(D.change))}%</span>`),
+    row(`Same point, ${D.year - 1}`, CC.sum(prevYr)),
+    row("Since Labour took office", CC.sum(CC.between(days, PERIODS.labour, L.date))),
+    row("Since Burnham became PM", CC.sum(CC.between(days, PERIODS.burnham, L.date))),
+    row("Since 2018", CC.sum(days)),
+  ].join("");
+
+  /* ---- On this day ---- */
+  const today = CC.ukToday(), md = today.slice(5);
+  $("otdDate").textContent = CC.short(today).toUpperCase();
+  const otd = D.yearList.filter((Y) => Y.year < +today.slice(0, 4)).map((Y) => days.find((d) => d.date === `${Y.year}-${md}`)).filter(Boolean).reverse();
+  $("otd").innerHTML = otd.map((d) => `<li><span>${d.date.slice(0, 4)}${d.date.slice(0, 4) == +today.slice(0, 4) - 1 ? " · a year ago" : ""}</span><span>${d.migrants ? `<b>${fmt(d.migrants)}</b> · ${plural(d.boats, "boat", "boats")}` : "No crossings"}</span></li>`).join("")
+    || "<li><span>No earlier figures for this date</span></li>";
+
+  /* ---- People each year ---- */
+  const ymx = Math.max(...D.yearList.map((Y) => Y.total));
+  $("years").innerHTML = [...D.yearList].reverse().map((Y) => `<li><span>${Y.year}${Y.year === D.year ? " so far" : ""}</span><span class="bar"><i class="${Y.year === D.year ? "a" : ""}" style="width:${(Y.total / ymx) * 100}%"></i></span><b>${fmt(Y.total)}<small>${fmt(Y.boats)} boats</small></b></li>`).join("");
+  $("yrNote").textContent = `${fmt(D.allTotal)} IN ALL`;
+
+  /* ---- Running total by year ---- */
+  const race = $("race");
+  function drawRace() {
+    const W = race.clientWidth, H = 260, l = 34, r = 70, t = 8, b = 20;
+    race.setAttribute("viewBox", `0 0 ${W} ${H}`);
+    const mx = Math.max(...D.yearList.map((Y) => Y.total)), step = niceStep(mx / 4), top = Math.ceil(mx / step) * step;
+    const x = (i) => l + (i / 365) * (W - l - r), y = (v) => H - b - (v / top) * (H - t - b);
+    let g = "";
+    for (let v = 0; v <= top; v += step) g += `<line class="g" x1="${l}" x2="${W - r}" y1="${y(v)}" y2="${y(v)}"/><text x="${l - 6}" y="${y(v) + 3}" text-anchor="end">${v / 1000}k</text>`;
+    [0, 90, 181, 273].forEach((i, k) => (g += `<text x="${x(i)}" y="${H - 5}">${["Jan", "Apr", "Jul", "Oct"][k]}</text>`));
+    const ends = [];
+    D.yearList.forEach((Y) => {
+      let d = ""; for (let i = 0; i < Y.cum.length; i += 2) d += (i ? "L" : "M") + x(i).toFixed(1) + "," + y(Y.cum[i]).toFixed(1);
+      d += "L" + x(Y.cum.length - 1).toFixed(1) + "," + y(Y.total).toFixed(1);
+      const cls = Y.year === D.year ? "now" : Y.year === D.year - 1 ? "prev" : "";
+      g += `<path class="ln ${cls}" d="${d}"/>`;
+      ends.push({ Y, cls, ex: x(Y.cum.length - 1), ey: y(Y.total) });
+    });
+    ends.sort((a, c) => a.ey - c.ey);
+    for (let i = 1; i < ends.length; i++) if (ends[i].ey - ends[i - 1].ey < 12 && Math.abs(ends[i].ex - ends[i - 1].ex) < 40) ends[i].ey = ends[i - 1].ey + 12;
+    ends.forEach((e) => (g += `<text class="${e.cls ? "lab-" + e.cls : ""}" x="${e.ex + 5}" y="${e.ey + 3}">${e.Y.year}${e.cls === "now" ? " · " + fmt(e.Y.total) : ""}</text>`));
+    race.innerHTML = g;
+  }
+  onResize(race, drawRace);
+  $("raceKey").innerHTML = `<span style="color:var(--hot)">━ ${D.year}</span> &nbsp;<span style="color:var(--amber)">┅ ${D.year - 1}</span>`;
+
+  /* ---- Patterns ---- */
+  const STEADY = "2020-01-01", steady = days.filter((d) => d.date >= STEADY);
+  let patMode = "m";
+  const pat = $("pat");
+  function drawPat() {
+    const W = pat.clientWidth, H = 200, l = 34, t = 16, b = 20;
+    pat.setAttribute("viewBox", `0 0 ${W} ${H}`);
+    const n = patMode === "m" ? 12 : 7, s = Array(n).fill(0), c = Array(n).fill(0);
+    steady.forEach((d) => { const dt = CC.d8(d.date), k = patMode === "m" ? dt.getUTCMonth() : (dt.getUTCDay() + 6) % 7; s[k] += d.migrants; c[k]++; });
+    const avg = s.map((v, i) => (c[i] ? v / c[i] : 0)), mx = Math.max(...avg), bw = (W - l) / n, y = (v) => H - b - (v / mx) * (H - t - b);
+    const labs = patMode === "m" ? MON : ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+    let g = "";
+    avg.forEach((v, i) => {
+      const x = l + i * bw;
+      g += `<rect class="bar ${v === mx ? "a" : ""}" x="${x + bw * 0.15}" y="${y(v)}" width="${bw * 0.7}" height="${H - b - y(v)}"/><text x="${x + bw / 2}" y="${H - 5}" text-anchor="middle">${labs[i]}</text><text class="ink" x="${x + bw / 2}" y="${y(v) - 4}" text-anchor="middle">${Math.round(v)}</text>`;
+    });
+    pat.innerHTML = g;
+    const hi = avg.indexOf(mx), lo = avg.indexOf(Math.min(...avg));
+    $("patNote").textContent = `Since 2020, ${patMode === "m" ? CC.MONTHS[hi] : ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"][hi]} has been the busiest ${patMode === "m" ? "month" : "day of the week"}, with ${Math.round(mx)} people a day on average, and ${patMode === "m" ? CC.MONTHS[lo] : ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"][lo]} the quietest. Calm weather matters far more than the calendar.`;
+  }
+  $("patSeg").addEventListener("click", (e) => { const b = e.target.closest("button"); if (!b) return; patMode = b.dataset.p; [...$("patSeg").children].forEach((x) => x.setAttribute("aria-pressed", x === b)); drawPat(); });
+  onResize(pat, drawPat);
+
+  /* ---- Between two dates ---- */
+  const f = $("dFrom"), tI = $("dTo");
+  f.min = tI.min = days[0].date; f.max = tI.max = L.date;
+  f.value = `${D.year}-01-01`; tI.value = L.date;
+  const calc = () => {
+    let a = f.value, b2 = tI.value; if (!a || !b2) return; if (a > b2) [a, b2] = [b2, a];
+    const s = CC.sum(CC.between(days, a, b2));
+    $("cP").textContent = fmt(s.people); $("cB").textContent = fmt(s.boats); $("cA").textContent = s.boats ? Math.round(s.people / s.boats) : "–";
+    $("cN").textContent = fmt(s.n); $("cO").textContent = fmt(s.on); $("cD").textContent = s.n ? fmt(s.people / s.n) : "–";
+    $("cNote").textContent = `${CC.long(a)} ${a.slice(0, 4)} to ${CC.long(b2)} ${b2.slice(0, 4)}, both days counted.`;
+  };
+  f.addEventListener("change", calc); tI.addEventListener("change", calc); calc();
+
+  /* ---- Records ---- */
+  const rec = days.reduce((a, d) => (d.migrants > a.migrants ? d : a)), recB = days.reduce((a, d) => ((d.boats || 0) > (a.boats || 0) ? d : a));
+  const months = {}; days.forEach((d) => (months[d.date.slice(0, 7)] = (months[d.date.slice(0, 7)] || 0) + d.migrants));
+  const bestM = Object.entries(months).sort((a, c) => c[1] - a[1])[0];
+  const runsY = CC.quietRuns(D.cur.days)[0];
+  const since = D.quietStreak;
+  $("records").innerHTML = [
+    ["Record day since 2018", shortY(rec.date), fmt(rec.migrants)],
+    ["Most boats in a day", shortY(recB.date), fmt(recB.boats)],
+    ["Busiest month", `${CC.MONTHS[+bestM[0].slice(5) - 1]} ${bestM[0].slice(0, 4)}`, fmt(bestM[1])],
+    [`Busiest day of ${D.year}`, CC.short(D.cur.best.date), fmt(D.cur.best.migrants)],
+    ["Since the last crossing", `Last: ${CC.short(D.latestCrossing.date)}`, since ? plural(since, "day", "days") : "Crossings on the latest day"],
+    [`Longest quiet spell, ${D.year}`, runsY ? `${CC.short(runsY.from)} – ${CC.short(runsY.to)}` : "", runsY ? plural(runsY.n, "day", "days") : "–"],
+  ].map((r) => `<li><span>${r[0]}<br><small style="color:var(--dim)">${r[1]}</small></span><span><b>${r[2]}</b></span></li>`).join("");
+
+  /* ---- Quiet spells ---- */
+  $("quiet").innerHTML = CC.quietRuns(steady).slice(0, 7).map((q) => `<li><span>${shortY(q.from)} – ${q.open ? "now" : shortY(q.to)}</span><span><b>${plural(q.n, "day", "days")}</b></span></li>`).join("");
+
+  /* ---- Every person, last 30 days: one dot a person, a row a day ---- */
+  const cv = $("dots"), last30 = D.last30, busy = last30.filter((d) => d.migrants).reverse();
+  const s30 = CC.sum(last30);
+  $("repN").textContent = `${fmt(s30.people)} PEOPLE`;
+  $("repS").textContent = `${plural(s30.boats, "boat", "boats")} · ${CC.short(last30[0].date)} – ${CC.short(last30[last30.length - 1].date)} · crossings on ${s30.on} of ${s30.n} days. Each dot is one person.`;
+  cv.setAttribute("aria-label", `${fmt(s30.people)} people in the last 30 days, one dot each`);
+  function drawDots() {
+    const W = cv.clientWidth, dpr = Math.min(2, devicePixelRatio || 1), lab = 54, P = 4, R = 1.4, cols = Math.max(10, Math.floor((W - lab) / P));
+    let h = 0; const rows = busy.map((d) => { const r = Math.ceil(d.migrants / cols); const y = h; h += r * P + 10; return { d, y, r }; });
+    h = Math.max(h, 20);
+    cv.width = W * dpr; cv.height = h * dpr; cv.style.height = h + "px";
+    const x = cv.getContext("2d"); x.scale(dpr, dpr);
+    const cs = getComputedStyle(document.documentElement);
+    rows.forEach(({ d, y }) => {
+      x.fillStyle = cs.getPropertyValue("--dim"); x.font = "10px " + cs.getPropertyValue("--mono");
+      x.fillText(CC.short(d.date), 0, y + 8);
+      x.fillStyle = cs.getPropertyValue("--hot");
+      for (let i = 0; i < d.migrants; i++) { x.beginPath(); x.arc(lab + (i % cols) * P + R, y + Math.floor(i / cols) * P + R + 2, R, 0, 7); x.fill(); }
+    });
+    if (!rows.length) { x.fillStyle = cs.getPropertyValue("--dim"); x.fillText("No crossings in the last 30 days", 0, 12); }
+  }
+  onResize(cv, drawDots);
+  new MutationObserver(drawDots).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+
+  /* ---- Arrival outlook: today and tomorrow, from the forecast and past crossings ---- */
+  loadOutlook(D);
+});
+
+// Calm is wind under 12 mph with waves under 0.5 m; moderate is under 18 mph and 1 m; anything stronger is rough
+const rate = (w, v) => (w == null ? null : w < 12 && (v == null || v < 0.5) ? "calm" : w < 18 && (v == null || v < 1) ? "moderate" : "rough");
+const PRED = { calm: ["high", "High chance"], moderate: ["medium", "Some chance"], rough: ["low", "Low chance"] };
+const roundTo = (n) => (n < 10 ? Math.round(n) : n < 100 ? Math.round(n / 5) * 5 : Math.round(n / 10) * 10);
+async function loadOutlook(D) {
+  const q = "latitude=51.0&longitude=1.55&timezone=Europe%2FLondon&forecast_days=3";
+  const get = (u) => fetch(u, { cache: "no-cache" }).then((r) => { if (!r.ok) throw 0; return r.json(); });
+  try {
+    const [w, m] = await Promise.all([get("https://api.open-meteo.com/v1/forecast?" + q + "&hourly=wind_speed_10m,precipitation&wind_speed_unit=mph"),
+      get("https://marine-api.open-meteo.com/v1/marine?" + q + "&hourly=wave_height").catch(() => null)]);
+    const by = {};
+    w.hourly.time.forEach((t, i) => {   // midnight to noon, when most boats set out
+      const d = t.slice(0, 10), h = +t.slice(11, 13); if (h > 12) return;
+      (by[d] ||= { w: [], v: [], r: 0 }); by[d].w.push(w.hourly.wind_speed_10m[i]); by[d].r += w.hourly.precipitation[i] || 0;
+      const mi = m && m.hourly ? m.hourly.time.indexOf(t) : -1; if (mi >= 0) by[d].v.push(m.hourly.wave_height[mi]);
+    });
+    const med = (a) => { const s = a.filter((x) => x != null).sort((x, y) => x - y); return s.length ? s[Math.floor(s.length / 2)] : null; };
+    const td = CC.ukToday();
+    const all = D.days, idx = new Map(all.map((d, i) => [d.date, i]));
+    const base = (date) => {   // the average day within a week either side of the date, over the last three full years
+      const y = +date.slice(0, 4), vals = [];
+      for (let k = 1; k <= 3; k++) for (let j = -7; j <= 7; j++) { const iso = CC.addDays(`${y - k}${date.slice(4)}`, j), i = idx.get(iso); if (i != null) vals.push(all[i].migrants); }
+      if (!vals.length) return null; const on = vals.filter((v) => v > 0);
+      return { avg: vals.reduce((a, b) => a + b, 0) / vals.length, onAvg: on.length ? on.reduce((a, b) => a + b, 0) / on.length : 0, from: y - 3, to: y - 1 };
+    };
+    document.getElementById("pred").innerHTML = Object.keys(by).sort().filter((d) => d >= td).slice(0, 2).map((d) => {
+      const wind = med(by[d].w), wave = med(by[d].v), lvl = rate(wind, wave), b = base(d), p = PRED[lvl] || ["", "No forecast"];
+      const est = b && lvl ? roundTo(lvl === "calm" ? b.onAvg : lvl === "moderate" ? b.avg * 0.5 : b.avg * 0.05) : null;
+      return `<article><h3><span>${d === td ? "Today" : "Tomorrow"}</span><span>${CC.long(d)}</span></h3><div class="lv ${p[0]}">${p[1]} of crossings</div>`
+        + (est != null ? `<div class="est">${est === 0 ? "Few if any arrivals expected" : `Around ${CC.fmt(est)} people`} · typical for the time of year ${CC.fmt(Math.round(b.avg))} a day</div>` : "")
+        + `<div class="wx"><span>Wind <b>${wind == null ? "–" : Math.round(wind)}</b> mph</span><span>Waves <b>${wave == null ? "–" : wave.toFixed(1)}</b> m</span><span>Rain <b>${Math.round(by[d].r * 10) / 10}</b> mm</span></div></article>`;
+    }).join("") + `<p class="note">Midnight to noon, when most boats set out. An estimate from the Open-Meteo forecast and past crossings, not an official figure.</p>`;
+  } catch (e) {
+    document.getElementById("pred").innerHTML = `<p class="note">The forecast didn't load. Try again in a few minutes.</p>`;
+  }
+}
+
+</script>
+</body>
+</html>

@@ -5,6 +5,9 @@ A one-page site showing how many people cross the English Channel in small boats
 ## Files
 
 - `index.html` – the page: the "Bridge" instrument panel (radar of the Strait, year total, daily log, vessels, news)
+- `trends.html` – every day since 2018: the daily chart, records, running totals, patterns, quiet spells, a date calculator and the arrival outlook
+- `people.html` – who crosses: sex and age, nationalities, people per boat, returns, asylum claims and support, petitions
+- `bridge.css`, `bridge.js` – the look, the figures loader, the menu, Report a crossing and Share, shared by all three pages
 - `previous.html` – the earlier map homepage, kept for reference and linked from the footer (not indexed by search engines)
 - `privacy.html` – the Privacy Policy and Terms of Use, linked from the page footer
 - `favicon.svg` – the CC logo shown in the browser tab

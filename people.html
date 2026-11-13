@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#E9EFED" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#050807" media="(prefers-color-scheme: dark)">
+<script>/* Night is the default; Day or Auto only when chosen */
+function ccTheme(t){var r=document.documentElement;if(t==="auto")r.removeAttribute("data-theme");else r.setAttribute("data-theme",t);
+  var c=t==="auto"?null:(t==="light"?"#E9EFED":"#050807");document.querySelectorAll('meta[name="theme-color"]').forEach(function(m){if(!m.dataset.c)m.dataset.c=m.content;m.content=c||m.dataset.c;});}
+try{var t=localStorage.getItem("cc-theme");ccTheme(t==="light"||t==="auto"?t:"dark")}catch(e){ccTheme("dark")}</script>
+<meta name="description" content="Who crosses the Channel in small boats: sex and age, nationalities, people per boat, returns to France, asylum claims and support, and petitions.">
+<title>People · Channel Crossings</title>
+<link rel="canonical" href="https://channelcrossings.world/people.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Channel Crossings">
+<meta property="og:title" content="People · Channel Crossings">
+<meta property="og:description" content="Who crosses the Channel in small boats: sex and age, nationalities, people per boat, returns to France, asylum claims and support, and petitions.">
+<meta property="og:url" content="https://channelcrossings.world/people.html">
+<meta property="og:image" content="https://channelcrossings.world/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="bridge.css">
+<style>
+.stack{display:flex;height:12px;margin-top:12px;background:var(--line2)}
+.stack i{display:block;height:100%}
+.key{list-style:none;display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:8px;font-size:11.5px;color:var(--dim)}
+.key i{display:inline-block;width:8px;height:8px;margin-right:6px}
+.key b{color:var(--ink);margin-left:4px}
+.pet{list-style:none}
+.pet li{padding:8px 0;border-top:1px solid var(--line2);font-size:12px}
+.pet li:first-child{border-top:0}
+.pet a{color:var(--ink);text-decoration:none}
+.pet a:hover{color:var(--hot)}
+.pet .m{color:var(--dim);font-size:11px;margin-top:3px;display:block}
+.pet .pb{height:4px;background:var(--line2);margin-top:5px;position:relative}
+.pet .pb i{position:absolute;inset:0 auto 0 0;background:var(--hot)}
+.pet .done .pb i{background:var(--faint)}
+
+</style>
+</head>
+<body>
+<header class="status">
+  <a class="logo" href="./">CHANNEL CROSSINGS</a>
+  <span class="hide-s">UTC <b id="utc">--:--</b></span>
+  <span class="hide-s">Gov.uk data to <b id="dataTo">–</b></span>
+  <span class="sp"></span>
+  <nav class="tabs hide-s" aria-label="Pages"><a href="./">Live</a><a href="trends.html">Trends</a><a href="people.html" aria-current="page">People</a></nav>
+  <nav>
+    <button class="btn hide-s" data-open="dlgReport">Report</button>
+    <button class="btn hide-s" data-open="dlgShare">Share</button>
+    <button class="btn icon" id="theme" aria-label="Switch day or night"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></svg></button>
+    <button class="btn icon" data-open="dlgMore" aria-label="Menu"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  </nav>
+</header>
+<nav class="ptabs" aria-label="Pages"><a href="./">Live</a><a href="trends.html">Trends</a><a href="people.html" aria-current="page">People</a><button data-open="dlgReport">Report</button></nav>
+<main>
+<div class="page-h"><div><h1>People</h1><p>Who crosses, who is sent back and what happens to their claims</p></div><p id="pageNote">Home Office quarterly statistics</p></div>
+<div class="grid">
+  <section class="p s6">
+    <h2><span>Sex and age</span><span class="seg" id="sexSeg"><button data-k="lastYear" aria-pressed="true">Last year</button><button data-k="since2018">Since 2018</button></span></h2>
+    <div class="kv" style="margin-bottom:10px"><div><span>People</span><b id="gT"></b></div><div><span>Men and boys</span><b id="gM"></b></div><div><span>Aged 17 or under</span><b id="gK"></b></div></div>
+    <ul class="rows" id="sex"></ul>
+    <ul class="rows" id="age" style="margin-top:8px"></ul>
+    <p class="note" id="gNote"></p>
+  </section>
+  <section class="p s6">
+    <h2><span>Who is crossing · top nationalities</span><b id="natP"></b></h2>
+    <ul class="rows" id="nat"></ul>
+    <p class="note" id="natNote"></p>
+  </section>
+
+  <section class="p s6">
+    <h2><span>People per boat</span><b id="pbNow"></b></h2>
+    <svg class="chart" id="pb" height="200" role="img" aria-label="Average people per boat each year"></svg>
+    <p class="note">Each year the dinghies carry more people. The figure is people detected divided by boats detected.</p>
+  </section>
+  <section class="p s6">
+    <h2><span>UK–France returns deal</span><b id="retP"></b></h2>
+    <div class="kv"><div><span>Returned to France</span><b id="rOut"></b></div><div><span>Came legally from France</span><b id="rIn"></b></div><div><span>Small boat arrivals</span><b id="rArr"></b></div></div>
+    <svg class="chart" id="ret" height="150" role="img" aria-label="People returned and admitted each month" style="margin-top:10px"></svg>
+    <p class="note" id="retNote"></p>
+  </section>
+
+  <section class="p s6">
+    <h2><span>Returned from the UK</span><b id="brP"></b></h2>
+    <div class="kv"><div><span>Returned, last year</span><b id="brN"></b></div><div><span>Change on a year before</span><b id="brC"></b></div><div><span>Arrivals, same year</span><b id="brA"></b></div></div>
+    <svg class="chart" id="br" height="150" role="img" aria-label="People who came by small boat and were returned, each quarter" style="margin-top:10px"></svg>
+    <ul class="list" id="brTop" style="margin-top:6px"></ul>
+    <p class="note" id="brNote"></p>
+  </section>
+  <section class="p s6">
+    <h2><span>Asylum claims · what happened</span><b id="asyP"></b></h2>
+    <div class="kv"><div><span>Claimed asylum</span><b id="aC"></b></div><div><span>Grant rate</span><b id="aR"></b></div><div><span>Still waiting</span><b id="aW"></b></div></div>
+    <div class="stack" id="aStack" role="img"></div>
+    <ul class="key" id="aKey"></ul>
+    <ul class="rows" id="aYears" style="margin-top:8px"></ul>
+    <p class="note" id="aNote"></p>
+  </section>
+
+  <section class="p s6">
+    <h2><span>Asylum support</span><b>end of June 2026</b></h2>
+    <div class="big num">93,293<small>people on asylum support</small></div>
+    <p class="note" style="margin-top:2px">12% fewer than a year before</p>
+    <div class="stack" role="img" aria-label="16,021 in hotels, 73,068 in other housing, 4,204 on cash support only"><i style="width:17.2%;background:var(--amber)"></i><i style="width:78.3%;background:var(--hot)"></i><i style="width:4.5%;background:var(--blue)"></i></div>
+    <ul class="key"><li><i style="background:var(--amber)"></i>In hotels <b>16,021</b></li><li><i style="background:var(--hot)"></i>Other housing <b>73,068</b></li><li><i style="background:var(--blue)"></i>Cash only <b>4,204</b></li></ul>
+    <div class="kv" style="margin-top:10px"><div><span>A week, self-catering</span><b>£49.18</b></div><div><span>A week, in a hotel</span><b>£9.95</b></div><div><span>In hotels, a year before</span><b>about 2×</b></div></div>
+    <p class="note">Half as many people are in hotels as a year before. People waiting for an asylum decision can't usually claim benefits such as Universal Credit; asylum support is housing and this allowance instead. These are everyone on asylum support, however they arrived. Source: Home Office, <a href="https://www.gov.uk/government/statistics/immigration-system-statistics-year-ending-june-2026/how-many-people-are-in-the-uk-asylum-system">Immigration system statistics, year ending June 2026</a>, and <a href="https://www.gov.uk/asylum-support/what-youll-get">GOV.UK asylum support rates</a>.</p>
+  </section>
+  <section class="p s6">
+    <h2><span>Petitions</span><b>UK Parliament</b></h2>
+    <ul class="pet" id="pet"><li class="note">Loading petitions…</li></ul>
+    <p class="note">From the <a href="https://petition.parliament.uk/">UK Parliament petitions</a> site. At 10,000 signatures the government responds; at 100,000 Parliament considers a debate.</p>
+  </section>
+</div>
+</main>
+
+<footer class="foot"><span>Figures: <a href="https://www.gov.uk/government/publications/migrants-detected-crossing-the-english-channel-in-small-boats">Home Office</a>, provisional and subject to revision.</span><span><a href="how-it-works.html">How it works</a> · <a href="data.csv" download>Figures (CSV)</a> · <a href="privacy.html">Privacy</a></span></footer>
+<script src="bridge.js"></script>
+<script>
+const $ = (id) => document.getElementById(id), { fmt, esc } = CC;
+const pc = (a, b) => (b ? Math.round((a / b) * 100) : 0);
+const onResize = (el, fn) => { let w = 0; fn(); if (window.ResizeObserver) new ResizeObserver(() => { if (el.clientWidth !== w) { w = el.clientWidth; fn(); } }).observe(el); };
+const rows = (items, max, cls) => items.map(([k, v, extra]) => `<li><span>${esc(k)}</span><span class="bar"><i class="${cls || ""}" style="width:${(v / max) * 100}%"></i></span><b>${fmt(v)}${extra ? `<small>${extra}</small>` : ""}</b></li>`).join("");
+// Bars at the chart's real width: groups of one or two series
+function bars(svg, labels, series, opts = {}) {
+  const W = svg.clientWidth, H = +svg.getAttribute("height"), l = 4, t = 14, b = 18;
+  svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+  const mx = Math.max(1, ...series.flatMap((s) => s.v)), n = labels.length, gw = (W - l) / n, inner = gw * 0.74, bw = inner / series.length;
+  const y = (v) => H - b - (v / mx) * (H - t - b);
+  let g = `<line class="g" x1="0" x2="${W}" y1="${H - b}" y2="${H - b}"/>`, every = Math.ceil(n / Math.max(1, Math.floor(W / 46)));
+  labels.forEach((lab, i) => {
+    series.forEach((s, k) => { const v = s.v[i], x = l + i * gw + (gw - inner) / 2 + k * bw; g += `<rect class="bar ${s.cls || ""}${opts.hl && opts.hl(i) ? " a" : ""}" x="${x.toFixed(1)}" y="${y(v).toFixed(1)}" width="${Math.max(1, bw - 1).toFixed(1)}" height="${(H - b - y(v)).toFixed(1)}"/>`;
+      if (opts.values) g += `<text class="ink" x="${(x + bw / 2).toFixed(1)}" y="${(y(v) - 3).toFixed(1)}" text-anchor="middle">${v}</text>`; });
+    if (i % every === 0) g += `<text x="${(l + i * gw + gw / 2).toFixed(1)}" y="${H - 4}" text-anchor="middle">${lab}</text>`;
+  });
+  svg.innerHTML = g;
+}
+
+CC.load().then(async (D) => {
+  CCUI.setShare(CCUI.shareFrom(D));
+  $("dataTo").textContent = CC.short(D.latest.date);
+
+  /* ---- Sex and age ---- */
+  const G = D.gender;
+  const drawSex = (k) => {
+    const g = G[k], T = g.total;
+    $("gT").textContent = fmt(T); $("gM").textContent = pc(g.sex.Male, T) + "%"; $("gK").textContent = pc(g.age["17 and under"], T) + "%";
+    $("sex").innerHTML = rows(Object.entries(g.sex).map(([s, v]) => [s, v, pc(v, T) + "%"]), T);
+    $("age").innerHTML = rows(Object.entries(g.age).map(([s, v]) => [s, v, pc(v, T) + "%"]), Math.max(...Object.values(g.age)), "a");
+    $("gNote").textContent = `${k === "lastYear" ? G.period[0].toUpperCase() + G.period.slice(1) : "Small boat arrivals since 2018"}. ${fmt(g.adultMen)} adult men, ${pc(g.adultMen, T)}% of everyone. Ages are as people gave them on arrival.`;
+  };
+  if (G) { drawSex("lastYear"); $("sexSeg").addEventListener("click", (e) => { const b = e.target.closest("button"); if (!b) return; [...$("sexSeg").children].forEach((x) => x.setAttribute("aria-pressed", x === b)); drawSex(b.dataset.k); }); }
+
+  /* ---- Nationalities ---- */
+  const N = D.nat;
+  if (N) {
+    $("natP").textContent = N.period.toUpperCase();
+    const list = N.top.map((n) => [n.name, n.n, `${n.pc}% · <span class="${n.change > 0 ? "up" : "down"}">${n.change > 0 ? "+" : ""}${n.change}%</span>`]);
+    if (N.other) list.push(["All others", N.other.n || N.other, N.other.pc ? N.other.pc + "%" : ""]);
+    $("nat").innerHTML = list.map(([k, v, x]) => `<li><span>${esc(k)}</span><span class="bar"><i style="width:${(v / Math.max(...list.map((q) => q[1]))) * 100}%"></i></span><b>${fmt(v)}<small>${x}</small></b></li>`).join("");
+    $("natNote").textContent = `${fmt(N.total)} people in all. The change is on the year before.`;
+  }
+
+  /* ---- People per boat ---- */
+  const P = D.perboat;
+  if (P) { $("pbNow").textContent = `${P.years[P.years.length - 1].avg} IN ${P.years[P.years.length - 1].y}`; onResize($("pb"), () => bars($("pb"), P.years.map((y) => "’" + y.y.slice(2)), [{ v: P.years.map((y) => y.avg) }], { values: true, hl: (i) => i === P.years.length - 1 })); }
+
+  /* ---- UK–France returns deal ---- */
+  const R = D.returns;
+  if (R) {
+    $("rOut").textContent = fmt(R.out); $("rIn").textContent = fmt(R.in); $("rArr").textContent = fmt(R.arrivals);
+    $("retP").textContent = "AUG 2025 – JUN 2026";
+    onResize($("ret"), () => bars($("ret"), R.months.map((m) => CC.MONTHS[+m.month.slice(5) - 1].slice(0, 3)), [{ v: R.months.map((m) => m.out), cls: "" }, { v: R.months.map((m) => m.in), cls: "b" }]));
+    $("retNote").innerHTML = `<span style="color:var(--hot)">■</span> returned to France &nbsp;<span style="color:var(--blue)">■</span> came legally the other way. Under the one-in, one-out deal about one small boat arrival in ${Math.round(R.arrivals / Math.max(1, R.out))} was sent back. <a href="${esc(R.source)}">Source</a>.`;
+  }
+
+  /* ---- Returned from the UK ---- */
+  const BR = await CC.get("boatreturns.json");
+  if (BR) {
+    $("brP").textContent = BR.period.toUpperCase(); $("brN").textContent = fmt(BR.year);
+    $("brC").textContent = (BR.change > 0 ? "+" : "") + BR.change + "%"; $("brA").textContent = fmt(BR.arrived);
+    const q = BR.quarters.filter((x) => x.q >= "2020");
+    onResize($("br"), () => bars($("br"), q.map((x) => (x.q.endsWith("Q1") ? x.q.slice(0, 4) : "")), [{ v: q.map((x) => x.n) }], { hl: (i) => i >= q.length - 4 }));
+    $("brTop").innerHTML = (BR.top || []).map((t) => `<li><span>${esc(t.name)}</span><span><b>${fmt(t.n)}</b></span></li>`).join("");
+    $("brNote").innerHTML = `People who came by small boat and were later returned from the UK, each quarter since 2020 (the last four highlighted), and the nationalities returned most. <a href="${esc(BR.source)}">Source</a>.`;
+  }
+
+  /* ---- Asylum claims ---- */
+  const A = await CC.get("asylum.json");
+  if (A) {
+    const t = A.total;
+    $("asyP").textContent = A.period.toUpperCase();
+    $("aC").textContent = fmt(t.claimed); $("aR").textContent = t.grantRate + "%"; $("aW").textContent = fmt(t.waiting);
+    const parts = [["Granted", t.granted, "var(--hot)"], ["Refused", t.refused, "var(--red)"], ["Withdrawn", t.withdrawn, "var(--amber)"], ["Waiting", t.waiting, "var(--faint)"]], all = parts.reduce((a, p) => a + p[1], 0);
+    $("aStack").innerHTML = parts.map((p) => `<i style="width:${(p[1] / all) * 100}%;background:${p[2]}"></i>`).join("");
+    $("aStack").setAttribute("aria-label", parts.map((p) => `${fmt(p[1])} ${p[0].toLowerCase()}`).join(", "));
+    $("aKey").innerHTML = parts.map((p) => `<li><i style="background:${p[2]}"></i>${p[0]} <b>${fmt(p[1])}</b></li>`).join("");
+    const ys = A.years.filter((y) => y.claimed), mx = Math.max(...ys.map((y) => y.claimed));
+    $("aYears").innerHTML = ys.reverse().map((y) => { const dec = y.granted + y.refused; return `<li><span>${y.year}</span><span class="bar"><i style="width:${(y.claimed / mx) * 100}%"></i></span><b>${fmt(y.claimed)}<small>${dec ? pc(y.granted, dec) + "% granted" : ""}</small></b></li>`; }).join("");
+    $("aNote").innerHTML = `Claims by small boat arrivals, by year of arrival. The grant rate is grants out of decisions (granted or refused). <a href="${esc(A.source)}">Source</a>.`;
+  }
+
+  /* ---- Petitions ---- */
+  const PT = await CC.get("petitions.json");
+  const list = (PT && PT.petitions) || [];
+  $("pet").innerHTML = list.length ? list.slice(0, 6).map((p) => {
+    const target = p.signatures < 10000 ? 10000 : 100000, open = p.state === "open";
+    const url = /^https:\/\//.test(p.url) ? p.url : "https://petition.parliament.uk/";
+    return `<li class="${open ? "" : "done"}"><a href="${esc(url)}" target="_blank" rel="noopener">${esc(p.title)}</a><span class="m">${open ? "Open" : "Closed"}${open && p.closes ? " · closes " + CC.short(p.closes) + " " + p.closes.slice(0, 4) : ""} · ${fmt(p.signatures)} of ${fmt(target)}${p.response ? " · Government responded" : ""}</span><span class="pb"><i style="width:${Math.min(100, (p.signatures / target) * 100).toFixed(1)}%"></i></span></li>`;
+  }).join("") : '<li class="note">No current petitions found.</li>';
+});
+
+</script>
+</body>
+</html>

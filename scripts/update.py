@@ -291,7 +291,8 @@ INDEXNOW_KEY = "3c699a48e42e6f3a4c6573138dd6fc80"   # proves we own the site: th
 
 def write_sitemap(latest):
     """Tell search engines when the figures last changed."""
-    pages = [("", latest, "daily", "1.0"), ("how-it-works.html", None, "monthly", "0.6"), ("privacy.html", None, "yearly", "0.3")]
+    pages = [("", latest, "daily", "1.0"), ("trends.html", latest, "daily", "0.8"), ("people.html", None, "monthly", "0.7"),
+             ("how-it-works.html", None, "monthly", "0.6"), ("privacy.html", None, "yearly", "0.3")]
     rows = "".join(f"  <url><loc>{SITE}{p}</loc>" + (f"<lastmod>{m}</lastmod>" if m else "") + f"<changefreq>{c}</changefreq><priority>{pr}</priority></url>\n"
                    for p, m, c, pr in pages)
     (ROOT / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + rows + "</urlset>\n")

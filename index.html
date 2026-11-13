@@ -66,6 +66,7 @@ try{window.__data=fetch("data.json",{cache:"no-cache"}).then(function(r){if(!r.o
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="preload" href="vendor/jetbrains-mono/jetbrains-mono-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="vendor/inter-tight/inter-tight-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="bridge.css">
 <style>
 @font-face{font-family:"JBM";src:url(vendor/jetbrains-mono/jetbrains-mono-latin-400-normal.woff2) format("woff2");font-weight:400;font-display:swap}
 @font-face{font-family:"JBM";src:url(vendor/jetbrains-mono/jetbrains-mono-latin-700-normal.woff2) format("woff2");font-weight:700;font-display:swap}
@@ -92,7 +93,7 @@ try{window.__data=fetch("data.json",{cache:"no-cache"}).then(function(r){if(!r.o
 html,body{height:100%;overflow:hidden}
 body{background:var(--bg);color:var(--ink);font-family:var(--mono);font-size:13px;line-height:1.45}
 /* The whole page is one screen: status bar, panels, news line. Nothing scrolls. */
-.app{height:100vh;height:100dvh;display:grid;grid-template-rows:auto minmax(0,1fr) auto;padding-bottom:env(safe-area-inset-bottom)}
+.app{height:100vh;height:100dvh;display:grid;grid-template-rows:auto auto minmax(0,1fr) auto;padding-bottom:env(safe-area-inset-bottom)}
 
 .status{display:flex;align-items:center;gap:20px;padding:8px 16px;padding-top:max(8px,env(safe-area-inset-top));border-bottom:1px solid var(--line);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);white-space:nowrap;overflow:hidden}
 .status b{color:var(--ink);font-weight:700}
@@ -243,12 +244,15 @@ td.r,th.r{text-align:right}
   <span class="hide-s">Gov.uk data to <b id="dataTo">–</b></span>
   <span class="hide-s">AIS contacts <b id="aisN">–</b></span>
   <span class="sp"></span>
+  <nav class="tabs hide-s" aria-label="Pages"><a href="./" aria-current="page">Live</a><a href="trends.html">Trends</a><a href="people.html">People</a></nav>
   <nav>
-    <button class="btn hide-s" data-open="dlgYears">Years</button>
+    <button class="btn hide-s" data-open="dlgReport">Report</button>
+    <button class="btn hide-s" data-open="dlgShare">Share</button>
     <button class="btn icon" id="theme" aria-label="Switch day or night"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></svg></button>
-    <button class="btn icon" data-open="dlgMore" aria-label="More"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <button class="btn icon" data-open="dlgMore" aria-label="Menu"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
   </nav>
 </header>
+<nav class="ptabs" aria-label="Pages"><a href="./" aria-current="page">Live</a><a href="trends.html">Trends</a><a href="people.html">People</a><button data-open="dlgReport">Report</button></nav>
 
 <main class="deck">
   <section class="p radar">
@@ -272,7 +276,7 @@ td.r,th.r{text-align:right}
   </section>
 
   <section class="p tape">
-    <h2><span>Daily log · last 60 days</span><b id="tapeSum"></b></h2>
+    <h2><span>Daily log · last 60 days</span><span><b id="tapeSum"></b> <a class="link" href="trends.html">Trends →</a></span></h2>
     <svg id="tape" aria-label="People detected each day for the last 60 days"></svg>
   </section>
 
@@ -285,123 +289,17 @@ td.r,th.r{text-align:right}
 <div class="ticker"><span class="lab">NEWS</span><div class="run" id="run"></div></div>
 </div>
 
-<dialog id="dlgYears" class="trace" aria-labelledby="hYears">
-  <h2><span id="hYears">Running total by year</span><button class="btn" data-close>Close</button></h2>
-  <div class="body"><p id="traceN" style="margin-bottom:8px"></p><svg id="trace" viewBox="0 0 500 260"></svg></div>
-</dialog>
 <dialog id="dlgVessels" aria-labelledby="hVes">
   <h2><span id="hVes">Vessels in the Strait</span><button class="btn" data-close>Close</button></h2>
   <div class="body"><table id="roster"></table></div>
 </dialog>
-<dialog id="dlgMore" class="menu" aria-labelledby="hMore">
-  <h2><span id="hMore">Menu</span><button class="btn" data-close>Close</button></h2>
-  <div class="body">
-    <a href="#" data-open="dlgYears">Running total by year</a>
-    <a href="#" data-open="dlgVessels">All vessels in the Strait</a>
-    <a href="how-it-works.html">How it works</a>
-    <a href="data.csv" download>Download the figures (CSV)</a>
-    <a href="previous.html">Previous design</a>
-    <a href="privacy.html">Privacy and terms</a>
-    <p>Figures: <a href="https://www.gov.uk/government/publications/migrants-detected-crossing-the-english-channel-in-small-boats">Home Office</a>, provisional. Vessel positions: aisstream.io. News: UK news feeds.</p>
-  </div>
-</dialog>
 
+<script src="bridge.js"></script>
 <script>
-/* Shared data loader for the UI concepts. Reads the same JSON files as the live site. */
-(function () {
-  const BASE = "";
-  const get = (f) => fetch(BASE + f, { cache: "no-cache" }).then((r) => (r.ok ? r.json() : null)).catch(() => null);
-  const MONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-  const DAYS = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-  const fmt = (n) => (n == null ? "–" : Math.round(n).toLocaleString("en-GB"));
-  const d8 = (s) => new Date(s + "T12:00:00Z");
-  const doy = (s) => { const d = d8(s); return Math.floor((d - Date.UTC(d.getUTCFullYear(), 0, 1, 12)) / 864e5); };
-  const long = (s) => { const d = d8(s); return `${DAYS[d.getUTCDay()]} ${d.getUTCDate()} ${MONTHS[d.getUTCMonth()]}`; };
-  const short = (s) => { const d = d8(s); return `${d.getUTCDate()} ${MONTHS[d.getUTCMonth()].slice(0, 3)}`; };
-
-  async function load() {
-    const [data, news, vessels, nat, gender, returns, perboat, status] = await Promise.all(
-      ["data.json", "news.json", "vessels.json", "nationalities.json", "gender.json", "returns.json", "perboat.json", "status.json"].map(get)
-    );
-    const days = data.days;
-    const latest = days[days.length - 1];
-    const year = +latest.date.slice(0, 4);
-    const latestDoy = doy(latest.date);
-    const latestCrossing = [...days].reverse().find((d) => d.migrants > 0);
-    let quietStreak = 0;
-    for (let i = days.length - 1; i >= 0 && !days[i].migrants; i--) quietStreak++;
-
-    const years = {};
-    for (const d of days) {
-      const y = +d.date.slice(0, 4);
-      (years[y] ||= { year: y, total: 0, boats: 0, days: [], cum: [], best: null });
-      const Y = years[y];
-      Y.total += d.migrants; Y.boats += d.boats || 0; Y.days.push(d); Y.cum.push(Y.total);
-      if (!Y.best || d.migrants > Y.best.migrants) Y.best = d;
-    }
-    const cur = years[year];
-    const prev = years[year - 1];
-    const prevSame = prev ? prev.cum[Math.min(latestDoy, prev.cum.length - 1)] : null;
-    const change = prevSame ? ((cur.total - prevSame) / prevSame) * 100 : null;
-    const yearList = Object.values(years).sort((a, b) => a.year - b.year);
-    const allTotal = yearList.reduce((s, y) => s + y.total, 0);
-    const last = (n) => days.slice(-n);
-    const crossingDays = cur.days.filter((d) => d.migrants > 0).length;
-
-    const STRAIT = { minLat: 50.55, maxLat: 51.45, minLon: 0.7, maxLon: 2.3 };
-    const inStrait = (v) => v.lat > STRAIT.minLat && v.lat < STRAIT.maxLat && v.lon > STRAIT.minLon && v.lon < STRAIT.maxLon;
-    const vs = (vessels && vessels.vessels) || [];
-
-    return {
-      days, latest, latestCrossing, quietStreak, year, latestDoy, years, yearList, cur, prev, prevSame, change, allTotal, crossingDays,
-      last7: last(7), last30: last(30),
-      avgPerBoat: cur.boats ? cur.total / cur.boats : null,
-      news: (news && news.items) || [],
-      vessels: vs, strait: vs.filter(inStrait), STRAIT,
-      nat, gender, returns, perboat, status, checkedAt: data.checkedAt,
-    };
-  }
-
-  // Simplified Strait of Dover coastline (lat, lon) for stylised maps.
-  const COAST = {
-    england: [[50.77,0.28],[50.84,0.47],[50.855,0.573],[50.9,0.68],[50.94,0.77],[50.93,0.86],[50.913,0.976],[50.95,0.98],[51.02,0.98],[51.07,1.08],[51.08,1.18],[51.1,1.27],[51.125,1.32],[51.14,1.37],[51.18,1.405],[51.22,1.405],[51.27,1.365],[51.31,1.37],[51.33,1.42],[51.375,1.445],[51.39,1.38],[51.37,1.13],[51.36,1.02],[51.4,0.88],[51.44,0.76],[51.48,0.6],[51.5,0.4]],
-    france: [[50.3,1.55],[50.4,1.56],[50.52,1.58],[50.63,1.57],[50.73,1.6],[50.77,1.61],[50.87,1.58],[50.885,1.66],[50.93,1.71],[50.945,1.75],[50.965,1.85],[51.0,2.12],[51.05,2.37],[51.085,2.52],[51.1,2.58],[51.15,2.7],[51.23,2.9]],
-    places: [
-      { n: "Dover", lat: 51.125, lon: 1.32, side: "uk" }, { n: "Folkestone", lat: 51.08, lon: 1.18, side: "uk" },
-      { n: "Dungeness", lat: 50.913, lon: 0.976, side: "uk" }, { n: "Ramsgate", lat: 51.33, lon: 1.42, side: "uk" },
-      { n: "Calais", lat: 50.965, lon: 1.85, side: "fr" }, { n: "Dunkirk", lat: 51.05, lon: 2.37, side: "fr" },
-      { n: "Boulogne", lat: 50.73, lon: 1.6, side: "fr" }, { n: "Gravelines", lat: 51.0, lon: 2.12, side: "fr" },
-    ],
-  };
-
-  function theme(btn) {
-    const root = document.documentElement;
-    let t = null;
-        if (btn) btn.addEventListener("click", () => {
-      const dark = root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
-      const next = dark ? "light" : "dark";
-      if (window.ccTheme) ccTheme(next); else root.dataset.theme = next;
-      try { localStorage.setItem("cc-theme", next); } catch (e) {}
-    });
-  }
-
-  const ago = (iso) => {
-    const m = Math.round((Date.now() - new Date(iso)) / 6e4);
-    if (m < 60) return `${m} min ago`;
-    const h = Math.round(m / 60);
-    return h < 24 ? `${h} hour${h > 1 ? "s" : ""} ago` : `${Math.round(h / 24)} day${Math.round(h / 24) > 1 ? "s" : ""} ago`;
-  };
-
-  window.CC = { load, fmt, long, short, d8, doy, MONTHS, DAYS, COAST, theme, ago };
-})();
-</script>
-<script>
-CC.theme(document.getElementById("theme"));
 const $ = (id) => document.getElementById(id), { fmt } = CC;
-const tick = () => { const d = new Date(); $("utc").textContent = d.toISOString().slice(11, 16); };
-tick(); setInterval(tick, 10000);
 
 CC.load().then((D) => {
+  CCUI.setShare(CCUI.shareFrom(D));
   $("dataTo").textContent = CC.short(D.latest.date);
   $("aisN").textContent = D.vessels.length;
   $("yr").textContent = D.year; $("py").textContent = D.year - 1;
@@ -478,33 +376,12 @@ CC.load().then((D) => {
   $("roster").innerHTML = `<tr><th>Vessel</th><th>Type</th><th class="r">Speed</th><th class="r">Seen</th></tr>` + sorted.map((v) =>
     `<tr><td><span class="k ${v.kind}"></span>${v.name || "Unnamed"}</td><td>${kindName[v.kind]}</td><td class="r">${v.sog == null ? "–" : v.sog.toFixed(1) + " kn"}</td><td class="r">${CC.ago(v.seen).replace(" ago", "")}</td></tr>`).join("");
 
-  // Trace
-  const mxY = Math.max(...D.yearList.map((y) => y.total));
-  let g = "";
-  for (let v = 10000; v < mxY; v += 10000) { const y = 250 - (v / mxY) * 236; g += `<line class="g" x1="0" x2="500" y1="${y}" y2="${y}"/><text x="2" y="${y - 3}">${v / 1000}K</text>`; }
-  D.yearList.forEach((Y) => {
-    let d = "";
-    for (let i = 0; i < Y.cum.length; i += 3) d += (i ? "L" : "M") + ((i / 365) * 500).toFixed(1) + "," + (250 - (Y.cum[i] / mxY) * 236).toFixed(1);
-    const cls = Y.year === D.year ? "now" : Y.year === D.year - 1 ? "prev" : "";
-    g += `<path class="${cls}" d="${d}"/>`;
-  });
-  $("trace").innerHTML = g;
-  $("traceN").innerHTML = `<span style="color:var(--hot)">━ ${D.year}</span> &nbsp;<span style="color:var(--amber)">┅ ${D.year - 1}</span>`;
-
   // Ticker
   const esc = (t) => String(t).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const items = D.news.slice(0, 8).map((n) => `<a href="${esc(n.url)}" rel="noopener"><b>${esc(n.source).toUpperCase()}</b>${esc(n.title)}</a>`).join("");
   $("run").innerHTML = items + items;
 });
 
-// Pop-up panels: Years, All vessels, Menu
-document.addEventListener("click", (e) => {
-  const o = e.target.closest("[data-open]"), c = e.target.closest("[data-close]");
-  if (o) { e.preventDefault(); document.querySelectorAll("dialog[open]").forEach((d) => d.close()); document.getElementById(o.dataset.open).showModal(); }
-  else if (c) c.closest("dialog").close();
-  else if (e.target.tagName === "DIALOG") e.target.close();   // a tap on the dark backdrop
-});
 </script>
-<script>if("serviceWorker" in navigator){ addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {})); }</script>
 </body>
 </html>

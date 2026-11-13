@@ -4,9 +4,9 @@
    page then looks for newer figures by itself a minute later). Fetching them fresh keeps a new page from
    running with last week's script. Icons, fonts and vendor/ files: served from the saved copy straight
    away and refreshed in the background. Other sites (weather, map) are never touched. */
-const CACHE = "cc-v37";
+const CACHE = "cc-v38";
 const CORE = [
-  "./", "index.html", "how-it-works.html", "privacy.html",
+  "./", "index.html", "trends.html", "people.html", "bridge.css", "bridge.js", "how-it-works.html", "privacy.html",
   "favicon.svg", "manifest.webmanifest", "icon-192.png", "apple-touch-icon.png",
   "vendor/leaflet/leaflet.js"
 ];
