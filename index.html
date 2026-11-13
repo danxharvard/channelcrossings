@@ -66,6 +66,7 @@ try{window.__data=fetch("data.json",{cache:"no-cache"}).then(function(r){if(!r.o
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="preload" href="vendor/jetbrains-mono/jetbrains-mono-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="vendor/inter-tight/inter-tight-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="bridge.css">
 <style>
 @font-face{font-family:"JBM";src:url(vendor/jetbrains-mono/jetbrains-mono-latin-400-normal.woff2) format("woff2");font-weight:400;font-display:swap}
 @font-face{font-family:"JBM";src:url(vendor/jetbrains-mono/jetbrains-mono-latin-700-normal.woff2) format("woff2");font-weight:700;font-display:swap}
@@ -89,26 +90,33 @@ try{window.__data=fetch("data.json",{cache:"no-cache"}).then(function(r){if(!r.o
   --sea:#06110e; --land:#0d1714; --coast:#2f6b57; --glow:drop-shadow(0 0 6px rgba(83,245,174,.55)); color-scheme:dark;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--ink);font-family:var(--mono);font-size:13px;line-height:1.45;min-height:100vh}
-.status{display:flex;align-items:center;gap:22px;padding:10px 20px;border-bottom:1px solid var(--line);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);white-space:nowrap;overflow:hidden}
+html,body{height:100%;overflow:hidden}
+body{background:var(--bg);color:var(--ink);font-family:var(--mono);font-size:13px;line-height:1.45}
+/* The whole page is one screen: status bar, panels, news line. Nothing scrolls. */
+.app{height:100vh;height:100dvh;display:grid;grid-template-rows:auto auto minmax(0,1fr) auto;padding-bottom:env(safe-area-inset-bottom)}
+
+.status{display:flex;align-items:center;gap:20px;padding:8px 16px;padding-top:max(8px,env(safe-area-inset-top));border-bottom:1px solid var(--line);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);white-space:nowrap;overflow:hidden}
 .status b{color:var(--ink);font-weight:700}
 .status .logo{color:var(--hot);font-weight:700;letter-spacing:.2em;font-size:inherit;margin:0}
 .status .dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--hot);margin-right:6px;box-shadow:0 0 8px var(--hot);animation:blink 2s infinite}
 @keyframes blink{50%{opacity:.35}}
 .status .sp{flex:1}
-.status button{all:unset;cursor:pointer;border:1px solid var(--line);padding:4px 10px;color:var(--ink)}
-.status button:hover{border-color:var(--hot);color:var(--hot)}
+.status nav{display:flex;gap:6px}
+.btn{all:unset;cursor:pointer;border:1px solid var(--line);padding:5px 10px;color:var(--ink);font:inherit;letter-spacing:.08em;text-transform:uppercase;line-height:1.3}
+.btn:hover,.btn:focus-visible{border-color:var(--hot);color:var(--hot)}
+.btn.icon{padding:5px 8px;display:inline-grid;place-items:center}
+.btn.icon svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.8}
 
-.deck{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);grid-template-rows:auto auto;gap:1px;background:var(--line);border-bottom:1px solid var(--line)}
-.p{background:var(--panel);padding:16px 18px;position:relative;min-width:0}
-.p>h2{font-size:10.5px;font-weight:400;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);display:flex;justify-content:space-between;gap:10px;margin-bottom:12px}
+.deck{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);grid-template-rows:auto minmax(0,1fr) auto;gap:1px;background:var(--line);min-height:0}
+.p{background:var(--panel);padding:12px 16px;position:relative;min-width:0;min-height:0;overflow:hidden}
+.p>h2{font-size:10.5px;font-weight:400;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:8px;white-space:nowrap}
 .p>h2 b{color:var(--hot);font-weight:400}
 .p::before,.p::after{content:"";position:absolute;width:8px;height:8px;border-color:var(--faint);border-style:solid}
-.p::before{top:6px;left:6px;border-width:1px 0 0 1px}.p::after{bottom:6px;right:6px;border-width:0 1px 1px 0}
+.p::before{top:5px;left:5px;border-width:1px 0 0 1px}.p::after{bottom:5px;right:5px;border-width:0 1px 1px 0}
 
 /* Radar */
-.radar{grid-row:span 2;display:flex;flex-direction:column}
-.radar svg{width:100%;height:auto;max-height:640px;display:block;flex:1}
+.radar{grid-row:1/4;display:flex;flex-direction:column}
+.radar svg{width:100%;flex:1;min-height:0;display:block}
 .radar .sea{fill:var(--sea)}
 .radar .land{fill:var(--land);stroke:var(--coast);stroke-width:1.4}
 .radar .ring{fill:none;stroke:var(--hot);stroke-opacity:.22;stroke-dasharray:2 4}
@@ -122,87 +130,135 @@ body{background:var(--bg);color:var(--ink);font-family:var(--mono);font-size:13p
 @keyframes spin{to{transform:rotate(360deg)}}
 .radar .v circle{filter:var(--glow)}
 .radar .v text{font:10px var(--mono);fill:var(--ink)}
-.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:11px;color:var(--dim);margin-top:10px}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:11px;color:var(--dim);margin-top:6px}
 .legend i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:0}
 
 /* Counter */
-.count .flaps{display:flex;gap:5px;margin:4px 0 10px}
-.flap{position:relative;width:clamp(36px,4.2vw,58px);height:clamp(52px,6vw,80px);background:var(--bg);border:1px solid var(--line);border-radius:4px;display:grid;place-items:center;font:700 clamp(32px,3.9vw,54px)/1 var(--mono);color:var(--hot);text-shadow:0 0 14px var(--hot2)}
+.count .flaps{display:flex;gap:5px;margin:2px 0 8px}
+.flap{position:relative;width:clamp(30px,min(4vw,6vh),58px);height:clamp(42px,min(5.6vw,8.4vh),80px);background:var(--bg);border:1px solid var(--line);border-radius:4px;display:grid;place-items:center;font:700 clamp(26px,min(3.7vw,5.6vh),54px)/1 var(--mono);color:var(--hot);text-shadow:0 0 14px var(--hot2)}
 .flap::after{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:var(--line)}
-.flap.sep{width:16px;border:0;background:none}
+.flap.sep{width:12px;border:0;background:none}
 .flap.sep::after{display:none}
-.kv{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:12px}
-.kv div{background:var(--panel);padding:10px 12px}
-.kv span{display:block;font-size:10px;color:var(--dim);letter-spacing:.12em;text-transform:uppercase}
-.kv b{display:block;font:600 22px/1.2 var(--sans);margin-top:4px;font-variant-numeric:tabular-nums}
+.kv{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.kv div{background:var(--panel);padding:7px 10px;min-width:0}
+.kv span span{display:inline;font-size:inherit;letter-spacing:inherit}
+.kv span{display:block;font-size:10px;color:var(--dim);letter-spacing:.12em;text-transform:uppercase;white-space:nowrap}
+.kv b{display:block;font:600 clamp(15px,2.3vh,22px)/1.2 var(--sans);margin-top:2px;font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .kv b.down{color:var(--hot)}.kv b.up{color:var(--red)}
-.msg{font-size:13px;color:var(--ink);border-left:2px solid var(--amber);padding:6px 10px;margin-top:12px;background:var(--hot2)}
+.msg{font-size:12.5px;color:var(--ink);border-left:2px solid var(--amber);padding:5px 10px;margin-top:8px;background:var(--hot2)}
 .msg em{color:var(--amber);font-style:normal}
 
 /* Tape */
-.tape svg{width:100%;height:150px;display:block}
+.tape{display:flex;flex-direction:column}
+.tape svg{width:100%;flex:1;min-height:40px;display:block}
 .tape .bar{fill:var(--hot)}
 .tape .bar.z{fill:var(--faint)}
-.tape .base{stroke:var(--line)}
 .tape text{font:10px var(--mono);fill:var(--dim)}
 .tape .pk{fill:var(--ink)}
 
-/* Lower row */
-.lower{display:grid;grid-template-columns:1.35fr 1fr;gap:1px;background:var(--line)}
+/* Vessels: the latest few, the rest behind a button */
+.vlist{list-style:none}
+.vlist li{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:14px;padding:4px 0;border-top:1px solid var(--line2);font-size:12px;white-space:nowrap}
+.vlist li span:first-child{overflow:hidden;text-overflow:ellipsis}
+.vlist li span+span{color:var(--dim);text-align:right}
+.k{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:8px}
+.rescue{background:var(--amber);fill:var(--amber)}.border{background:var(--blue);fill:var(--blue)}.navy{background:var(--violet);fill:var(--violet)}
+.link{all:unset;cursor:pointer;color:var(--hot);letter-spacing:.16em}
+.link:hover,.link:focus-visible{text-decoration:underline}
+
+.ticker{display:flex;border-top:1px solid var(--line);background:var(--panel);overflow:hidden;white-space:nowrap;font-size:12px}
+.ticker .lab{position:relative;z-index:2;background:var(--red);color:#fff;padding:8px 14px;font-weight:700;letter-spacing:.14em;flex:none}
+.ticker .run{display:flex;gap:48px;padding:8px 20px;animation:tick 60s linear infinite}
+.ticker .run a{color:inherit;text-decoration:none}
+.ticker .run a:hover{text-decoration:underline}
+.ticker .run b{color:var(--amber);font-weight:400;margin-right:8px}
+@keyframes tick{to{transform:translateX(-50%)}}
+
+/* Pop-up panels */
+dialog{margin:auto;width:min(640px,calc(100vw - 24px));max-height:calc(100dvh - 24px);background:var(--panel);color:var(--ink);border:1px solid var(--hot);padding:16px 18px;font:13px/1.5 var(--mono)}
+dialog::backdrop{background:rgba(0,0,0,.55)}
+dialog h2{font-size:11px;font-weight:400;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+dialog .body{overflow:auto;max-height:calc(100dvh - 110px)}
 table{width:100%;border-collapse:collapse;font-size:12px}
 th{font-weight:400;text-align:left;color:var(--dim);font-size:10px;letter-spacing:.12em;text-transform:uppercase;padding:6px 8px;border-bottom:1px solid var(--line)}
 td{padding:6px 8px;border-bottom:1px solid var(--line2);white-space:nowrap}
 td.r,th.r{text-align:right}
-.k{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:8px}
-.rescue{background:var(--amber);fill:var(--amber)}.border{background:var(--blue);fill:var(--blue)}.navy{background:var(--violet);fill:var(--violet)}
-.trace svg{width:100%;height:220px;display:block}
+.trace svg{width:100%;height:auto;display:block}
 .trace path{fill:none;stroke:var(--faint);stroke-width:1}
 .trace path.now{stroke:var(--hot);stroke-width:2.2;filter:var(--glow)}
 .trace path.prev{stroke:var(--amber);stroke-width:1.3;stroke-dasharray:4 3}
 .trace text{font:10px var(--mono);fill:var(--dim)}
 .trace .g{stroke:var(--line2)}
-
-.ticker{display:flex;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--panel);overflow:hidden;white-space:nowrap;font-size:12px}
-.ticker .lab{position:relative;z-index:2;background:var(--red);color:#fff;padding:9px 14px;font-weight:700;letter-spacing:.14em;flex:none}
-.ticker .run{display:flex;gap:48px;padding:9px 20px;animation:tick 60s linear infinite}
-.ticker .run span b{color:var(--amber);font-weight:400;margin-right:8px}
-@keyframes tick{to{transform:translateX(-50%)}}
-footer a{color:inherit}
-footer{padding:14px 20px 30px;color:var(--faint);font-size:11px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.menu a{display:block;color:var(--ink);text-decoration:none;padding:11px 0;border-bottom:1px solid var(--line2)}
+.menu a:hover{color:var(--hot)}
+.menu p{color:var(--dim);font-size:11.5px;margin-top:12px}
+.menu p a{display:inline;padding:0;border:0;color:inherit;text-decoration:underline}
 @media (prefers-reduced-motion:reduce){.radar .sweep,.ticker .run,.status .dot{animation:none}}
 
-@media (max-width:980px){
-  .deck,.lower{grid-template-columns:1fr}
-  .radar{grid-row:auto}
-}
-@media (max-width:600px){
-  .status{gap:12px;padding:10px 16px}
+/* Phone and narrow screens: one column, the radar takes whatever height is left */
+@media (max-width:820px){
+  .status{gap:10px;padding-left:12px;padding-right:12px}
   .status .hide-s{display:none}
-  .p{padding:14px 16px}
-  .kv b{font-size:18px}
-  .kv div{padding:8px}
-  td.hide-s,th.hide-s{display:none}
+  .status .logo{letter-spacing:.12em}
+  .deck{grid-template-columns:1fr;grid-template-rows:minmax(0,1fr) auto auto auto}
+  .radar{grid-row:auto}
+  .p{padding:9px 12px}
+  .p>h2{margin-bottom:5px}
+  .legend{gap:10px;font-size:10px;margin-top:3px}
+  .legend .rr{display:none}
+  .count .flaps{margin-bottom:6px}
+  .flap{width:clamp(26px,8vw,40px);height:clamp(34px,5.4vh,52px);font-size:clamp(22px,3.8vh,36px)}
+  .kv div{padding:4px 8px}
+  .kv span{font-size:9px;letter-spacing:.08em}
+  .kv b{font-size:clamp(13px,2.1vh,17px)}
+  .msg{font-size:11.5px;padding:4px 8px;margin-top:6px}
+  .tape svg{height:clamp(40px,8vh,90px);flex:none}
+  .vlist li{font-size:11px;padding:3px 0}
+  .vlist li:nth-child(n+3){display:none}
   .radar .v text{font-size:19px}.radar .place text{font-size:21px}.radar .rl{font-size:18px}.radar .country{font-size:22px}
   .radar .v circle{r:9}
+}
+@media (max-width:820px) and (max-height:700px){
+  .vlist li:nth-child(n+2){display:none}
+  .kv div:nth-child(n+4){display:none}
+  .msg{display:none}
+}
+/* Short, wide screens (laptops with small windows, phones on their side) */
+@media (min-width:821px) and (max-height:760px){
+  .kv div{padding:5px 8px}
+  .vlist li:nth-child(n+3){display:none}
+  .legend{display:none}
+}
+@media (min-width:821px) and (max-height:560px){
+  .msg,.kv div:nth-child(n+4){display:none}
+  .vessels{display:none}
 }
 </style>
 </head>
 <body>
-<div class="status">
+<div class="app">
+<header class="status">
   <h1 class="logo">CHANNEL CROSSINGS</h1>
-  <span><span class="dot"></span>Feed <b>live</b></span>
+  <span class="hide-s"><span class="dot"></span>Feed <b>live</b></span>
   <span class="hide-s">UTC <b id="utc">--:--</b></span>
   <span class="hide-s">Gov.uk data to <b id="dataTo">–</b></span>
   <span class="hide-s">AIS contacts <b id="aisN">–</b></span>
   <span class="sp"></span>
-  <button id="theme">Day / Night</button>
-</div>
+  <nav class="tabs hide-s" aria-label="Pages"><a href="./" aria-current="page">Live</a><a href="trends.html">Trends</a><a href="people.html">People</a></nav>
+  <nav>
+    <button class="btn hide-s" data-open="dlgReport">Report</button>
+    <button class="btn hide-s" data-open="dlgShare">Share</button>
+    <button class="btn icon" id="theme" aria-label="Switch day or night"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></svg></button>
+    <button class="btn icon" data-open="dlgMore" aria-label="Menu"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  </nav>
+</header>
+<nav class="ptabs" aria-label="Pages"><a href="./" aria-current="page">Live</a><a href="trends.html">Trends</a><a href="people.html">People</a><button data-open="dlgReport">Report</button></nav>
 
-<div class="deck">
+<main class="deck">
   <section class="p radar">
     <h2><span>Strait of Dover · AIS plot</span><b id="radarN"></b></h2>
     <svg id="radar" viewBox="0 0 800 800" role="img" aria-label="Plot of rescue, Border Force and navy vessels in the Strait"></svg>
-    <div class="legend"><span><i class="rescue"></i>Lifeboat / rescue</span><span><i class="border"></i>Border Force</span><span><i class="navy"></i>Navy</span><span style="margin-left:auto">Range rings 10 km</span></div>
+    <div class="legend"><span><i class="rescue"></i>Lifeboat / rescue</span><span><i class="border"></i>Border Force</span><span><i class="navy"></i>Navy</span><span class="rr" style="margin-left:auto">Range rings 10 km</span></div>
   </section>
 
   <section class="p count">
@@ -212,129 +268,38 @@ footer{padding:14px 20px 30px;color:var(--faint);font-size:11px;display:flex;jus
       <div><span>Vs <span id="py"></span></span><b id="chg"></b></div>
       <div><span>Boats</span><b id="boats"></b></div>
       <div><span>Per boat</span><b id="pb"></b></div>
-      <div><span>Last crossing</span><b id="lc" style="font-size:16px"></b></div>
+      <div><span>Last crossing</span><b id="lc"></b></div>
       <div><span>Quiet days</span><b id="quiet"></b></div>
-      <div><span>Peak day</span><b id="peak" style="font-size:16px"></b></div>
+      <div><span>Peak day</span><b id="peak"></b></div>
     </div>
     <div class="msg"><em>&gt;</em> <span id="heroSr" aria-live="polite">No crossings detected for Wednesday, 11 November 2026</span></div>
   </section>
 
   <section class="p tape">
-    <h2><span>Daily log · last 60 days</span><b id="tapeSum"></b></h2>
-    <svg id="tape" viewBox="0 0 600 150" preserveAspectRatio="none"></svg>
+    <h2><span>Daily log · last 60 days</span><span><b id="tapeSum"></b> <a class="link" href="trends.html">Trends →</a></span></h2>
+    <svg id="tape" aria-label="People detected each day for the last 60 days"></svg>
   </section>
+
+  <section class="p vessels">
+    <h2><span>Latest contacts</span><button class="link" data-open="dlgVessels" id="allV">All vessels</button></h2>
+    <ul class="vlist" id="vlist"></ul>
+  </section>
+</main>
+
+<div class="ticker"><span class="lab">NEWS</span><div class="run" id="run"></div></div>
 </div>
 
-<div class="lower">
-  <section class="p">
-    <h2><span>Contacts in the Strait</span><b>sorted by last seen</b></h2>
-    <table id="roster"></table>
-  </section>
-  <section class="p trace">
-    <h2><span>Running total by year</span><b id="traceN"></b></h2>
-    <svg id="trace" viewBox="0 0 500 220" preserveAspectRatio="none"></svg>
-  </section>
-</div>
+<dialog id="dlgVessels" aria-labelledby="hVes">
+  <h2><span id="hVes">Vessels in the Strait</span><button class="btn" data-close>Close</button></h2>
+  <div class="body"><table id="roster"></table></div>
+</dialog>
 
-<div class="ticker"><span class="lab">WIRE</span><div class="run" id="run"></div></div>
-<footer><span>Figures: <a href="https://www.gov.uk/government/publications/migrants-detected-crossing-the-english-channel-in-small-boats">Home Office</a>, provisional · Positions: aisstream.io · News: UK news feeds</span><span><a href="how-it-works.html">How it works</a> · <a href="data.csv" download>Download the figures (CSV)</a> · <a href="previous.html">Previous design</a> · <a href="privacy.html">Privacy</a></span></footer>
-
+<script src="bridge.js"></script>
 <script>
-/* Shared data loader for the UI concepts. Reads the same JSON files as the live site. */
-(function () {
-  const BASE = "";
-  const get = (f) => fetch(BASE + f, { cache: "no-cache" }).then((r) => (r.ok ? r.json() : null)).catch(() => null);
-  const MONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-  const DAYS = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-  const fmt = (n) => (n == null ? "–" : Math.round(n).toLocaleString("en-GB"));
-  const d8 = (s) => new Date(s + "T12:00:00Z");
-  const doy = (s) => { const d = d8(s); return Math.floor((d - Date.UTC(d.getUTCFullYear(), 0, 1, 12)) / 864e5); };
-  const long = (s) => { const d = d8(s); return `${DAYS[d.getUTCDay()]} ${d.getUTCDate()} ${MONTHS[d.getUTCMonth()]}`; };
-  const short = (s) => { const d = d8(s); return `${d.getUTCDate()} ${MONTHS[d.getUTCMonth()].slice(0, 3)}`; };
-
-  async function load() {
-    const [data, news, vessels, nat, gender, returns, perboat, status] = await Promise.all(
-      ["data.json", "news.json", "vessels.json", "nationalities.json", "gender.json", "returns.json", "perboat.json", "status.json"].map(get)
-    );
-    const days = data.days;
-    const latest = days[days.length - 1];
-    const year = +latest.date.slice(0, 4);
-    const latestDoy = doy(latest.date);
-    const latestCrossing = [...days].reverse().find((d) => d.migrants > 0);
-    let quietStreak = 0;
-    for (let i = days.length - 1; i >= 0 && !days[i].migrants; i--) quietStreak++;
-
-    const years = {};
-    for (const d of days) {
-      const y = +d.date.slice(0, 4);
-      (years[y] ||= { year: y, total: 0, boats: 0, days: [], cum: [], best: null });
-      const Y = years[y];
-      Y.total += d.migrants; Y.boats += d.boats || 0; Y.days.push(d); Y.cum.push(Y.total);
-      if (!Y.best || d.migrants > Y.best.migrants) Y.best = d;
-    }
-    const cur = years[year];
-    const prev = years[year - 1];
-    const prevSame = prev ? prev.cum[Math.min(latestDoy, prev.cum.length - 1)] : null;
-    const change = prevSame ? ((cur.total - prevSame) / prevSame) * 100 : null;
-    const yearList = Object.values(years).sort((a, b) => a.year - b.year);
-    const allTotal = yearList.reduce((s, y) => s + y.total, 0);
-    const last = (n) => days.slice(-n);
-    const crossingDays = cur.days.filter((d) => d.migrants > 0).length;
-
-    const STRAIT = { minLat: 50.55, maxLat: 51.45, minLon: 0.7, maxLon: 2.3 };
-    const inStrait = (v) => v.lat > STRAIT.minLat && v.lat < STRAIT.maxLat && v.lon > STRAIT.minLon && v.lon < STRAIT.maxLon;
-    const vs = (vessels && vessels.vessels) || [];
-
-    return {
-      days, latest, latestCrossing, quietStreak, year, latestDoy, years, yearList, cur, prev, prevSame, change, allTotal, crossingDays,
-      last7: last(7), last30: last(30),
-      avgPerBoat: cur.boats ? cur.total / cur.boats : null,
-      news: (news && news.items) || [],
-      vessels: vs, strait: vs.filter(inStrait), STRAIT,
-      nat, gender, returns, perboat, status, checkedAt: data.checkedAt,
-    };
-  }
-
-  // Simplified Strait of Dover coastline (lat, lon) for stylised maps.
-  const COAST = {
-    england: [[50.77,0.28],[50.84,0.47],[50.855,0.573],[50.9,0.68],[50.94,0.77],[50.93,0.86],[50.913,0.976],[50.95,0.98],[51.02,0.98],[51.07,1.08],[51.08,1.18],[51.1,1.27],[51.125,1.32],[51.14,1.37],[51.18,1.405],[51.22,1.405],[51.27,1.365],[51.31,1.37],[51.33,1.42],[51.375,1.445],[51.39,1.38],[51.37,1.13],[51.36,1.02],[51.4,0.88],[51.44,0.76],[51.48,0.6],[51.5,0.4]],
-    france: [[50.3,1.55],[50.4,1.56],[50.52,1.58],[50.63,1.57],[50.73,1.6],[50.77,1.61],[50.87,1.58],[50.885,1.66],[50.93,1.71],[50.945,1.75],[50.965,1.85],[51.0,2.12],[51.05,2.37],[51.085,2.52],[51.1,2.58],[51.15,2.7],[51.23,2.9]],
-    places: [
-      { n: "Dover", lat: 51.125, lon: 1.32, side: "uk" }, { n: "Folkestone", lat: 51.08, lon: 1.18, side: "uk" },
-      { n: "Dungeness", lat: 50.913, lon: 0.976, side: "uk" }, { n: "Ramsgate", lat: 51.33, lon: 1.42, side: "uk" },
-      { n: "Calais", lat: 50.965, lon: 1.85, side: "fr" }, { n: "Dunkirk", lat: 51.05, lon: 2.37, side: "fr" },
-      { n: "Boulogne", lat: 50.73, lon: 1.6, side: "fr" }, { n: "Gravelines", lat: 51.0, lon: 2.12, side: "fr" },
-    ],
-  };
-
-  function theme(btn) {
-    const root = document.documentElement;
-    let t = null;
-        if (btn) btn.addEventListener("click", () => {
-      const dark = root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
-      const next = dark ? "light" : "dark";
-      if (window.ccTheme) ccTheme(next); else root.dataset.theme = next;
-      try { localStorage.setItem("cc-theme", next); } catch (e) {}
-    });
-  }
-
-  const ago = (iso) => {
-    const m = Math.round((Date.now() - new Date(iso)) / 6e4);
-    if (m < 60) return `${m} min ago`;
-    const h = Math.round(m / 60);
-    return h < 24 ? `${h} hour${h > 1 ? "s" : ""} ago` : `${Math.round(h / 24)} day${Math.round(h / 24) > 1 ? "s" : ""} ago`;
-  };
-
-  window.CC = { load, fmt, long, short, d8, doy, MONTHS, DAYS, COAST, theme, ago };
-})();
-</script>
-<script>
-CC.theme(document.getElementById("theme"));
 const $ = (id) => document.getElementById(id), { fmt } = CC;
-const tick = () => { const d = new Date(); $("utc").textContent = d.toISOString().slice(11, 16); };
-tick(); setInterval(tick, 10000);
 
 CC.load().then((D) => {
+  CCUI.setShare(CCUI.shareFrom(D));
   $("dataTo").textContent = CC.short(D.latest.date);
   $("aisN").textContent = D.vessels.length;
   $("yr").textContent = D.year; $("py").textContent = D.year - 1;
@@ -354,17 +319,23 @@ CC.load().then((D) => {
     ? `${fmt(D.latest.migrants)} people crossed in ${D.latest.boats} small boat${D.latest.boats > 1 ? "s" : ""} on ${CC.long(D.latest.date)}.`
     : `No small boats detected on ${CC.long(D.latest.date)}. ${D.quietStreak} consecutive quiet day${D.quietStreak > 1 ? "s" : ""}.`;
 
-  // Tape: last 60 days
-  const T = D.days.slice(-60), mx = Math.max(...T.map((d) => d.migrants)), bw = 600 / T.length;
-  let t = `<line class="base" x1="0" x2="600" y1="128" y2="128"/>`;
-  T.forEach((d, i) => {
-    const h = d.migrants ? Math.max(2, (d.migrants / mx) * 104) : 2;
-    t += `<rect class="bar ${d.migrants ? "" : "z"}" x="${i * bw + 1}" y="${128 - h}" width="${bw - 2}" height="${h}"/>`;
-    if (CC.d8(d.date).getUTCDate() === 1) t += `<text x="${i * bw}" y="144">${CC.MONTHS[CC.d8(d.date).getUTCMonth()].slice(0, 3).toUpperCase()}</text>`;
-  });
-  const pk = T.reduce((a, b) => (b.migrants > a.migrants ? b : a)), pi = T.indexOf(pk);
-  t += `<text class="pk" x="${Math.min(560, pi * bw)}" y="${128 - (pk.migrants / mx) * 104 - 6}">${pk.migrants}</text>`;
-  $("tape").innerHTML = t;
+  // Tape: last 60 days, drawn at the panel's real size so the labels never stretch
+  const T = D.days.slice(-60), mx = Math.max(1, ...T.map((d) => d.migrants));
+  const drawTape = () => {
+    const svg = $("tape"), W = Math.max(100, svg.clientWidth), H = Math.max(40, svg.clientHeight), base = H - 16, top = 14, bw = W / T.length;
+    svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+    let t = "";
+    T.forEach((d, i) => {
+      const h = d.migrants ? Math.max(2, (d.migrants / mx) * (base - top)) : 1.5;
+      t += `<rect class="bar ${d.migrants ? "" : "z"}" x="${(i * bw + 0.5).toFixed(1)}" y="${(base - h).toFixed(1)}" width="${Math.max(1, bw - 1.5).toFixed(1)}" height="${h.toFixed(1)}"/>`;
+      if (CC.d8(d.date).getUTCDate() === 1) t += `<text x="${(i * bw).toFixed(1)}" y="${H - 3}">${CC.MONTHS[CC.d8(d.date).getUTCMonth()].slice(0, 3).toUpperCase()}</text>`;
+    });
+    const pk = T.reduce((p, q) => (q.migrants > p.migrants ? q : p)), pi = T.indexOf(pk);
+    t += `<text class="pk" x="${Math.min(W - 30, pi * bw).toFixed(1)}" y="${(base - (pk.migrants / mx) * (base - top) - 3).toFixed(1)}">${pk.migrants}</text>`;
+    svg.innerHTML = t;
+  };
+  drawTape();
+  if (window.ResizeObserver) new ResizeObserver(drawTape).observe($("tape"));
   $("tapeSum").textContent = fmt(T.reduce((a, b) => a + b.migrants, 0)) + " PEOPLE";
 
   // Radar
@@ -395,30 +366,22 @@ CC.load().then((D) => {
   $("radar").innerHTML = r;
   $("radarN").textContent = `${vs.length} CONTACTS`;
 
-  // Roster
+  // Vessels: the latest few on the page, all of them in a pop-up
   const kindName = { rescue: "Rescue", border: "Border Force", navy: "Navy" };
-  const sorted = [...vs].sort((a, b) => new Date(b.seen) - new Date(a.seen)).slice(0, 9);
-  $("roster").innerHTML = `<tr><th>Vessel</th><th class="hide-s">Type</th><th class="r">Speed</th><th class="r">Seen</th></tr>` + sorted.map((v) =>
-    `<tr><td><span class="k ${v.kind}"></span>${v.name || "Unnamed"}</td><td class="hide-s">${kindName[v.kind]}</td><td class="r">${v.sog == null ? "–" : v.sog.toFixed(1) + " kn"}</td><td class="r">${CC.ago(v.seen).replace(" ago", "")}</td></tr>`).join("");
-
-  // Trace
-  const mxY = Math.max(...D.yearList.map((y) => y.total));
-  let g = "";
-  for (let v = 10000; v < mxY; v += 10000) { const y = 210 - (v / mxY) * 196; g += `<line class="g" x1="0" x2="500" y1="${y}" y2="${y}"/><text x="2" y="${y - 3}">${v / 1000}K</text>`; }
-  D.yearList.forEach((Y) => {
-    let d = "";
-    for (let i = 0; i < Y.cum.length; i += 3) d += (i ? "L" : "M") + ((i / 365) * 500).toFixed(1) + "," + (210 - (Y.cum[i] / mxY) * 196).toFixed(1);
-    const cls = Y.year === D.year ? "now" : Y.year === D.year - 1 ? "prev" : "";
-    g += `<path class="${cls}" d="${d}"/>`;
-  });
-  $("trace").innerHTML = g;
-  $("traceN").innerHTML = `<span style="color:var(--hot)">━ ${D.year}</span> &nbsp;<span style="color:var(--amber)">┅ ${D.year - 1}</span>`;
+  const sorted = [...vs].sort((a, b) => new Date(b.seen) - new Date(a.seen));
+  $("vlist").innerHTML = sorted.slice(0, 3).map((v) =>
+    `<li><span><span class="k ${v.kind}"></span>${v.name || "Unnamed"}</span><span>${v.sog == null ? "–" : v.sog.toFixed(1) + " kn"}</span><span>${CC.ago(v.seen).replace(" ago", "")}</span></li>`).join("")
+    || "<li><span>No vessels reporting in the Strait</span></li>";
+  $("allV").textContent = `All ${vs.length} vessels`;
+  $("roster").innerHTML = `<tr><th>Vessel</th><th>Type</th><th class="r">Speed</th><th class="r">Seen</th></tr>` + sorted.map((v) =>
+    `<tr><td><span class="k ${v.kind}"></span>${v.name || "Unnamed"}</td><td>${kindName[v.kind]}</td><td class="r">${v.sog == null ? "–" : v.sog.toFixed(1) + " kn"}</td><td class="r">${CC.ago(v.seen).replace(" ago", "")}</td></tr>`).join("");
 
   // Ticker
-  const items = D.news.slice(0, 8).map((n) => `<span><b>${n.source.toUpperCase()}</b>${n.title}</span>`).join("");
+  const esc = (t) => String(t).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const items = D.news.slice(0, 8).map((n) => `<a href="${esc(n.url)}" rel="noopener"><b>${esc(n.source).toUpperCase()}</b>${esc(n.title)}</a>`).join("");
   $("run").innerHTML = items + items;
 });
+
 </script>
-<script>if("serviceWorker" in navigator){ addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {})); }</script>
 </body>
 </html>
