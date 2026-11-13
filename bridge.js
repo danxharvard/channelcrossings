@@ -123,7 +123,6 @@
     <a href="#" data-open="dlgShare">Share</a>
     <a href="how-it-works.html">How it works</a>
     <a href="data.csv" download>Download the figures (CSV)</a>
-    <a href="previous.html">Previous design</a>
     <a href="privacy.html">Privacy and terms</a>
     <p>Figures: <a href="https://www.gov.uk/government/publications/migrants-detected-crossing-the-english-channel-in-small-boats">Home Office</a>, provisional. Vessel positions: aisstream.io. Weather: Open-Meteo. News: UK news feeds.</p>
   </div>
