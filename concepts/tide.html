@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Channel Crossings · Tide (concept)</title>
+<meta name="robots" content="noindex">
+<style>
+@font-face{font-family:"Inter Tight";src:url(../vendor/inter-tight/inter-tight-latin.woff2) format("woff2");font-weight:100 900;font-display:swap}
+@font-face{font-family:"Inter";src:url(../vendor/inter/inter-latin.woff2) format("woff2");font-weight:100 900;font-display:swap}
+:root{
+  --sky1:#f2f8f7; --sky2:#d3e8ea; --deep:#a9cfd5; --ink:#06303a; --ink2:#3d6670; --ink3:#7d9ca2;
+  --wave:#13788a; --wave2:rgba(19,120,138,.18); --hi:#ff6a52; --glass:rgba(255,255,255,.55); --glassb:rgba(6,48,58,.08);
+  --dot:#13788a; --dot0:rgba(6,48,58,.12); --glow:none; color-scheme:light;
+  --display:"Inter Tight",system-ui,sans-serif; --text:"Inter",system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --sky1:#01060b; --sky2:#04131c; --deep:#072433; --ink:#e3fbff; --ink2:#8fb9c4; --ink3:#4f7682;
+  --wave:#6cf0ff; --wave2:rgba(108,240,255,.14); --hi:#ff8b6e; --glass:rgba(8,30,42,.55); --glassb:rgba(108,240,255,.14);
+  --dot:#6cf0ff; --dot0:rgba(108,240,255,.12); --glow:drop-shadow(0 0 8px rgba(108,240,255,.6)); color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --sky1:#01060b; --sky2:#04131c; --deep:#072433; --ink:#e3fbff; --ink2:#8fb9c4; --ink3:#4f7682;
+  --wave:#6cf0ff; --wave2:rgba(108,240,255,.14); --hi:#ff8b6e; --glass:rgba(8,30,42,.55); --glassb:rgba(108,240,255,.14);
+  --dot:#6cf0ff; --dot0:rgba(108,240,255,.12); --glow:drop-shadow(0 0 8px rgba(108,240,255,.6)); color-scheme:dark;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--text);color:var(--ink);background:var(--sky1);overflow-x:hidden}
+.label{font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--ink2)}
+.num{font-variant-numeric:tabular-nums}
+
+header.top{position:fixed;inset:0 0 auto 0;z-index:10;display:flex;justify-content:space-between;align-items:center;padding:18px clamp(16px,4vw,48px)}
+.mark{font-family:var(--display);font-weight:600;font-size:15px;letter-spacing:-.01em;display:flex;align-items:center;gap:10px}
+.mark i{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--ink);position:relative;overflow:hidden}
+.mark i::after{content:"";position:absolute;left:-4px;right:-4px;bottom:-3px;height:11px;background:var(--wave);border-radius:45% 55% 0 0}
+.tbtn{all:unset;cursor:pointer;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:var(--glass);border:1px solid var(--glassb);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.tbtn svg{width:18px;height:18px;stroke:var(--ink);fill:none;stroke-width:1.6}
+
+/* Hero */
+.hero{min-height:100svh;position:relative;display:flex;flex-direction:column;justify-content:center;padding:90px clamp(16px,6vw,96px) 34vh;
+  background:linear-gradient(180deg,var(--sky1) 0%,var(--sky2) 60%,var(--deep) 100%);overflow:hidden}
+.hero .when{margin-bottom:18px}
+.hero h1{font-family:var(--display);font-weight:200;font-size:clamp(96px,22vw,300px);line-height:.8;letter-spacing:-.06em;margin-left:-.04em}
+.hero h1 em{font-style:normal;color:var(--hi)}
+.hero p.say{font-family:var(--display);font-size:clamp(20px,2.4vw,30px);font-weight:400;line-height:1.3;max-width:24ch;margin-top:26px;color:var(--ink);letter-spacing:-.01em;text-wrap:balance}
+.hero .chips{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}
+.chip{background:var(--glass);border:1px solid var(--glassb);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-radius:999px;padding:10px 16px;font-size:14px;font-weight:500}
+.chip b{font-family:var(--display);font-weight:700;margin-left:4px}
+.chip .d{color:var(--wave);font-weight:600}
+.sealab{position:absolute;right:clamp(16px,6vw,96px);bottom:calc(34vh + 14px);font-size:11px;z-index:1}
+.sea{position:absolute;left:0;right:0;bottom:0;height:34vh;width:100%}
+.sea path.f{fill:var(--wave2)}
+.sea path.s{fill:none;stroke:var(--wave);stroke-width:2;filter:var(--glow);vector-effect:non-scaling-stroke}
+.sea path.f2{fill:var(--wave);opacity:.12}
+.sea .swell{animation:swell 7s ease-in-out infinite alternate}
+@keyframes swell{to{transform:translateY(6px)}}
+.sea text{font:600 11px var(--text);fill:var(--ink2);letter-spacing:.1em}
+
+/* Chapters */
+.ch{padding:110px clamp(16px,6vw,96px);position:relative;background:var(--sky1)}
+.ch.alt{background:var(--sky2)}
+.ch h2{font-family:var(--display);font-weight:300;font-size:clamp(40px,6.4vw,92px);line-height:.95;letter-spacing:-.04em;margin:14px 0 18px;max-width:14ch}
+.ch h2 b{font-weight:700}
+.ch p.lede{font-size:clamp(17px,1.5vw,20px);line-height:1.55;color:var(--ink2);max-width:52ch}
+.ch p.lede strong{color:var(--ink);font-weight:600}
+.wide{margin-top:44px;width:100%}
+.wide svg{width:100%;display:block;overflow:visible}
+.yeartide path.f{fill:var(--wave2)}
+.yeartide path.s{fill:none;stroke:var(--wave);stroke-width:1.6;vector-effect:non-scaling-stroke;filter:var(--glow)}
+.yeartide text{font:500 12px var(--text);fill:var(--ink3)}
+.yeartide .peak circle{fill:var(--hi)}
+.yeartide .peak text{fill:var(--ink);font-weight:600;font-size:14px}
+.yeartide .peak line{stroke:var(--hi)}
+.yeartide .today line{stroke:var(--ink3);stroke-dasharray:2 4}
+
+.ridge path.f{fill:var(--sky1)}
+.ch.alt .ridge path.f{fill:var(--sky2)}
+.ridge path.s{fill:none;stroke:var(--ink);stroke-width:1.3;vector-effect:non-scaling-stroke}
+.ridge g.now path.s{stroke:var(--hi);stroke-width:2.4}
+.ridge text{font:600 13px var(--display);fill:var(--ink2)}
+.ridge text.t{font-weight:400;fill:var(--ink3)}
+.ridge g.now text{fill:var(--hi)}
+
+.dots{display:grid;gap:18px;margin-top:44px}
+.drow{display:grid;grid-template-columns:64px 1fr 84px;gap:16px;align-items:start}
+.drow .y{font-family:var(--display);font-weight:600;font-size:15px;padding-top:0}
+.drow .n{font-family:var(--display);font-size:15px;text-align:right;color:var(--ink2)}
+.drow .field{display:flex;flex-wrap:wrap;gap:3px}
+.drow .field i{width:8px;height:8px;border-radius:50%;background:var(--dot);opacity:.85}
+.drow.now .field i{background:var(--hi);opacity:1}
+.drow.now .y,.drow.now .n{color:var(--hi)}
+.key{display:flex;align-items:center;gap:10px;margin-top:22px;color:var(--ink2);font-size:14px}
+.key i{width:8px;height:8px;border-radius:50%;background:var(--dot)}
+
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:44px}
+.fact{background:var(--glass);border:1px solid var(--glassb);border-radius:24px;padding:22px}
+.fact .big{font-family:var(--display);font-weight:200;font-size:56px;letter-spacing:-.04em;line-height:1;margin:10px 0}
+.fact p{color:var(--ink2);font-size:15px;line-height:1.45}
+
+nav.dock{position:fixed;left:50%;bottom:max(18px,env(safe-area-inset-bottom));transform:translateX(-50%);z-index:20;display:flex;gap:4px;padding:6px;border-radius:999px;background:var(--glass);border:1px solid var(--glassb);backdrop-filter:blur(20px) saturate(1.4);-webkit-backdrop-filter:blur(20px) saturate(1.4);box-shadow:0 10px 40px rgba(0,0,0,.12)}
+nav.dock a{text-decoration:none;color:var(--ink2);font-size:14px;font-weight:500;padding:10px 16px;border-radius:999px}
+nav.dock a.on{background:var(--ink);color:var(--sky1)}
+footer{padding:30px clamp(16px,6vw,96px) 110px;color:var(--ink3);font-size:13px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;background:var(--sky1)}
+@media (prefers-reduced-motion:reduce){.sea .swell{animation:none}html{scroll-behavior:auto}}
+@media (max-width:760px){
+  .hero{padding-bottom:30vh}
+  .sea{height:28vh}
+  .sealab{bottom:calc(28vh + 10px)}
+  .ch{padding:80px 16px}
+  .hero{padding-left:16px;padding-right:16px}
+  .facts{grid-template-columns:1fr}
+  .drow{grid-template-columns:44px 1fr 58px;gap:10px}
+  .drow .field{gap:2px}
+  .drow .field i{width:5px;height:5px}
+  .drow .y,.drow .n{font-size:13px}
+  nav.dock a{padding:9px 12px;font-size:13px}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="mark"><i></i>channel crossings</div>
+  <button class="tbtn" id="theme" aria-label="Switch day or night"><svg viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg></button>
+</header>
+
+<section class="hero" id="now">
+  <div class="label when" id="when"></div>
+  <h1 id="word">&nbsp;</h1>
+  <p class="say" id="say"></p>
+  <div class="chips">
+    <span class="chip num"><span id="yrl"></span> so far<b id="ytd"></b></span>
+    <span class="chip num"><span class="d" id="chg"></span> on <span id="py"></span></span>
+    <span class="chip num">Last boats <b id="last"></b></span>
+  </div>
+  <span class="label sealab">The last 45 days, as a swell</span>
+  <svg class="sea" id="sea" viewBox="0 0 1000 300" preserveAspectRatio="none" aria-hidden="true"></svg>
+</section>
+
+<section class="ch" id="year">
+  <div class="label">This year</div>
+  <h2>The year as a <b>tide</b></h2>
+  <p class="lede" id="yearText"></p>
+  <div class="wide"><svg class="yeartide" id="yeartide" role="img" aria-label="Daily crossings this year"></svg></div>
+</section>
+
+<section class="ch alt" id="years">
+  <div class="label">Every year since 2018</div>
+  <h2>Nine years, <b>one shoreline</b></h2>
+  <p class="lede">Each line is a year, January on the left to December on the right. The swells are the calm-weather surges, when hundreds cross in a single day. Summer and early autumn rise every year.</p>
+  <div class="wide"><svg class="ridge" id="ridge" role="img" aria-label="Crossings by week for each year"></svg></div>
+</section>
+
+<section class="ch" id="people">
+  <div class="label">Everyone, counted</div>
+  <h2>Each dot is <b>100 people</b></h2>
+  <p class="lede" id="dotText"></p>
+  <div class="dots" id="dots"></div>
+  <div class="facts">
+    <div class="fact"><div class="label">Per boat</div><div class="big num" id="pb"></div><p>people on the average boat this year. In 2018 it was seven.</p></div>
+    <div class="fact"><div class="label">Who</div><div class="big num" id="men"></div><p id="menText"></p></div>
+    <div class="fact"><div class="label">Sent back</div><div class="big num" id="ret"></div><p id="retText"></p></div>
+  </div>
+</section>
+
+<footer><span>Figures from the Home Office, provisional.</span><span>Concept C · Tide</span></footer>
+
+<nav class="dock"><a class="on" href="#now">Now</a><a href="#year">Year</a><a href="#years">Years</a><a href="#people">People</a></nav>
+
+<script src="data.js"></script>
+<script>
+CC.theme(document.getElementById("theme"));
+const $ = (id) => document.getElementById(id), { fmt } = CC;
+// Smooth path through points (Catmull-Rom → cubic Bézier)
+const smooth = (P, floor = Infinity) => {
+  const c = (v) => Math.min(v, floor).toFixed(1);
+  let d = `M${P[0][0]},${P[0][1]}`;
+  for (let i = 0; i < P.length - 1; i++) {
+    const p0 = P[i - 1] || P[i], p1 = P[i], p2 = P[i + 1], p3 = P[i + 2] || p2;
+    d += `C${(p1[0] + (p2[0] - p0[0]) / 6).toFixed(1)},${c(p1[1] + (p2[1] - p0[1]) / 6)} ${(p2[0] - (p3[0] - p1[0]) / 6).toFixed(1)},${c(p2[1] - (p3[1] - p1[1]) / 6)} ${p2[0].toFixed(1)},${p2[1].toFixed(1)}`;
+  }
+  return d;
+};
+const avg = (arr, i, r) => { let s = 0, n = 0; for (let k = i - r; k <= i + r; k++) if (arr[k] != null) { s += arr[k]; n++; } return s / n; };
+
+CC.load().then((D) => {
+  const L = D.latest;
+  $("when").textContent = CC.long(L.date);
+  if (L.migrants === 0) {
+    $("word").innerHTML = "Calm<em>.</em>";
+    $("say").textContent = `No one crossed the Channel. ${D.quietStreak > 1 ? `That's ${["","","two","three","four","five","six","seven"][D.quietStreak] || D.quietStreak} quiet days in a row.` : ""}`;
+  } else {
+    $("word").textContent = fmt(L.migrants);
+    $("say").textContent = `people crossed the Channel in ${L.boats} small boat${L.boats > 1 ? "s" : ""}.`;
+  }
+  $("yrl").textContent = D.year; $("ytd").textContent = fmt(D.cur.total);
+  $("chg").textContent = `${D.change < 0 ? "↓" : "↑"} ${Math.abs(Math.round(D.change))}%`; $("py").textContent = D.year - 1;
+  $("last").textContent = `${CC.short(D.latestCrossing.date)} · ${D.latestCrossing.migrants}`;
+
+  // Hero sea: last 45 days as a swell
+  const S = D.days.slice(-45).map((d) => d.migrants), mxS = Math.max(...S, 1);
+  const pts = S.map((v, i) => [(i / (S.length - 1)) * 1000, 250 - (avg(S, i, 1) / mxS) * 190]);
+  const back = S.map((v, i) => [(i / (S.length - 1)) * 1000, 262 - (avg(S, i, 3) / mxS) * 120 - 12]);
+  $("sea").innerHTML = `<path class="f2" d="${smooth(back, 250)}L1000,300L0,300Z"/><g class="swell"><path class="f" d="${smooth(pts, 250)}L1000,300L0,300Z"/><path class="s" d="${smooth(pts, 250)}"/></g>`;
+
+  // Year tide
+  const VW = innerWidth < 760 ? 420 : 1000; $("yeartide").setAttribute("viewBox", `0 0 ${VW} 300`);
+  const Y = D.cur.days.map((d) => d.migrants), mxY = Math.max(...Y);
+  const yp = Y.map((v, i) => [(i / 364) * VW, 270 - (avg(Y, i, 1) / mxY) * 240]);
+  let t = `<path class="f" d="${smooth(yp, 270)}L${yp[yp.length - 1][0]},270L0,270Z"/><path class="s" d="${smooth(yp, 270)}"/>`;
+  ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"].forEach((m, k) => { if (VW > 500 || k % 3 === 0) t += `<text x="${(k / 12) * VW}" y="294">${m}</text>`; });
+  const bi = D.cur.days.indexOf(D.cur.best), bx = (bi / 364) * VW, by = 270 - (avg(Y, bi, 1) / mxY) * 240;
+  t += `<g class="peak"><line x1="${bx}" x2="${bx}" y1="${by}" y2="18"/><circle cx="${bx}" cy="18" r="4"/><text x="${bx - 8}" y="22" text-anchor="end">${fmt(D.cur.best.migrants)} on ${CC.short(D.cur.best.date)}</text></g>`;
+  const tx = (D.latestDoy / 364) * VW;
+  t += `<g class="today"><line x1="${tx}" x2="${tx}" y1="10" y2="270"/></g>`;
+  $("yeartide").innerHTML = t;
+  $("yearText").innerHTML = `<strong>${fmt(D.cur.total)} people</strong> have crossed in ${D.year}, ${Math.abs(Math.round(D.change))}% ${D.change < 0 ? "fewer" : "more"} than by this point last year. Boats came on <strong>${D.crossingDays} days</strong>; on the other ${D.latestDoy + 1 - D.crossingDays} the water stayed empty.`;
+
+  // Ridgeline
+  const ridge = $("ridge"), Ys = D.yearList, rowH = VW < 500 ? 40 : 52, amp = VW < 500 ? 150 : 210, Wd = VW;
+  const wkMax = Math.max(...Ys.map((y) => { const w = []; y.days.forEach((d, i) => (w[Math.floor(i / 7)] = (w[Math.floor(i / 7)] || 0) + d.migrants)); return Math.max(...w); }));
+  const wk = (yr) => { const w = []; yr.days.forEach((d, i) => (w[Math.floor(i / 7)] = (w[Math.floor(i / 7)] || 0) + d.migrants)); return w; };
+  const top = Math.max(...Ys.map((yr, j) => { const w = wk(yr); return Math.max(...w.map((_, i) => avg(w, i, 1))) / wkMax * amp - j * rowH; })) + 12;
+  const H = top + rowH * (Ys.length - 1) + 30;
+  ridge.setAttribute("viewBox", `0 0 ${Wd} ${H}`);
+  let rg = "";
+  Ys.forEach((yr, j) => {
+    const w = []; yr.days.forEach((d, i) => (w[Math.floor(i / 7)] = (w[Math.floor(i / 7)] || 0) + d.migrants));
+    const base = top + j * rowH, x0 = VW < 500 ? 44 : 70, x1 = Wd - (VW < 500 ? 56 : 100);
+    const p = w.map((v, i) => [x0 + (i / 52) * (x1 - x0), base - (avg(w, i, 1) / wkMax) * amp]);
+    const cls = yr.year === D.year ? "now" : "";
+    rg += `<g class="${cls}"><path class="f" d="${smooth(p, base)}L${p[p.length - 1][0]},${base}L${x0},${base}Z"/><path class="s" d="${smooth(p, base)}"/><text x="0" y="${base + 4}">${yr.year}</text><text class="t" x="${Wd}" y="${base + 4}" text-anchor="end">${fmt(yr.total)}</text></g>`;
+  });
+  ridge.innerHTML = rg;
+
+  // Dots
+  $("dots").innerHTML = Ys.map((yr) => `<div class="drow ${yr.year === D.year ? "now" : ""}"><span class="y">${yr.year}</span><div class="field">${"<i></i>".repeat(Math.round(yr.total / 100))}</div><span class="n num">${fmt(yr.total)}</span></div>`).join("");
+  $("dotText").innerHTML = `Since 2018, <strong>${fmt(D.allTotal)} people</strong> have crossed in small boats. Laid out a hundred at a time, ${D.year} sits mid-pack: fewer than the peak of 2022, far more than the hundreds of 2018.`;
+  $("pb").textContent = Math.round(D.avgPerBoat);
+  if (D.gender) { const g = D.gender.lastYear; $("men").textContent = Math.round((g.sex.Male / g.total) * 100) + "%"; $("menText").textContent = `were male in the year to June 2026. ${Math.round((g.age["17 and under"] / g.total) * 100)}% said they were 17 or under.`; }
+  if (D.returns) { $("ret").textContent = fmt(D.returns.out); $("retText").textContent = `people returned to France under the UK–France deal, August 2025 to June 2026.`; }
+
+  // Dock highlight
+  const links = [...document.querySelectorAll("nav.dock a")];
+  const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) links.forEach((a) => a.classList.toggle("on", a.getAttribute("href") === "#" + e.target.id)); }), { rootMargin: "-45% 0px -50% 0px" });
+  ["now", "year", "years", "people"].forEach((id) => io.observe($(id)));
+});
+</script>
+</body>
+</html>

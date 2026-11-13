@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Channel Crossings · The Ledger (concept)</title>
+<meta name="robots" content="noindex">
+<style>
+@font-face{font-family:"Newsreader";src:url(fonts/newsreader-latin-400-normal.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Newsreader";src:url(fonts/newsreader-latin-400-italic.woff2) format("woff2");font-weight:400;font-style:italic;font-display:swap}
+@font-face{font-family:"Newsreader";src:url(fonts/newsreader-latin-600-normal.woff2) format("woff2");font-weight:600;font-display:swap}
+@font-face{font-family:"Newsreader";src:url(fonts/newsreader-latin-700-normal.woff2) format("woff2");font-weight:700;font-display:swap}
+@font-face{font-family:"Inter";src:url(../vendor/inter/inter-latin.woff2) format("woff2");font-weight:100 900;font-display:swap}
+
+:root{
+  --paper:#f3eee4; --paper2:#ebe4d6; --ink:#1b1814; --ink2:#5b544a; --ink3:#8d8475; --rule:#1b1814; --hair:#cfc6b5;
+  --red:#b0261c; --blue:#1f4e79; --old:#b8ae9c;
+  --serif:"Newsreader",Georgia,"Times New Roman",serif; --sans:"Inter",system-ui,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#16140f; --paper2:#1f1c16; --ink:#ede5d6; --ink2:#b5ac9c; --ink3:#7f776a; --rule:#ede5d6; --hair:#3a352c;
+  --red:#ec7b6d; --blue:#8fb7dd; --old:#4d473d; color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --paper:#16140f; --paper2:#1f1c16; --ink:#ede5d6; --ink2:#b5ac9c; --ink3:#7f776a; --rule:#ede5d6; --hair:#3a352c;
+  --red:#ec7b6d; --blue:#8fb7dd; --old:#4d473d; color-scheme:dark;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:18px;line-height:1.5;
+  background-image:radial-gradient(rgba(0,0,0,.025) 1px,transparent 1px);background-size:3px 3px}
+a{color:inherit}
+.wrap{max-width:1240px;margin:0 auto;padding:0 32px}
+.num{font-variant-numeric:lining-nums tabular-nums}
+.sc{font-family:var(--sans);font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:600}
+
+/* Masthead */
+.topline{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:14px 0 10px;color:var(--ink2)}
+.topline button{all:unset;cursor:pointer;font-family:var(--sans);font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;border:1px solid var(--ink);padding:6px 10px;color:var(--ink)}
+.topline button:hover{background:var(--ink);color:var(--paper)}
+.mast{text-align:center;border-top:3px double var(--rule);border-bottom:1px solid var(--rule);padding:18px 0 14px}
+.mast h1{font-weight:700;font-size:clamp(46px,9vw,112px);line-height:.92;letter-spacing:-.025em}
+.mast .motto{font-style:italic;color:var(--ink2);font-size:17px;margin-top:8px}
+.edition{display:flex;justify-content:space-between;border-bottom:3px double var(--rule);padding:8px 0;gap:12px;flex-wrap:wrap}
+nav.sections{display:flex;gap:26px;justify-content:center;padding:12px 0;border-bottom:1px solid var(--hair)}
+nav.sections a{text-decoration:none}
+nav.sections a.on{border-bottom:2px solid var(--red);color:var(--red)}
+
+/* Front page grid */
+.front{display:grid;grid-template-columns:2.1fr 1fr;gap:0;margin-top:28px}
+.lead{padding-right:32px;border-right:1px solid var(--hair)}
+.side{padding-left:32px}
+.kicker{color:var(--red)}
+.lead h2{font-weight:700;font-size:clamp(34px,4.6vw,60px);line-height:1.02;letter-spacing:-.02em;margin:10px 0 14px;text-wrap:balance}
+.deck{font-size:22px;line-height:1.38;color:var(--ink2);font-style:italic;text-wrap:pretty}
+.byline{margin:18px 0;padding:10px 0;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);display:flex;gap:18px;color:var(--ink3);flex-wrap:wrap}
+.figure{display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:end;margin:26px 0 8px}
+.big{font-weight:700;font-size:clamp(72px,11vw,148px);line-height:.82;letter-spacing:-.04em}
+.figure p{font-size:19px;line-height:1.4;padding-bottom:6px;text-wrap:pretty}
+.figure p b{color:var(--red);font-weight:600}
+.body{columns:2;column-gap:32px;column-rule:1px solid var(--hair);margin-top:22px;font-size:18px;hyphens:auto;text-align:justify}
+.body p{margin-bottom:12px}
+.body p:first-child::first-letter{float:left;font-size:64px;line-height:.82;font-weight:700;padding:6px 8px 0 0}
+
+/* Side: the week */
+.side h3,.col h3{font-size:24px;font-weight:700;line-height:1.1;border-top:3px solid var(--rule);padding-top:10px;margin-bottom:4px}
+.side h3+.sc,.col h3+.sc{color:var(--ink3);display:block;margin-bottom:12px}
+table.week{width:100%;border-collapse:collapse;font-size:17px}
+table.week td{padding:7px 0;border-bottom:1px dotted var(--hair);vertical-align:middle}
+table.week td.n{text-align:right;font-weight:600;width:64px}
+table.week td.bar{width:42%;padding-left:12px}
+table.week .b{height:7px;background:var(--ink)}
+table.week tr.zero td{color:var(--ink3)}
+table.week tr.zero .b{height:1px;background:var(--ink3)}
+table.week tfoot td{border-top:1px solid var(--rule);border-bottom:0;font-weight:700;padding-top:9px}
+.wire{margin-top:30px}
+.wire li{list-style:none;padding:10px 0;border-bottom:1px solid var(--hair);font-size:17px;line-height:1.3}
+.wire li .sc{display:block;color:var(--ink3);margin-top:4px;font-size:10px}
+.wire li a{text-decoration:none}
+.wire li a:hover{text-decoration:underline}
+
+/* Chart */
+.chartbox{margin-top:40px;border-top:3px double var(--rule);padding-top:16px}
+.chartbox header{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap}
+.chartbox h3{font-size:30px;font-weight:700;letter-spacing:-.01em}
+.chartbox header p{color:var(--ink2);font-style:italic}
+svg text{font-family:var(--serif)}
+.cum .grid line{stroke:var(--hair)}
+.cum .grid text{fill:var(--ink3);font-size:13px;font-family:var(--sans)}
+.cum .yr path{fill:none;stroke:var(--old);stroke-width:1.4}
+.cum .yr text{fill:var(--ink3);font-size:15px;font-style:italic}
+.cum .yr.prev path{stroke:var(--ink2);stroke-dasharray:3 3}
+.cum .yr.prev text{fill:var(--ink2)}
+.cum .yr.now path{stroke:var(--red);stroke-width:3}
+.cum .yr.now text{fill:var(--red);font-weight:700;font-style:normal;font-size:17px}
+.cum .yr.now circle{fill:var(--red)}
+
+/* Three columns */
+.cols{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:40px;border-top:1px solid var(--rule)}
+.col{padding:18px 26px 10px;border-right:1px solid var(--hair)}
+.col:first-child{padding-left:0}.col:last-child{border-right:0;padding-right:0}
+.leader{display:flex;align-items:baseline;gap:6px;padding:6px 0;font-size:17px}
+.leader i{flex:1;border-bottom:1px dotted var(--ink3);transform:translateY(-4px)}
+.leader b{font-weight:600}
+.leader small{font-family:var(--sans);font-size:11px;color:var(--ink3);width:46px;text-align:right}
+.leader small.up{color:var(--red)}
+.pull{font-size:44px;font-weight:700;line-height:1;letter-spacing:-.02em;margin:6px 0}
+.col p.note{color:var(--ink2);font-size:16px;line-height:1.45;margin-top:10px}
+.perboat{display:flex;align-items:flex-end;gap:6px;height:120px;margin-top:12px}
+.perboat div{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:4px;height:100%}
+.perboat span{display:block;width:100%;background:var(--ink)}
+.perboat div:last-child span{background:var(--red)}
+.perboat em{font-style:normal;font-family:var(--sans);font-size:10px;color:var(--ink3)}
+.perboat strong{font-family:var(--sans);font-size:11px;font-weight:600}
+footer{margin:48px 0 0;border-top:3px double var(--rule);padding:16px 0 40px;color:var(--ink3);font-size:15px;font-style:italic;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+@media (max-width:900px){
+  .front{grid-template-columns:1fr}
+  .lead{padding-right:0;border-right:0}
+  .side{padding-left:0;margin-top:28px}
+  .cols{grid-template-columns:1fr}
+  .col{padding:18px 0;border-right:0;border-bottom:1px solid var(--hair)}
+}
+@media (max-width:600px){
+  body{font-size:17px}
+  .wrap{padding:0 16px}
+  .topline .hide-s{display:none}
+  nav.sections{gap:14px;overflow-x:auto;justify-content:flex-start;scrollbar-width:none}
+  nav.sections a{white-space:nowrap}
+  .edition #ed-src{display:none}
+  .figure{grid-template-columns:1fr;gap:10px}
+  .body{columns:1;text-align:left}
+  .deck{font-size:19px}
+  .chartbox h3{font-size:24px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topline sc">
+    <span class="hide-s" id="vol">Daily record of small boat arrivals</span>
+    <span id="issue"></span>
+    <button id="theme" aria-label="Switch day or night edition">Day / Night</button>
+  </div>
+  <header class="mast">
+    <h1>Channel Crossings</h1>
+    <div class="motto">A daily record of the small boats, set down in figures</div>
+  </header>
+  <div class="edition sc"><span id="ed-date"></span><span id="ed-src">Home Office figures, published daily</span></div>
+  <nav class="sections sc"><a class="on" href="#">Front page</a><a href="#year">The year</a><a href="#people">The people</a><a href="#boats">The boats</a><a href="#returns">Returns</a><a href="#">Method</a></nav>
+
+  <main>
+    <section class="front">
+      <article class="lead">
+        <span class="sc kicker">The daily figure</span>
+        <h2 id="headline">&nbsp;</h2>
+        <p class="deck" id="deck"></p>
+        <div class="byline sc"><span id="by-date"></span><span id="by-checked"></span></div>
+        <div class="figure">
+          <div class="big num" id="ytd">–</div>
+          <p id="ytd-text"></p>
+        </div>
+        <div class="body" id="body"></div>
+      </article>
+      <aside class="side">
+        <h3>The week</h3><span class="sc">People detected, by day</span>
+        <table class="week num" id="week"></table>
+        <div class="wire">
+          <h3>From the wire</h3><span class="sc">Latest reports</span>
+          <ul id="wire"></ul>
+        </div>
+      </aside>
+    </section>
+
+    <section class="chartbox" id="year">
+      <header><h3>The year so far, set against every year since 2018</h3><p id="cum-note"></p></header>
+      <svg class="cum" id="cum" viewBox="0 0 1200 440" role="img" aria-label="Running total by year"></svg>
+    </section>
+
+    <section class="cols">
+      <div class="col" id="people">
+        <h3>Who crosses</h3><span class="sc" id="nat-period"></span>
+        <div id="nat"></div>
+        <p class="note" id="sex"></p>
+      </div>
+      <div class="col" id="boats">
+        <h3>Fuller boats</h3><span class="sc">Average people per boat</span>
+        <div class="pull num" id="avg"></div>
+        <div class="perboat" id="perboat"></div>
+        <p class="note">Each year the dinghies carry more people. Crowding raises the danger of crush injuries and capsizes.</p>
+      </div>
+      <div class="col" id="returns">
+        <h3>Sent back</h3><span class="sc">UK–France returns deal</span>
+        <div class="pull num" id="out"></div>
+        <p class="note" id="ret-text"></p>
+      </div>
+    </section>
+  </main>
+  <footer><span>Set in Newsreader. Figures from the Home Office, provisional and subject to revision.</span><span>Concept A · The Ledger</span></footer>
+</div>
+<script src="data.js"></script>
+<script>
+CC.theme(document.getElementById("theme"));
+const $ = (id) => document.getElementById(id);
+const { fmt } = CC;
+const words = ["no","one","two","three","four","five","six","seven","eight","nine","ten"];
+const W = (n) => (n < 11 ? words[n] : fmt(n));
+const weekday = (s) => CC.DAYS[CC.d8(s).getUTCDay()];
+
+CC.load().then((D) => {
+  const L = D.latest, LC = D.latestCrossing;
+  $("issue").textContent = `No. ${fmt(D.days.length)}`;
+  const today = new Date();
+  $("ed-date").textContent = `${CC.DAYS[today.getDay()]} ${today.getDate()} ${CC.MONTHS[today.getMonth()]} ${today.getFullYear()}`;
+  $("by-date").textContent = `Figures for ${CC.long(L.date)}`;
+  $("by-checked").textContent = `Checked ${CC.ago(D.checkedAt)}`;
+
+  // Headline written from the data
+  if (L.migrants === 0) {
+    $("headline").textContent = D.quietStreak > 1
+      ? `No small boats crossed for a ${["","","second","third","fourth","fifth","sixth","seventh"][D.quietStreak] || D.quietStreak + "th"} day running`
+      : `No small boats crossed the Channel on ${weekday(L.date)}`;
+    $("deck").textContent = `The last arrivals were on ${CC.long(LC.date)}, when ${W(LC.migrants)} ${LC.migrants === 1 ? "person was" : "people were"} detected in ${W(LC.boats)} boat${LC.boats === 1 ? "" : "s"}.`;
+  } else {
+    $("headline").textContent = `${fmt(L.migrants)} people crossed the Channel in ${W(L.boats)} small boat${L.boats === 1 ? "" : "s"} on ${weekday(L.date)}`;
+    $("deck").textContent = `That is about ${Math.round(L.migrants / Math.max(1, L.boats))} people to a boat. The year's total now stands at ${fmt(D.cur.total)}.`;
+  }
+  $("ytd").textContent = fmt(D.cur.total);
+  const dir = D.change < 0 ? "fewer" : "more";
+  $("ytd-text").innerHTML = `people have crossed so far in ${D.year}, <b>${Math.abs(Math.round(D.change))}% ${dir}</b> than by this point in ${D.year - 1}, when the count stood at ${fmt(D.prevSame)}.`;
+
+  const best = D.cur.best;
+  const share = Math.round((D.crossingDays / (D.latestDoy + 1)) * 100);
+  $("body").innerHTML = `
+    <p>Boats have reached Britain on ${D.crossingDays} of the ${D.latestDoy + 1} days of ${D.year} so far, roughly ${share} days in every hundred. Most days nothing happens; the sea, the wind and French patrols keep the beaches quiet. Then the weather settles and hundreds arrive at once.</p>
+    <p>The busiest day this year was ${CC.long(best.date)}, when ${fmt(best.migrants)} people came across in ${W(best.boats)} boats. Over the whole year the average boat has carried ${Math.round(D.avgPerBoat)} people.</p>
+    <p>Since records began in 2018, ${fmt(D.allTotal)} people have been detected making the crossing, more than the population of a city the size of Oxford.</p>`;
+
+  // Week table
+  const max7 = Math.max(1, ...D.last7.map((d) => d.migrants));
+  const sum7 = D.last7.reduce((s, d) => s + d.migrants, 0), b7 = D.last7.reduce((s, d) => s + d.boats, 0);
+  $("week").innerHTML = D.last7.map((d) => `<tr class="${d.migrants ? "" : "zero"}"><td>${weekday(d.date).slice(0, 3)} ${CC.short(d.date)}</td><td class="bar"><div class="b" style="width:${d.migrants ? Math.max(3, (d.migrants / max7) * 100) : 100}%"></div></td><td class="n">${d.migrants ? fmt(d.migrants) : "–"}</td></tr>`).join("")
+    + `<tfoot><tr><td>Seven days</td><td class="bar" style="font-weight:400;color:var(--ink3);font-style:italic">${b7} boats</td><td class="n">${fmt(sum7)}</td></tr></tfoot>`;
+
+  // Wire
+  $("wire").innerHTML = D.news.slice(0, 4).map((n) => `<li><a href="${n.url}" rel="noopener">${n.title}</a><span class="sc">${n.source} · ${CC.ago(n.published)}</span></li>`).join("");
+
+  // Cumulative chart
+  const svg = $("cum"), Wd = 1200, H = 440, l = 56, r = 1110, t = 16, b = 400;
+  const maxY = Math.ceil(Math.max(...D.yearList.map((y) => y.total)) / 10000) * 10000;
+  const x = (i) => l + (i / 365) * (r - l), y = (v) => b - (v / maxY) * (b - t);
+  let g = '<g class="grid">';
+  for (let v = 0; v <= maxY; v += 10000) g += `<line x1="${l}" x2="${r}" y1="${y(v)}" y2="${y(v)}"/><text x="${l - 10}" y="${y(v) + 4}" text-anchor="end">${v ? v / 1000 + "k" : "0"}</text>`;
+  ["Jan","Mar","May","Jul","Sep","Nov"].forEach((m, k) => { const i = [0,59,120,181,243,304][k]; g += `<text x="${x(i)}" y="${b + 26}">${m}</text>`; });
+  g += "</g>";
+  const ends = [];
+  D.yearList.forEach((Y) => {
+    const step = 2, pts = [];
+    for (let i = 0; i < Y.cum.length; i += step) pts.push(`${x(i).toFixed(1)},${y(Y.cum[i]).toFixed(1)}`);
+    pts.push(`${x(Y.cum.length - 1).toFixed(1)},${y(Y.cum[Y.cum.length - 1]).toFixed(1)}`);
+    const cls = Y.year === D.year ? "now" : Y.year === D.year - 1 ? "prev" : "";
+    const ex = x(Y.cum.length - 1), ey = y(Y.total);
+    ends.push({ Y, cls, ex, ey });
+    g += `<g class="yr ${cls}"><path d="M${pts.join("L")}"/>${cls === "now" ? `<circle cx="${ex}" cy="${ey}" r="5"/>` : ""}</g>`;
+  });
+  // labels, nudged apart
+  ends.sort((a, b2) => a.ey - b2.ey);
+  for (let i = 1; i < ends.length; i++) if (ends[i].ey - ends[i - 1].ey < 17 && ends[i].ex > 1000 && ends[i - 1].ex > 1000) ends[i].ey = ends[i - 1].ey + 17;
+  ends.forEach(({ Y, cls, ex, ey }) => {
+    g += `<g class="yr ${cls}"><text x="${ex + 9}" y="${ey + 5}">${Y.year}${cls === "now" ? " · " + fmt(Y.total) : ""}</text></g>`;
+  });
+  svg.innerHTML = g;
+  const rank = [...D.yearList].map((Y) => ({ y: Y.year, v: Y.cum[Math.min(D.latestDoy, Y.cum.length - 1)] })).sort((a, b2) => b2.v - a.v);
+  const pos = rank.findIndex((q) => q.y === D.year) + 1;
+  $("cum-note").textContent = `At this point in the year, ${D.year} ranks ${["","first","second","third","fourth","fifth","sixth","seventh","eighth","ninth"][pos]} of ${rank.length}.`;
+
+  // People
+  if (D.nat) {
+    $("nat-period").textContent = `Nationality, ${D.nat.period}`;
+    $("nat").innerHTML = D.nat.top.slice(0, 6).map((n) => `<div class="leader"><span>${n.name}</span><i></i><b class="num">${fmt(n.n)}</b><small class="${n.change > 0 ? "up" : ""}">${n.change > 0 ? "+" : ""}${n.change}%</small></div>`).join("");
+  }
+  if (D.gender) {
+    const g2 = D.gender.lastYear, men = Math.round((g2.sex.Male / g2.total) * 100), kids = Math.round((g2.age["17 and under"] / g2.total) * 100);
+    $("sex").textContent = `${men} in every hundred were men or boys. About ${kids} in a hundred said they were 17 or under.`;
+  }
+  // Boats
+  if (D.perboat) {
+    const ys = D.perboat.years, mx = Math.max(...ys.map((q) => q.avg));
+    $("avg").textContent = `${ys[ys.length - 1].avg} people`;
+    $("perboat").innerHTML = ys.map((q) => `<div><strong class="num">${q.avg}</strong><span style="height:${(q.avg / mx) * 80}%"></span><em>’${q.y.slice(2)}</em></div>`).join("");
+  }
+  if (D.returns) {
+    const R = D.returns;
+    $("out").textContent = `${fmt(R.out)} people`;
+    $("ret-text").textContent = `were returned to France under the one-in, one-out deal between August 2025 and June 2026, while ${fmt(R.in)} came the other way legally. Over the same months ${fmt(R.arrivals)} people arrived by small boat, so about one in ${Math.round(R.arrivals / R.out)} was sent back.`;
+  }
+});
+</script>
+</body>
+</html>

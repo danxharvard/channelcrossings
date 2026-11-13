@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Channel Crossings · The Bridge (concept)</title>
+<meta name="robots" content="noindex">
+<style>
+@font-face{font-family:"JBM";src:url(fonts/jetbrains-mono-latin-400-normal.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"JBM";src:url(fonts/jetbrains-mono-latin-700-normal.woff2) format("woff2");font-weight:700;font-display:swap}
+@font-face{font-family:"Inter Tight";src:url(../vendor/inter-tight/inter-tight-latin.woff2) format("woff2");font-weight:100 900;font-display:swap}
+
+/* Day: the chart table. Night: the bridge at night. */
+:root{
+  --bg:#e9efed; --panel:#f6f9f8; --line:#c7d3cf; --line2:#dbe4e1; --ink:#0d2a35; --dim:#56717a; --faint:#8aa0a6;
+  --hot:#0b7d58; --hot2:rgba(11,125,88,.14); --amber:#b46900; --red:#c6372f; --blue:#1d5fb8; --violet:#6b4bd1;
+  --sea:#dbe9ee; --land:#f1ede4; --coast:#6f8b93; --glow:none;
+  --mono:"JBM",ui-monospace,monospace; --sans:"Inter Tight",system-ui,sans-serif; color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#050807; --panel:#0a100e; --line:#1b2a25; --line2:#121c19; --ink:#d4f5e7; --dim:#6f9688; --faint:#3d5a50;
+  --hot:#53f5ae; --hot2:rgba(83,245,174,.12); --amber:#ffb547; --red:#ff6b5e; --blue:#5aa8ff; --violet:#a98bff;
+  --sea:#06110e; --land:#0d1714; --coast:#2f6b57; --glow:drop-shadow(0 0 6px rgba(83,245,174,.55)); color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#050807; --panel:#0a100e; --line:#1b2a25; --line2:#121c19; --ink:#d4f5e7; --dim:#6f9688; --faint:#3d5a50;
+  --hot:#53f5ae; --hot2:rgba(83,245,174,.12); --amber:#ffb547; --red:#ff6b5e; --blue:#5aa8ff; --violet:#a98bff;
+  --sea:#06110e; --land:#0d1714; --coast:#2f6b57; --glow:drop-shadow(0 0 6px rgba(83,245,174,.55)); color-scheme:dark;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--mono);font-size:13px;line-height:1.45;min-height:100vh}
+.status{display:flex;align-items:center;gap:22px;padding:10px 20px;border-bottom:1px solid var(--line);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);white-space:nowrap;overflow:hidden}
+.status b{color:var(--ink);font-weight:700}
+.status .logo{color:var(--hot);font-weight:700;letter-spacing:.2em}
+.status .dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--hot);margin-right:6px;box-shadow:0 0 8px var(--hot);animation:blink 2s infinite}
+@keyframes blink{50%{opacity:.35}}
+.status .sp{flex:1}
+.status button{all:unset;cursor:pointer;border:1px solid var(--line);padding:4px 10px;color:var(--ink)}
+.status button:hover{border-color:var(--hot);color:var(--hot)}
+
+.deck{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);grid-template-rows:auto auto;gap:1px;background:var(--line);border-bottom:1px solid var(--line)}
+.p{background:var(--panel);padding:16px 18px;position:relative;min-width:0}
+.p>h2{font-size:10.5px;font-weight:400;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);display:flex;justify-content:space-between;gap:10px;margin-bottom:12px}
+.p>h2 b{color:var(--hot);font-weight:400}
+.p::before,.p::after{content:"";position:absolute;width:8px;height:8px;border-color:var(--faint);border-style:solid}
+.p::before{top:6px;left:6px;border-width:1px 0 0 1px}.p::after{bottom:6px;right:6px;border-width:0 1px 1px 0}
+
+/* Radar */
+.radar{grid-row:span 2;display:flex;flex-direction:column}
+.radar svg{width:100%;height:auto;max-height:640px;display:block;flex:1}
+.radar .sea{fill:var(--sea)}
+.radar .land{fill:var(--land);stroke:var(--coast);stroke-width:1.4}
+.radar .ring{fill:none;stroke:var(--hot);stroke-opacity:.22;stroke-dasharray:2 4}
+.radar .axis{stroke:var(--hot);stroke-opacity:.18}
+.radar .rl{fill:var(--faint);font:10px var(--mono)}
+.radar .place circle{fill:var(--dim)}
+.radar .place text{fill:var(--dim);font:11px var(--mono);letter-spacing:.06em;text-transform:uppercase}
+.radar .country{fill:var(--faint);font:12px var(--mono);letter-spacing:.5em}
+.radar .lane{stroke:var(--amber);stroke-opacity:.35;stroke-dasharray:6 6;fill:none}
+.radar .sweep{transform-origin:400px 400px;animation:spin 6s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.radar .v circle{filter:var(--glow)}
+.radar .v text{font:10px var(--mono);fill:var(--ink)}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:11px;color:var(--dim);margin-top:10px}
+.legend i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:0}
+
+/* Counter */
+.count .flaps{display:flex;gap:5px;margin:4px 0 10px}
+.flap{position:relative;width:clamp(36px,4.2vw,58px);height:clamp(52px,6vw,80px);background:var(--bg);border:1px solid var(--line);border-radius:4px;display:grid;place-items:center;font:700 clamp(32px,3.9vw,54px)/1 var(--mono);color:var(--hot);text-shadow:0 0 14px var(--hot2)}
+.flap::after{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:var(--line)}
+.flap.sep{width:16px;border:0;background:none}
+.flap.sep::after{display:none}
+.kv{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:12px}
+.kv div{background:var(--panel);padding:10px 12px}
+.kv span{display:block;font-size:10px;color:var(--dim);letter-spacing:.12em;text-transform:uppercase}
+.kv b{display:block;font:600 22px/1.2 var(--sans);margin-top:4px;font-variant-numeric:tabular-nums}
+.kv b.down{color:var(--hot)}.kv b.up{color:var(--red)}
+.msg{font-size:13px;color:var(--ink);border-left:2px solid var(--amber);padding:6px 10px;margin-top:12px;background:var(--hot2)}
+.msg em{color:var(--amber);font-style:normal}
+
+/* Tape */
+.tape svg{width:100%;height:150px;display:block}
+.tape .bar{fill:var(--hot)}
+.tape .bar.z{fill:var(--faint)}
+.tape .base{stroke:var(--line)}
+.tape text{font:10px var(--mono);fill:var(--dim)}
+.tape .pk{fill:var(--ink)}
+
+/* Lower row */
+.lower{display:grid;grid-template-columns:1.35fr 1fr;gap:1px;background:var(--line)}
+table{width:100%;border-collapse:collapse;font-size:12px}
+th{font-weight:400;text-align:left;color:var(--dim);font-size:10px;letter-spacing:.12em;text-transform:uppercase;padding:6px 8px;border-bottom:1px solid var(--line)}
+td{padding:6px 8px;border-bottom:1px solid var(--line2);white-space:nowrap}
+td.r,th.r{text-align:right}
+.k{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:8px}
+.rescue{background:var(--amber);fill:var(--amber)}.border{background:var(--blue);fill:var(--blue)}.navy{background:var(--violet);fill:var(--violet)}
+.trace svg{width:100%;height:220px;display:block}
+.trace path{fill:none;stroke:var(--faint);stroke-width:1}
+.trace path.now{stroke:var(--hot);stroke-width:2.2;filter:var(--glow)}
+.trace path.prev{stroke:var(--amber);stroke-width:1.3;stroke-dasharray:4 3}
+.trace text{font:10px var(--mono);fill:var(--dim)}
+.trace .g{stroke:var(--line2)}
+
+.ticker{display:flex;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--panel);overflow:hidden;white-space:nowrap;font-size:12px}
+.ticker .lab{position:relative;z-index:2;background:var(--red);color:#fff;padding:9px 14px;font-weight:700;letter-spacing:.14em;flex:none}
+.ticker .run{display:flex;gap:48px;padding:9px 20px;animation:tick 60s linear infinite}
+.ticker .run span b{color:var(--amber);font-weight:400;margin-right:8px}
+@keyframes tick{to{transform:translateX(-50%)}}
+footer{padding:14px 20px 30px;color:var(--faint);font-size:11px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+@media (prefers-reduced-motion:reduce){.radar .sweep,.ticker .run,.status .dot{animation:none}}
+
+@media (max-width:980px){
+  .deck,.lower{grid-template-columns:1fr}
+  .radar{grid-row:auto}
+}
+@media (max-width:600px){
+  .status{gap:12px;padding:10px 16px}
+  .status .hide-s{display:none}
+  .p{padding:14px 16px}
+  .kv b{font-size:18px}
+  .kv div{padding:8px}
+  td.hide-s,th.hide-s{display:none}
+  .radar .v text{font-size:19px}.radar .place text{font-size:21px}.radar .rl{font-size:18px}.radar .country{font-size:22px}
+  .radar .v circle{r:9}
+}
+</style>
+</head>
+<body>
+<div class="status">
+  <span class="logo">CC//STRAIT</span>
+  <span><span class="dot"></span>Feed <b>live</b></span>
+  <span class="hide-s">UTC <b id="utc">--:--</b></span>
+  <span class="hide-s">Gov.uk data to <b id="dataTo">–</b></span>
+  <span class="hide-s">AIS contacts <b id="aisN">–</b></span>
+  <span class="sp"></span>
+  <button id="theme">Day / Night</button>
+</div>
+
+<div class="deck">
+  <section class="p radar">
+    <h2><span>Strait of Dover · AIS plot</span><b id="radarN"></b></h2>
+    <svg id="radar" viewBox="0 0 800 800" role="img" aria-label="Plot of rescue, Border Force and navy vessels in the Strait"></svg>
+    <div class="legend"><span><i class="rescue"></i>Lifeboat / rescue</span><span><i class="border"></i>Border Force</span><span><i class="navy"></i>Navy</span><span style="margin-left:auto">Range rings 10 km</span></div>
+  </section>
+
+  <section class="p count">
+    <h2><span>People detected · <span id="yr"></span> to date</span><b id="asof"></b></h2>
+    <div class="flaps" id="flaps"></div>
+    <div class="kv">
+      <div><span>Vs <span id="py"></span></span><b id="chg"></b></div>
+      <div><span>Boats</span><b id="boats"></b></div>
+      <div><span>Per boat</span><b id="pb"></b></div>
+      <div><span>Last crossing</span><b id="lc" style="font-size:16px"></b></div>
+      <div><span>Quiet days</span><b id="quiet"></b></div>
+      <div><span>Peak day</span><b id="peak" style="font-size:16px"></b></div>
+    </div>
+    <div class="msg" id="msg"></div>
+  </section>
+
+  <section class="p tape">
+    <h2><span>Daily log · last 60 days</span><b id="tapeSum"></b></h2>
+    <svg id="tape" viewBox="0 0 600 150" preserveAspectRatio="none"></svg>
+  </section>
+</div>
+
+<div class="lower">
+  <section class="p">
+    <h2><span>Contacts in the Strait</span><b>sorted by last seen</b></h2>
+    <table id="roster"></table>
+  </section>
+  <section class="p trace">
+    <h2><span>Running total by year</span><b id="traceN"></b></h2>
+    <svg id="trace" viewBox="0 0 500 220" preserveAspectRatio="none"></svg>
+  </section>
+</div>
+
+<div class="ticker"><span class="lab">WIRE</span><div class="run" id="run"></div></div>
+<footer><span>Figures: Home Office, provisional · Positions: aisstream.io</span><span>Concept B · The Bridge</span></footer>
+
+<script src="data.js"></script>
+<script>
+CC.theme(document.getElementById("theme"));
+const $ = (id) => document.getElementById(id), { fmt } = CC;
+const tick = () => { const d = new Date(); $("utc").textContent = d.toISOString().slice(11, 16); };
+tick(); setInterval(tick, 10000);
+
+CC.load().then((D) => {
+  $("dataTo").textContent = CC.short(D.latest.date);
+  $("aisN").textContent = D.vessels.length;
+  $("yr").textContent = D.year; $("py").textContent = D.year - 1;
+  $("asof").textContent = "AS OF " + CC.short(D.latest.date).toUpperCase();
+
+  // Split-flap total
+  const s = fmt(D.cur.total);
+  $("flaps").innerHTML = [...s].map((c) => (c === "," ? '<div class="flap sep"></div>' : `<div class="flap">${c}</div>`)).join("");
+  const ch = Math.round(D.change);
+  $("chg").textContent = (ch > 0 ? "+" : "") + ch + "%"; $("chg").className = ch < 0 ? "down" : "up";
+  $("boats").textContent = fmt(D.cur.boats);
+  $("pb").textContent = Math.round(D.avgPerBoat);
+  $("lc").textContent = `${CC.short(D.latestCrossing.date)} · ${fmt(D.latestCrossing.migrants)}`;
+  $("quiet").textContent = D.quietStreak;
+  $("peak").textContent = `${CC.short(D.cur.best.date)} · ${fmt(D.cur.best.migrants)}`;
+  $("msg").innerHTML = D.latest.migrants
+    ? `<em>&gt;</em> ${fmt(D.latest.migrants)} people in ${D.latest.boats} boats detected ${CC.long(D.latest.date)}.`
+    : `<em>&gt;</em> No small boats detected ${CC.long(D.latest.date)}. ${D.quietStreak} consecutive quiet day${D.quietStreak > 1 ? "s" : ""}.`;
+
+  // Tape: last 60 days
+  const T = D.days.slice(-60), mx = Math.max(...T.map((d) => d.migrants)), bw = 600 / T.length;
+  let t = `<line class="base" x1="0" x2="600" y1="128" y2="128"/>`;
+  T.forEach((d, i) => {
+    const h = d.migrants ? Math.max(2, (d.migrants / mx) * 104) : 2;
+    t += `<rect class="bar ${d.migrants ? "" : "z"}" x="${i * bw + 1}" y="${128 - h}" width="${bw - 2}" height="${h}"/>`;
+    if (CC.d8(d.date).getUTCDate() === 1) t += `<text x="${i * bw}" y="144">${CC.MONTHS[CC.d8(d.date).getUTCMonth()].slice(0, 3).toUpperCase()}</text>`;
+  });
+  const pk = T.reduce((a, b) => (b.migrants > a.migrants ? b : a)), pi = T.indexOf(pk);
+  t += `<text class="pk" x="${Math.min(560, pi * bw)}" y="${128 - (pk.migrants / mx) * 104 - 6}">${pk.migrants}</text>`;
+  $("tape").innerHTML = t;
+  $("tapeSum").textContent = fmt(T.reduce((a, b) => a + b.migrants, 0)) + " PEOPLE";
+
+  // Radar
+  const lat0 = 50.98, lon0 = 1.5, k = Math.cos((lat0 * Math.PI) / 180) * 111.32, S = 400 / 62; // 62 km to edge
+  const P = (lat, lon) => [400 + (lon - lon0) * k * S, 400 - (lat - lat0) * 111.32 * S];
+  const poly = (pts, close) => pts.map((p, i) => (i ? "L" : "M") + P(...p).map((n) => n.toFixed(1)).join(",")).join("") + (close || "");
+  const C = CC.COAST;
+  const ukLand = poly(C.england) + "L800,0L0,0L0," + P(...C.england[0])[1].toFixed(1) + "Z";
+  const frLand = poly(C.france) + `L800,${P(...C.france[C.france.length - 1])[1].toFixed(1)}L800,800L${P(...C.france[0])[0].toFixed(1)},800Z`;
+  let r = `<defs><clipPath id="clip"><circle cx="400" cy="400" r="392"/></clipPath>
+    <linearGradient id="sw" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="var(--hot)" stop-opacity="0"/><stop offset="1" stop-color="var(--hot)" stop-opacity=".35"/></linearGradient></defs>
+    <g clip-path="url(#clip)"><rect class="sea" width="800" height="800"/><path class="land" d="${ukLand}"/><path class="land" d="${frLand}"/>`;
+  r += `<path class="lane" d="M${P(51.28, 1.62).join(",")}L${P(50.72, 1.0).join(",")}"/><path class="lane" d="M${P(51.18, 1.95).join(",")}L${P(50.82, 1.35).join(",")}"/>`;
+  for (let km = 10; km <= 60; km += 10) r += `<circle class="ring" cx="400" cy="400" r="${km * S}"/><text class="rl" x="${404 + km * S * 0.707}" y="${396 - km * S * 0.707}">${km}</text>`;
+  r += `<line class="axis" x1="400" y1="0" x2="400" y2="800"/><line class="axis" x1="0" y1="400" x2="800" y2="400"/>`;
+  r += `<g class="sweep"><path d="M400,400L800,400A400,400 0 0,0 ${400 + 400 * Math.cos(-0.6)},${400 + 400 * Math.sin(-0.6)}Z" fill="url(#sw)"/><line x1="400" y1="400" x2="800" y2="400" stroke="var(--hot)" stroke-opacity=".7"/></g>`;
+  r += `<text class="country" x="${P(51.2, 0.85)[0]}" y="${P(51.2, 0.85)[1]}">ENGLAND</text><text class="country" x="${P(50.62, 1.85)[0]}" y="${P(50.62, 1.85)[1]}">FRANCE</text>`;
+  C.places.forEach((p) => { const [x, y] = P(p.lat, p.lon); r += `<g class="place"><circle cx="${x}" cy="${y}" r="3"/><text x="${x + (p.side === "uk" ? -8 : 8)}" y="${y + 4}" text-anchor="${p.side === "uk" ? "end" : "start"}">${p.n}</text></g>`; });
+  const vs = D.strait;
+  vs.forEach((v, i) => {
+    const [x, y] = P(v.lat, v.lon), moving = v.sog > 1;
+    let head = "";
+    if (moving && v.cog != null) { const a = ((v.cog - 90) * Math.PI) / 180; head = `<line x1="${x}" y1="${y}" x2="${x + Math.cos(a) * 22}" y2="${y + Math.sin(a) * 22}" stroke="currentColor" class="${v.kind}" style="stroke:var(--${v.kind === "rescue" ? "amber" : v.kind === "border" ? "blue" : "violet"})"/>`; }
+    r += `<g class="v">${head}<circle class="${v.kind}" cx="${x}" cy="${y}" r="${moving ? 6 : 4.5}"/>${moving ? `<text x="${x + 10}" y="${y - 8}">${(v.name || "UNKNOWN").slice(0, 16)} ${v.sog.toFixed(0)}kn</text>` : ""}</g>`;
+  });
+  r += `</g><circle cx="400" cy="400" r="392" fill="none" stroke="var(--hot)" stroke-opacity=".5"/>`;
+  for (let a = 0; a < 360; a += 10) { const rad = ((a - 90) * Math.PI) / 180, l = a % 30 ? 6 : 12; r += `<line x1="${400 + Math.cos(rad) * 392}" y1="${400 + Math.sin(rad) * 392}" x2="${400 + Math.cos(rad) * (392 - l)}" y2="${400 + Math.sin(rad) * (392 - l)}" stroke="var(--hot)" stroke-opacity=".6"/>`; }
+  $("radar").innerHTML = r;
+  $("radarN").textContent = `${vs.length} CONTACTS`;
+
+  // Roster
+  const kindName = { rescue: "Rescue", border: "Border Force", navy: "Navy" };
+  const sorted = [...vs].sort((a, b) => new Date(b.seen) - new Date(a.seen)).slice(0, 9);
+  $("roster").innerHTML = `<tr><th>Vessel</th><th class="hide-s">Type</th><th class="r">Speed</th><th class="r">Seen</th></tr>` + sorted.map((v) =>
+    `<tr><td><span class="k ${v.kind}"></span>${v.name || "Unnamed"}</td><td class="hide-s">${kindName[v.kind]}</td><td class="r">${v.sog == null ? "–" : v.sog.toFixed(1) + " kn"}</td><td class="r">${CC.ago(v.seen).replace(" ago", "")}</td></tr>`).join("");
+
+  // Trace
+  const mxY = Math.max(...D.yearList.map((y) => y.total));
+  let g = "";
+  for (let v = 10000; v < mxY; v += 10000) { const y = 210 - (v / mxY) * 196; g += `<line class="g" x1="0" x2="500" y1="${y}" y2="${y}"/><text x="2" y="${y - 3}">${v / 1000}K</text>`; }
+  D.yearList.forEach((Y) => {
+    let d = "";
+    for (let i = 0; i < Y.cum.length; i += 3) d += (i ? "L" : "M") + ((i / 365) * 500).toFixed(1) + "," + (210 - (Y.cum[i] / mxY) * 196).toFixed(1);
+    const cls = Y.year === D.year ? "now" : Y.year === D.year - 1 ? "prev" : "";
+    g += `<path class="${cls}" d="${d}"/>`;
+  });
+  $("trace").innerHTML = g;
+  $("traceN").innerHTML = `<span style="color:var(--hot)">━ ${D.year}</span> &nbsp;<span style="color:var(--amber)">┅ ${D.year - 1}</span>`;
+
+  // Ticker
+  const items = D.news.slice(0, 8).map((n) => `<span><b>${n.source.toUpperCase()}</b>${n.title}</span>`).join("");
+  $("run").innerHTML = items + items;
+});
+</script>
+</body>
+</html>
