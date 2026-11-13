@@ -44,8 +44,7 @@ try{var t=localStorage.getItem("cc-theme");ccTheme(t==="light"||t==="auto"?t:"da
 <body>
 <header class="status">
   <a class="logo" href="./">CHANNEL CROSSINGS</a>
-  <span class="hide-s">UTC <b id="utc">--:--</b></span>
-  <span class="hide-s">Gov.uk data to <b id="dataTo">–</b></span>
+  <span class="upd" title="When the latest Home Office figures came in"><span class="hide-s">Results updated </span><b id="upd">–</b></span>
   <span class="sp"></span>
   <nav class="tabs hide-s" aria-label="Pages"><a href="./">Live</a><a href="trends.html">Trends</a><a href="people.html" aria-current="page">People</a></nav>
   <nav>
@@ -141,7 +140,6 @@ function bars(svg, labels, series, opts = {}) {
 
 CC.load().then(async (D) => {
   CCUI.setShare(CCUI.shareFrom(D));
-  $("dataTo").textContent = CC.short(D.latest.date);
 
   /* ---- Sex and age ---- */
   const G = D.gender;
