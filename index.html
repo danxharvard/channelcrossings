@@ -92,7 +92,7 @@ h1,h2,.lt-title,.inline-title,.hq-t{font-family:"Inter Tight",Inter,"Helvetica N
   --bg:#F2F2F7; --card:#FFFFFF; --card2:#F7F7FA; --fill:rgba(118,118,128,.12); --fill2:rgba(118,118,128,.2);
   --label:#000; --label2:rgba(60,60,67,.72); --label3:rgba(60,60,67,.36); --sep:rgba(60,60,67,.18);
   --blue:#007AFF; --green:#34C759; --green-t:#248A3D; --orange:#FF9500; --red:#FF3B30; --red-t:#D70015; --indigo:#5856D6; --teal:#30B0C7; --pink:#FF2D55;
-  --shadow:0 1px 2px rgba(0,0,0,.04),0 8px 28px rgba(0,0,0,.07); --glare:rgba(0,122,255,.05); --sea3:#1B64A8; --cloud:#E3E8EF; --cloud-edge:#AEB7C4;
+  --shadow:0 0 0 .5px var(--sep); --glare:transparent; --sea3:#1B64A8; --cloud:#E3E8EF; --cloud-edge:#AEB7C4;
   --seg-on:#FFFFFF; --orange-t:#C93400; --heat1:#D3DBE5; --heat2:#9FB1C6; --heat3:#6681A2; --heat4:#2F4B6E;   /* pressed button, orange text, the four shades of the year in squares */
   --age1:#CDD1DB; --age2:#A9AFBF; --age3:#868DA2; --age4:#636A84;
   --viz1:#2F4B6E; --viz1b:#7590B1; --viz2:#A8763C; --viz2b:#C9A06A; --viz3:#4D7A82; --viz4:#8F4F5E;   /* the graphs: a sober palette of slate navy, ochre, teal and rose */   /* the age bands in Who Is Crossing, youngest lightest */
@@ -104,7 +104,7 @@ h1,h2,.lt-title,.inline-title,.hq-t{font-family:"Inter Tight",Inter,"Helvetica N
   --bg:#000; --card:#1C1C1E; --card2:#232326; --fill:rgba(118,118,128,.24); --fill2:rgba(118,118,128,.32);
   --label:#fff; --label2:rgba(235,235,245,.62); --label3:rgba(235,235,245,.3); --sep:rgba(84,84,88,.55);
   --blue:#0A84FF; --green:#30D158; --green-t:#30D158; --orange:#FF9F0A; --red:#FF453A; --red-t:#FF453A; --indigo:#5E5CE6; --teal:#40C8E0; --pink:#FF375F;
-  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 28px rgba(0,0,0,.45); --glare:rgba(255,255,255,.075); --sea3:#061A30; --cloud:#C7C7CC; --cloud-edge:rgba(255,255,255,0);
+  --shadow:0 0 0 .5px var(--sep); --glare:transparent; --sea3:#061A30; --cloud:#C7C7CC; --cloud-edge:rgba(255,255,255,0);
   --seg-on:#636366; --orange-t:#FF9F0A; --heat1:#26364A; --heat2:#3B5472; --heat3:#5E7FA6; --heat4:#9DB6D3;
   --age1:#4C546B; --age2:#6B738B; --age3:#9097AE; --age4:#B7BCCB;
   --viz1:#8BA6C7; --viz1b:#58779C; --viz2:#CFA46E; --viz2b:#9A6F3E; --viz3:#86B2B8; --viz4:#C4909C;
@@ -114,7 +114,7 @@ h1,h2,.lt-title,.inline-title,.hq-t{font-family:"Inter Tight",Inter,"Helvetica N
   --bg:#000; --card:#1C1C1E; --card2:#232326; --fill:rgba(118,118,128,.24); --fill2:rgba(118,118,128,.32);
   --label:#fff; --label2:rgba(235,235,245,.62); --label3:rgba(235,235,245,.3); --sep:rgba(84,84,88,.55);
   --blue:#0A84FF; --green:#30D158; --green-t:#30D158; --orange:#FF9F0A; --red:#FF453A; --red-t:#FF453A; --indigo:#5E5CE6; --teal:#40C8E0; --pink:#FF375F;
-  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 28px rgba(0,0,0,.45); --glare:rgba(255,255,255,.075); --sea3:#061A30; --cloud:#C7C7CC; --cloud-edge:rgba(255,255,255,0);
+  --shadow:0 0 0 .5px var(--sep); --glare:transparent; --sea3:#061A30; --cloud:#C7C7CC; --cloud-edge:rgba(255,255,255,0);
   --seg-on:#636366; --orange-t:#FF9F0A; --heat1:#26364A; --heat2:#3B5472; --heat3:#5E7FA6; --heat4:#9DB6D3;
   --age1:#4C546B; --age2:#6B738B; --age3:#9097AE; --age4:#B7BCCB;
   --viz1:#8BA6C7; --viz1b:#58779C; --viz2:#CFA46E; --viz2b:#9A6F3E; --viz3:#86B2B8; --viz4:#C4909C;
@@ -154,7 +154,7 @@ button,input,select,textarea{font:inherit;font-family:var(--font)}
 .am-town,.am-area{pointer-events:none;white-space:nowrap;font-family:var(--font);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:geometricPrecision;font-kerning:normal;font-optical-sizing:auto;font-synthesis:none}
 .am-town i{position:absolute;left:-4px;top:-4px;width:8px;height:8px;border-radius:50%;border:1.6px solid #1A2B4C;background:rgba(255,255,255,.55)}
 .am-town span{position:absolute;left:0;bottom:7px;transform:translateX(-50%);color:#1B2840;font:600 12px/1 var(--font);letter-spacing:-.01em;
-  -webkit-text-stroke:2.6px rgba(255,255,255,.8);paint-order:stroke fill;stroke-linejoin:round;text-shadow:0 0 4px rgba(255,255,255,.3)}
+  -webkit-text-stroke:2.6px rgba(255,255,255,.8);paint-order:stroke fill;stroke-linejoin:round}
 .am-town.r1 span{font-weight:700;font-size:13.5px;letter-spacing:-.015em}
 .am-town.r1 i{width:10px;height:10px;left:-5px;top:-5px;border-width:2px}
 .am-town.r2 span{font-weight:650}
@@ -163,25 +163,25 @@ button,input,select,textarea{font:inherit;font-family:var(--font)}
 .am-town.cape i{border-color:#FF9F0A}
 .am-area span{position:absolute;left:0;top:0;transform:translate(-50%,-50%)}
 .am-area.land span{font:600 11px/1 var(--font);letter-spacing:.3em;color:rgba(27,40,64,.45)}
-.am-area.sea span{font:500 12.5px/1 var(--font);letter-spacing:.14em;color:rgba(255,255,255,.78);text-shadow:0 1px 2px rgba(10,30,80,.3)}   /* water in light, airy letters, as Apple Maps names seas */
+.am-area.sea span{font:500 12.5px/1 var(--font);letter-spacing:.14em;color:rgba(255,255,255,.82)}   /* water in light, airy letters, as Apple Maps names seas */
 /* main launch beaches: soft pulsing rings on the French coast */
 .am-launch{pointer-events:auto;cursor:pointer}
 .am-launch i,.am-launch b{position:absolute;border-radius:50%}
-.am-launch i{inset:8px;background:#FF9F0A;box-shadow:0 0 0 2px rgba(255,255,255,.9),0 1px 4px rgba(0,0,0,.5)}
+.am-launch i{inset:8px;background:#FF9F0A;box-shadow:0 0 0 2px #fff}
 .am-launch b{inset:0;border:2px solid rgba(255,159,10,.9);animation:launchPing 2.4s ease-out infinite}
 @keyframes launchPing{from{transform:scale(.4);opacity:1}to{transform:scale(1.5);opacity:0}}
 @media (prefers-reduced-motion:reduce){.am-launch b{opacity:.5}}
 .am-launch-tip{font:500 12px/1.35 var(--font);border-radius:10px;padding:7px 10px;width:200px;white-space:normal}
 /* lifeboats, Border Force, navy and rescue aircraft, from live AIS (vessels.json): a dot, with an arrow for the way it's heading */
 .am-ves{pointer-events:auto;cursor:pointer}
-.am-ves svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;filter:drop-shadow(0 1px 2px rgba(0,0,0,.45));transition:transform .3s}
+.am-ves svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;transition:transform .3s}
 .am-ves:hover svg{transform:scale(1.18)}
 .am-ves .hull{fill:var(--c);stroke:#fff;stroke-width:1.6;stroke-linejoin:round}
 .am-ves .deck{fill:#fff;opacity:.9}
 .am-ves .wake{fill:none;stroke:#fff;stroke-width:1.4;stroke-linecap:round;opacity:.55}
 /* "In the Channel now": the live vessels listed down the left of the map, only while there are some */
 .ves-list{position:absolute;z-index:3;width:252px;max-height:calc(100% - 230px);display:flex;flex-direction:column;color:var(--label);font-size:.765rem;line-height:1.3;letter-spacing:-.01em;overflow:hidden;
-  background:color-mix(in srgb,var(--card) 55%,transparent);-webkit-backdrop-filter:blur(22px) saturate(180%);backdrop-filter:blur(22px) saturate(180%);box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 0 0 .5px var(--sep),0 10px 32px rgba(0,0,0,.2);animation:vlIn .45s cubic-bezier(.2,.9,.3,1.12) both;transition:top .3s}
+  background:var(--card);box-shadow:0 0 0 .5px var(--sep);animation:vlIn .45s cubic-bezier(.2,.9,.3,1.12) both;transition:top .3s}
 @keyframes vlIn{from{opacity:0;transform:translateX(-12px)}}
 .ves-list .vl-h{all:unset;box-sizing:border-box;width:100%;display:flex;align-items:center;gap:7px;padding:12px 14px 8px;cursor:pointer}
 .ves-list .vl-h:focus-visible{outline:2px solid var(--blue);outline-offset:-3px;border-radius:20px}
@@ -212,7 +212,7 @@ button,input,select,textarea{font:inherit;font-family:var(--font)}
 @media (max-width:599px){.ves-list{width:min(240px,calc(100% - 24px));max-height:210px}}
 /* the vessel card on hover or tap: frosted, like the weather readings */
 #lmap .am-ves-tip{padding:12px 14px;width:256px;white-space:normal;border:0;border-radius:16px;color:var(--label);font:.765rem/1.35 var(--font);letter-spacing:-.01em;
-  background:color-mix(in srgb,var(--card) 90%,transparent);-webkit-backdrop-filter:blur(24px) saturate(180%);backdrop-filter:blur(24px) saturate(180%);box-shadow:var(--shadow),0 0 0 .5px var(--sep)}
+  background:var(--card);box-shadow:0 0 0 .5px var(--sep)}
 #lmap .am-ves-tip::before{display:none}
 .am-ves-tip .vt-h{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:center}
 .am-ves-tip .vt-ic{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;background:var(--c)}
@@ -228,12 +228,12 @@ button,input,select,textarea{font:inherit;font-family:var(--font)}
 .am-ves.old{opacity:.5}
 /* the tip in the middle of the map, once per visitor: live boats appear here, the grey dinghies are the day's crossings */
 .live-tip{position:absolute;z-index:4;left:50%;top:clamp(170px,42%,50%);transform:translate(-50%,-50%);width:min(340px,calc(100% - 32px));display:grid;grid-template-columns:auto 1fr;gap:12px;padding:14px 40px 14px 14px;border-radius:22px;color:var(--label);font-size:.794rem;line-height:1.38;letter-spacing:-.01em;
-  background:color-mix(in srgb,var(--card) 78%,transparent);-webkit-backdrop-filter:blur(30px) saturate(180%);backdrop-filter:blur(30px) saturate(180%);box-shadow:0 0 0 .5px var(--sep),0 10px 36px rgba(0,0,0,.22),0 2px 6px rgba(0,0,0,.08);animation:ltIn .55s cubic-bezier(.2,.9,.3,1.15) .6s both}
+  background:var(--card);box-shadow:0 0 0 .5px var(--sep);animation:ltIn .55s cubic-bezier(.2,.9,.3,1.15) .6s both}
 @keyframes ltIn{from{opacity:0;transform:translate(-50%,-50%) scale(.92)}}
 .live-tip.out{animation:ltOut .22s ease-in both}
 @keyframes ltOut{to{opacity:0;transform:translate(-50%,-50%) scale(.95)}}
 @media (prefers-reduced-motion:reduce){.live-tip,.live-tip.out{animation-duration:.01s}}
-.live-tip .lt-ic{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;background:linear-gradient(180deg,#FFD60A,#FF9F0A);box-shadow:inset 0 0 0 .5px rgba(0,0,0,.08),0 1px 3px rgba(0,0,0,.15)}
+.live-tip .lt-ic{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;background:#FF9F0A}
 .live-tip .lt-ic svg{width:24px;height:24px}
 .live-tip h3{margin:1px 0 2px;font-size:.882rem;font-weight:600;letter-spacing:-.02em}
 .live-tip p{margin:0;color:var(--label2)}
@@ -248,17 +248,17 @@ button,input,select,textarea{font:inherit;font-family:var(--font)}
 .mp-key{display:grid;grid-template-columns:repeat(2,9px);gap:4px;padding:4px 0 0 5px}
 
 .am-ves.rescue,.lv-rescue{--c:#FFCC00}.am-ves.border,.lv-border{--c:#0A84FF}.am-ves.navy,.lv-navy{--c:#5E5CE6}.am-ves.aircraft,.lv-aircraft{--c:#FF2D55}
-.mp-key i{width:9px;height:9px;border-radius:50%;background:var(--c);box-shadow:0 0 0 1.5px rgba(255,255,255,.9)}
+.mp-key i{width:9px;height:9px;border-radius:50%;background:var(--c)}
 /* with a mouse: the rain, wave height or temperature under the pointer */
 .am-hover{position:absolute;z-index:4;left:0;top:0;pointer-events:none;display:flex;align-items:center;gap:7px;padding:6px 11px 6px 8px;border-radius:999px;white-space:nowrap;
-  font:600 .824rem/1 var(--font);font-variant-numeric:tabular-nums;background:rgba(255,255,255,.94);color:#1A2B4C;box-shadow:0 0 0 .5px rgba(0,0,0,.08),0 4px 14px rgba(0,0,0,.18);transition:opacity .15s}
+  font:600 .824rem/1 var(--font);font-variant-numeric:tabular-nums;background:#fff;color:#1A2B4C;box-shadow:0 0 0 .5px rgba(0,0,0,.14);transition:opacity .15s}
 .am-hover.off{opacity:0}
 .am-hover b{font-size:1rem;font-weight:700;letter-spacing:-.01em}
 .am-hover small{font-weight:600;opacity:.7}
 .am-hover .sw{width:12px;height:12px;border-radius:50%;box-shadow:inset 0 0 0 .5px rgba(0,0,0,.2)}
 /* phones: the sheet a tap brings up */
 .am-sheet{position:absolute;z-index:6;left:10px;right:10px;bottom:calc(10px + env(safe-area-inset-bottom,0px));padding:16px 16px 14px;border-radius:24px;color:var(--label);
-  background:color-mix(in srgb,var(--card) 94%,transparent);-webkit-backdrop-filter:blur(28px) saturate(180%);backdrop-filter:blur(28px) saturate(180%);box-shadow:0 -2px 30px rgba(0,0,0,.3),0 0 0 .5px var(--sep)}
+  background:var(--card);box-shadow:0 0 0 .5px var(--sep)}
 .am-sheet.in{animation:sheetUp .38s cubic-bezier(.2,.9,.25,1) both}
 @keyframes sheetUp{from{transform:translateY(110%)}}
 .am-grab{position:absolute;top:6px;left:50%;width:36px;height:5px;margin-left:-18px;border-radius:3px;background:var(--label3)}
@@ -268,13 +268,13 @@ button,input,select,textarea{font:inherit;font-family:var(--font)}
 .am-sheet .in-sheet{font:inherit}.am-sheet .in-sheet .vt-stats{margin-right:-30px}
 /* the dropped pin where you tap */
 .am-pin{pointer-events:none}
-.am-pin i{position:absolute;left:3px;top:0;width:16px;height:16px;border-radius:50%;background:#FF3B30;box-shadow:inset 0 -2px 4px rgba(0,0,0,.25),0 2px 6px rgba(0,0,0,.4);animation:pinDrop .35s cubic-bezier(.3,1.5,.5,1) both}
+.am-pin i{position:absolute;left:3px;top:0;width:16px;height:16px;border-radius:50%;background:#FF3B30;box-shadow:0 0 0 2px #fff;animation:pinDrop .35s cubic-bezier(.3,1.5,.5,1) both}
 .am-pin i::after{content:"";position:absolute;left:5px;top:5px;width:6px;height:6px;border-radius:50%;background:#fff}
-.am-pin b{position:absolute;left:10px;top:15px;width:2px;height:13px;border-radius:1px;background:linear-gradient(#8E8E93,#C7C7CC)}
+.am-pin b{position:absolute;left:10px;top:15px;width:2px;height:13px;border-radius:1px;background:#8E8E93}
 .am-pin s{position:absolute;left:7px;top:26px;width:8px;height:4px;border-radius:50%;background:rgba(0,0,0,.4);filter:blur(1px)}
 @keyframes pinDrop{from{transform:translateY(-22px);opacity:0}}
 /* tap the map: the weather at that spot */
-#lmap .wx-pt .leaflet-popup-content-wrapper{border-radius:16px;background:color-mix(in srgb,var(--card) 80%,transparent);-webkit-backdrop-filter:blur(24px) saturate(180%);backdrop-filter:blur(24px) saturate(180%);color:var(--label);box-shadow:var(--shadow),0 0 0 .5px var(--sep)}
+#lmap .wx-pt .leaflet-popup-content-wrapper{border-radius:16px;background:var(--card);color:var(--label);box-shadow:0 0 0 .5px var(--sep)}
 #lmap .wx-pt .leaflet-popup-tip{background:color-mix(in srgb,var(--card) 80%,transparent)}
 #lmap .wx-pt .leaflet-popup-content{margin:12px 14px;width:236px!important;font:.765rem/1.35 var(--font)}
 .wx-pt b.pt-h{display:block;font-size:1.06rem;letter-spacing:-.02em;margin:0}
@@ -283,7 +283,7 @@ button,input,select,textarea{font:inherit;font-family:var(--font)}
 .wx-pt .wp-stats{margin:8px 0 0;gap:5px}
 .wx-pt .wp-stats div{padding:6px 8px}
 .wx-pt .wp-stats b{font-size:1rem}
-.hero::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(to bottom,rgba(0,0,0,.16) 0,rgba(0,0,0,0) 22%,rgba(0,0,0,0) 58%,rgba(0,0,0,.28) 100%)}   /* darker at the top and bottom, so white text reads over the light map */
+.hero::after{content:none}   /* flat: the panels on the map are solid, so the map needs no darkening */
 .hero-in{position:absolute;z-index:2;color:#fff}
 .hero-chips > *{pointer-events:auto}
 /* across the top of the map: breaking news, which flashes when a story comes in, and from 12:00 UK time
@@ -335,10 +335,10 @@ button.mn-head{border:0;background:none;padding:0;text-align:left;cursor:pointer
 .chip-fu .fig-ring,.chip-fu.dl > i{display:none}
 .chip-fu.dl .fig-ring{display:block}
 .chip-fu.stale > i{background:var(--orange);box-shadow:0 0 0 3px rgba(255,159,10,.25)}
-.kicker{font:600 .824rem/1.2 var(--font);letter-spacing:.02em;text-transform:uppercase;opacity:.85;text-shadow:0 1px 8px rgba(0,0,0,.4)}
+.kicker{font:600 .824rem/1.2 var(--font);letter-spacing:.02em;text-transform:uppercase;opacity:.85}
 /* the latest day as a calendar tile, as in On This Day */
 .hero-quiet{display:flex;align-items:center;gap:18px}
-.hero-quiet .cal{width:88px;height:92px;background:rgba(28,28,30,.4);-webkit-backdrop-filter:blur(18px) saturate(160%);backdrop-filter:blur(18px) saturate(160%);box-shadow:inset 0 0 0 .5px rgba(255,255,255,.25),0 6px 24px rgba(0,0,0,.25)}
+.hero-quiet .cal{width:88px;height:92px;background:var(--panel-cal);box-shadow:none}
 .hq-t{font:700 clamp(1.6rem,4.6vw,2.8rem)/1.05 var(--display)}
 .hq-s{margin-top:6px;font-size:1.06rem;font-weight:500;opacity:.85}
 @media (max-width:600px){.hero-quiet{gap:14px}.hq-s{font-size:.941rem}}   /* the tile's phone size: further down, with the panel */
@@ -351,30 +351,30 @@ button.mn-head{border:0;background:none;padding:0;text-align:left;cursor:pointer
 .chip i.rep{background:var(--orange);box-shadow:0 0 0 3px rgba(255,159,10,.25);animation:repPulse 2s ease-in-out infinite}
 @keyframes repPulse{50%{box-shadow:0 0 0 6px rgba(255,159,10,0)}}
 a.chip{text-decoration:none;color:inherit;white-space:nowrap}
-.chip i.none,.chip i.wait{background:rgba(255,255,255,.45);box-shadow:none}   /* no reading, or still loading */
+.chip i.none,.chip i.wait{background:var(--label3);box-shadow:none}   /* no reading, or still loading */
 .chip .fig-ring{width:14px;height:14px;margin:0 0 0 -2px;opacity:1}
 @keyframes pulse{50%{opacity:.3}}
-.chip .up{color:#FFB4AE}.chip .down{color:#9CF0B4}
+.chip .up{color:var(--red-t)}.chip .down{color:var(--green-t)}
 .chip small{font:inherit}.chip small s{text-decoration:none}
 button.chip,a.chip{border:0;font-family:inherit;cursor:pointer;touch-action:manipulation;transition:background-color .2s}
 button.chip svg,a.chip svg{width:13px;height:13px;margin-right:-3px;opacity:.8}
 @media (max-width:360px){#chipYear{white-space:nowrap;flex-wrap:wrap;gap:0 5px;padding:0 11px}}   /* small phones: "2026 so far 19,287 ↓44% on 2025" on one line, never broken mid-phrase */
 
 /* ------------------------------------------------------------ Figure Updates pop-up */
-.info-pop{position:fixed;z-index:60;width:min(320px,calc(100vw - 32px));padding:16px 18px;border-radius:18px;background:color-mix(in srgb,var(--card) 76%,transparent);-webkit-backdrop-filter:blur(40px) saturate(180%);backdrop-filter:blur(40px) saturate(180%);box-shadow:0 2px 6px rgba(0,0,0,.05),0 18px 44px rgba(0,0,0,.12),0 0 0 .5px var(--sep);font-size:.824rem;line-height:1.45;color:var(--label);letter-spacing:-.01em}
+.info-pop{position:fixed;z-index:60;width:min(320px,calc(100vw - 32px));padding:16px 18px;border-radius:18px;background:color-mix(in srgb,var(--card) 76%,transparent);box-shadow:0 2px 6px rgba(0,0,0,.05),0 18px 44px rgba(0,0,0,.12),0 0 0 .5px var(--sep);font-size:.824rem;line-height:1.45;color:var(--label);letter-spacing:-.01em}
 .info-pop b{display:block;font-size:.882rem;margin-bottom:6px}
 .info-pop p{margin:0 0 8px;color:var(--label2)}
 .info-pop.sheet{overflow:auto;overscroll-behavior:contain;border-radius:20px;padding:16px 18px}
 .info-pop.sheet > :first-child{padding-right:34px}   /* room for the close button */
 /* the close button on a phone sheet: it floats over the sheet's top right corner, so it stays put while the sheet scrolls */
-.pop-x{position:fixed;z-index:62;width:30px;height:30px;border:0;border-radius:50%;background:var(--fill2);color:var(--label);display:grid;place-items:center;cursor:pointer;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.pop-x{position:fixed;z-index:62;width:30px;height:30px;border:0;border-radius:50%;background:var(--fill2);color:var(--label);display:grid;place-items:center;cursor:pointer;}
 .pop-x svg{width:10px;height:10px}
 .pop-x::after{content:"";position:absolute;inset:-7px}   /* a 44pt tap target */
 .info-pop:not([hidden]){animation:popIn .26s cubic-bezier(.2,.9,.3,1.15) both;transform-origin:var(--from,bottom left)}
 @keyframes popIn{from{opacity:0;transform:scale(.92)}}
 /* Channel conditions pop-up, in the style of the Weather app */
 .wx-pop,.lx-pop{width:min(340px,calc(100vw - 32px));padding:16px;border-radius:18px}
-.wx-pop{--lv:var(--blue);-webkit-backdrop-filter:blur(44px) saturate(180%);backdrop-filter:blur(44px) saturate(180%);background-image:linear-gradient(to bottom,color-mix(in srgb,var(--lv) 12%,transparent),transparent 90px)}
+.wx-pop{--lv:var(--blue);border-top:3px solid var(--lv)}
 .wx-pop[data-lv="calm"]{--lv:var(--green);--lv-t:var(--green-t)}.wx-pop[data-lv="moderate"]{--lv:var(--orange);--lv-t:var(--orange-t)}.wx-pop[data-lv="rough"]{--lv:var(--red);--lv-t:var(--red-t)}   /* --lv-t: the level in words, in a readable shade */
 .wp-head{display:flex;align-items:center;gap:12px}
 .wp-ic{flex:none;width:44px;height:44px}
@@ -438,7 +438,7 @@ button.chip svg,a.chip svg{width:13px;height:13px;margin-right:-3px;opacity:.8}
 .fu-clock .fu-hour{transform-origin:60px 60px;animation:spin 144s linear infinite}
 @media (prefers-reduced-motion:reduce){.fu-clock .fu-min,.fu-clock .fu-hour{animation:none}}
 .fu-hd{display:flex;align-items:center;gap:12px}
-.fu-ic{flex:none;width:40px;height:40px;border-radius:10px;background:linear-gradient(160deg,#3D9BFF,#0062E0);box-shadow:inset 0 0 0 .5px rgba(255,255,255,.25),0 2px 6px rgba(0,98,224,.3);display:grid;place-items:center}
+.fu-ic{flex:none;width:40px;height:40px;border-radius:10px;background:var(--blue);display:grid;place-items:center}
 .fu-ic svg{width:34px;height:34px}
 .fu-ic .fu-min{transform-origin:20px 20px;animation:spin 6s linear infinite}
 .fu-ic .fu-hour{transform-origin:20px 20px;animation:spin 72s linear infinite}
@@ -455,7 +455,7 @@ button.chip svg,a.chip svg{width:13px;height:13px;margin-right:-3px;opacity:.8}
 .wkend .fu-tl{display:none}
 .fu-track{position:relative;height:6px;border-radius:3px;background:var(--fill2)}
 .fu-fill{position:absolute;left:0;top:0;bottom:0;width:0;border-radius:3px;background:var(--blue);transition:width .6s var(--ease-out,ease)}
-.fu-dot{position:absolute;top:50%;left:0;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.3),0 0 0 .5px rgba(0,0,0,.08);transition:left .6s var(--ease-out,ease)}
+.fu-dot{position:absolute;top:50%;left:0;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;background:#fff;box-shadow:0 0 0 .5px rgba(0,0,0,.2);transition:left .6s var(--ease-out,ease)}
 .fu-tl[data-st="wait"] .fu-dot{display:none}
 .fu-tl[data-st="in"] .fu-fill{background:var(--green)}
 .fu-lbl{display:flex;justify-content:space-between;margin-top:7px;font-size:.706rem;color:var(--label2);font-variant-numeric:tabular-nums}
@@ -497,7 +497,7 @@ main{max-width:1180px;margin:0 auto}
 .card.lift{transform:perspective(1100px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translateY(-2px);
   transition:transform .18s ease-out,box-shadow .3s ease,opacity .7s cubic-bezier(.2,.8,.2,1)}
 .card::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .35s ease;--mx:inherit;--my:inherit;
-  background:radial-gradient(380px circle at var(--mx,50%) var(--my,50%),var(--glare),transparent 65%)}
+  background:none}
 .card.lift::after{opacity:1}
 
 /* ------------------------------------------------------------ bento */
@@ -626,7 +626,7 @@ main{max-width:1180px;margin:0 auto}
 
 /* ------------------------------------------------------------ on this day */
 .otd-top{display:flex;align-items:center;gap:16px}
-.cal{flex:none;width:64px;height:68px;border-radius:15px;overflow:hidden;background:var(--card2);box-shadow:0 0 0 .5px var(--sep),0 3px 10px rgba(0,0,0,.08);display:grid;grid-template-rows:21px 1fr;text-align:center}
+.cal{flex:none;width:64px;height:68px;border-radius:15px;overflow:hidden;background:var(--card2);box-shadow:0 0 0 .5px var(--sep);display:grid;grid-template-rows:21px 1fr;text-align:center}
 .cal span{background:var(--red);color:#fff;font:700 .647rem/21px var(--font);letter-spacing:.08em;text-transform:uppercase}
 .cal b{display:grid;place-items:center;font:500 2rem/1 var(--font);letter-spacing:-.03em}
 .otd-years{display:flex;align-items:flex-end;gap:8px;height:136px;margin-top:18px}
@@ -649,7 +649,7 @@ main{max-width:1180px;margin:0 auto}
 .seg{display:inline-grid;grid-auto-flow:column;grid-auto-columns:1fr;padding:3px;border-radius:999px;background:var(--fill)}
 .seg button{border:0;border-radius:999px;background:none;color:var(--label);font:600 .765rem/1 var(--font);height:30px;padding:0 12px;cursor:pointer;position:relative}
 .seg button::after{content:"";position:absolute;inset:-7px 0}
-.seg button[aria-pressed="true"]{background:var(--seg-on);box-shadow:0 3px 8px rgba(0,0,0,.12),0 3px 1px rgba(0,0,0,.04)}
+.seg button[aria-pressed="true"]{background:var(--seg-on);box-shadow:0 0 0 .5px var(--sep)}
 .chart{position:relative;margin-top:8px;touch-action:pan-y;user-select:none;-webkit-user-select:none;cursor:crosshair}
 .chart svg{display:block;width:100%;height:auto;overflow:visible}
 .chart .line{fill:none;stroke-linejoin:round;stroke-linecap:round}
@@ -784,7 +784,7 @@ footer strong{color:var(--label);font-weight:600}
 .ft-theme{display:inline-flex;gap:2px;padding:3px;margin:2px 0 6px;border-radius:999px;background:var(--fill,rgba(118,118,128,.12))}
 .ft-theme button{appearance:none;border:0;background:none;color:var(--label2);display:inline-flex;align-items:center;gap:6px;min-height:38px;padding:0 15px;border-radius:999px;font:500 14px/1 var(--font);letter-spacing:0;cursor:pointer;touch-action:manipulation;transition:background-color .2s ease,color .2s ease}
 .ft-theme svg{width:15px;height:15px;flex:none}
-.ft-theme button[aria-pressed="true"]{background:#fff;color:#000;box-shadow:0 1px 3px rgba(0,0,0,.12),0 0 0 .5px rgba(0,0,0,.04)}
+.ft-theme button[aria-pressed="true"]{background:#fff;color:#000;box-shadow:0 0 0 .5px var(--sep)}
 :root[data-theme="dark"] .ft-theme button[aria-pressed="true"]{background:#636366;color:#fff;box-shadow:none}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .ft-theme button[aria-pressed="true"]{background:#636366;color:#fff;box-shadow:none}}
 @media (hover:hover){.ft-theme button[aria-pressed="false"]:hover{color:var(--label)}}
@@ -860,7 +860,7 @@ button.chip{position:relative}button.chip::after{content:"";position:absolute;in
   .spark span,.pb-p,.heat,.otd-years i{transform:none;opacity:1}
   .draw{stroke-dasharray:none;stroke-dashoffset:0}
 }
-@media (prefers-reduced-transparency:reduce){.info-pop{background:var(--card);-webkit-backdrop-filter:none;backdrop-filter:none}}
+@media (prefers-reduced-transparency:reduce){.info-pop{background:var(--card);}}
 @media (prefers-contrast:more){:root{--label2:rgba(60,60,67,.9);--sep:rgba(60,60,67,.5)}}
 /* ---------- The boxes (calendar, running totals, tables, calculator, patterns, dots, petitions) */
 .mb{--mbar4:#24405F;--mbar:var(--viz1);--bar-peak:var(--viz2);--boat:#8C6230;--green-bg:rgba(52,199,89,.14)}
@@ -873,12 +873,12 @@ button.chip{position:relative}button.chip::after{content:"";position:absolute;in
 .mb .petitions li:last-child{padding-bottom:0}
 .mb.area-rep{display:none}
 @media (min-width:760px) and (hover:hover) and (pointer:fine){.mb.area-rep{display:block}}
-.toast{position:fixed;left:50%;bottom:max(24px, calc(env(safe-area-inset-bottom, 0px) + 16px));transform:translate(-50%,8px);background:var(--glass);-webkit-backdrop-filter:blur(24px) saturate(180%);backdrop-filter:blur(24px) saturate(180%);box-shadow:0 2px 6px rgba(0,0,0,.05),0 18px 44px rgba(0,0,0,.12);color:var(--label);font-size:.882rem;font-weight:600;padding:12px 20px;border-radius:22px;opacity:0;pointer-events:none;transition:opacity .2s ease,transform .2s ease;z-index:10}
+.toast{position:fixed;left:50%;bottom:max(24px, calc(env(safe-area-inset-bottom, 0px) + 16px));transform:translate(-50%,8px);background:var(--card);box-shadow:0 0 0 .5px var(--sep);color:var(--label);font-size:.882rem;font-weight:600;padding:12px 20px;border-radius:22px;opacity:0;pointer-events:none;transition:opacity .2s ease,transform .2s ease;z-index:10}
 .toast.show{opacity:1;transform:translate(-50%,0)}
 /* new figures are announced, and a refresh shows them */
 .new-fig{position:fixed;left:50%;transform:translateX(-50%);bottom:max(24px, calc(env(safe-area-inset-bottom, 0px) + 16px));z-index:11;display:flex;align-items:center;flex-wrap:wrap;justify-content:center;gap:6px 12px;
-  width:max-content;max-width:calc(100vw - 32px);padding:10px 10px 10px 18px;border-radius:24px;background:var(--glass);-webkit-backdrop-filter:blur(24px) saturate(180%);backdrop-filter:blur(24px) saturate(180%);
-  box-shadow:0 2px 6px rgba(0,0,0,.05),0 18px 44px rgba(0,0,0,.16),0 0 0 .5px var(--sep);color:var(--label);font-size:.882rem;font-weight:600}
+  width:max-content;max-width:calc(100vw - 32px);padding:10px 10px 10px 18px;border-radius:24px;background:var(--card);
+  box-shadow:0 0 0 .5px var(--sep);color:var(--label);font-size:.882rem;font-weight:600}
 .new-fig button{border:0;border-radius:999px;background:var(--blue);color:#fff;font:600 .882rem/1 var(--font);padding:0 16px;height:36px;cursor:pointer}
 .mb .petitions li{grid-template-columns:1fr auto;gap:2px 12px;padding:12px 0}
 .mb .petitions a.pt{color:var(--label);text-decoration:none;font-size:.882rem;font-weight:600;line-height:1.3}
@@ -891,7 +891,7 @@ button.chip{position:relative}button.chip::after{content:"";position:absolute;in
 .mb .chipst{display:inline-block;padding:1px 7px;border-radius:999px;font-size:.647rem;font-weight:600}
 .mb .chipst.open{background:var(--green-bg);color:var(--green-t)}
 .mb .chipst.closed{background:var(--fill);color:var(--label2)}
-.mb .tip{position:absolute;top:8px;left:0;z-index:2;min-width:150px;max-width:220px;padding:10px 12px;border-radius:12px;background:var(--glass);-webkit-backdrop-filter:blur(22px) saturate(170%);backdrop-filter:blur(22px) saturate(170%);box-shadow:0 8px 24px rgba(0,0,0,.18);pointer-events:none;font-size:.824rem;line-height:1.35;transition:transform .12s ease-out;opacity:1}
+.mb .tip{position:absolute;top:8px;left:0;z-index:2;min-width:150px;max-width:220px;padding:10px 12px;border-radius:12px;background:var(--card);box-shadow:0 0 0 .5px var(--sep);pointer-events:none;font-size:.824rem;line-height:1.35;transition:transform .12s ease-out;opacity:1}
 .mb .tip b{display:block;font-size:.882rem;font-weight:600;margin-bottom:4px}
 .mb .tip .row{display:flex;align-items:center;gap:7px;font-variant-numeric:tabular-nums}
 .mb .tip .row i{flex:none;width:9px;height:9px;border-radius:3px;background:var(--mbar)}
@@ -976,7 +976,7 @@ button.chip{position:relative}button.chip::after{content:"";position:absolute;in
 .mb .presets button{position:relative;appearance:none;border:0;background:var(--fill);color:var(--label);font:600 .765rem/1 var(--font);border-radius:999px;padding:0 12px;height:34px;cursor:pointer}
 .mb .presets button::after{content:"";position:absolute;inset:-5px 0}
 .mb .presets button:focus-visible{outline:2px solid var(--blue);outline-offset:1px}
-.mb .presets button[aria-pressed="true"]{background:var(--seg-on);box-shadow:0 0 0 .5px var(--sep),0 3px 8px rgba(0,0,0,.12),0 3px 1px rgba(0,0,0,.04)}
+.mb .presets button[aria-pressed="true"]{background:var(--seg-on);box-shadow:0 0 0 .5px var(--sep)}
 .mb .calc-out{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;padding-top:12px;border-top:.5px solid var(--sep)}
 .mb .calc-out div{display:grid;gap:1px;align-content:start}
 .mb .calc-out b{font:700 clamp(1.15rem,6vw,1.4rem)/1.15 var(--round);font-variant-numeric:tabular-nums}
@@ -1110,34 +1110,37 @@ button.chip{position:relative}button.chip::after{content:"";position:absolute;in
 .ot-pop.grow .otd-years i{transform:scaleY(1)}
 
 /* ============================================================ 2026 redesign: the site as an app, in Liquid Glass
-   Three pages in tabs (Today, Trends, People), a bar of frosted glass that stays at the top, a floating tab bar on phones,
-   the map as a window with the day's figure on a glass panel, and cards in the style of the Health app. Everything above
+   Three pages in tabs (Today, Trends, People), a solid bar that stays at the top, a floating tab bar on phones,
+   the map as a window with the day's figure on a solid panel, and cards in the style of the Health app. Everything above
    still applies; this only changes the shell, the materials and the layout. */
 :root{
   --gut:max(16px,env(safe-area-inset-left,0px));
   --r-card:26px;
   --display:"Inter Tight",var(--font);   /* big figures in Inter Tight, like headings */
-  --amb1:rgba(0,122,255,.11); --amb2:rgba(255,149,0,.07); --amb3:rgba(88,86,214,.07);
-  --glass:rgba(255,255,255,.64); --glass-hi:rgba(255,255,255,.85); --glass-line:rgba(60,60,67,.12); --glass-shadow:0 8px 30px rgba(0,0,0,.10),0 1px 3px rgba(0,0,0,.06);
-  --card-line:rgba(60,60,67,.08); --card-shadow:0 0 0 .5px var(--card-line),0 1px 2px rgba(0,0,0,.03),0 12px 32px -12px rgba(0,30,80,.14);
+  --amb1:transparent; --amb2:transparent; --amb3:transparent;
+  --glass:#FFFFFF; --glass-hi:transparent; --glass-line:var(--sep); --glass-shadow:0 0 0 .5px var(--sep);
+  --card-line:rgba(60,60,67,.08); --card-shadow:none;
+  --panel:#FFFFFF; --panel-ink:#000; --panel-fill:rgba(118,118,128,.12); --panel-fill2:rgba(118,118,128,.2); --panel-cal:#F2F2F7;   /* the solid figure panel on the map */
   --pill:rgba(118,118,128,.14); --ease-spring:cubic-bezier(.3,1.25,.4,1); --ease-out:cubic-bezier(.2,.8,.2,1);
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --amb1:rgba(10,132,255,.24); --amb2:rgba(255,159,10,.07); --amb3:rgba(94,92,230,.16);
-  --glass:rgba(32,32,36,.58); --glass-hi:rgba(255,255,255,.16); --glass-line:rgba(255,255,255,.09); --glass-shadow:0 10px 34px rgba(0,0,0,.5),0 1px 3px rgba(0,0,0,.3);
-  --card-line:rgba(255,255,255,.07); --card-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 0 0 .5px var(--card-line),0 14px 34px -14px rgba(0,0,0,.7);
+  --amb1:transparent; --amb2:transparent; --amb3:transparent;
+  --glass:#1C1C1E; --glass-hi:transparent; --glass-line:var(--sep); --glass-shadow:0 0 0 .5px var(--sep);
+  --card-line:rgba(255,255,255,.07); --card-shadow:none;
   --pill:rgba(118,118,128,.28);
+  --panel:#1C1C1E; --panel-ink:#fff; --panel-fill:#2C2C2E; --panel-fill2:#3A3A3C; --panel-cal:#2C2C2E;
 }}
 :root[data-theme="dark"]{
-  --amb1:rgba(10,132,255,.24); --amb2:rgba(255,159,10,.07); --amb3:rgba(94,92,230,.16);
-  --glass:rgba(32,32,36,.58); --glass-hi:rgba(255,255,255,.16); --glass-line:rgba(255,255,255,.09); --glass-shadow:0 10px 34px rgba(0,0,0,.5),0 1px 3px rgba(0,0,0,.3);
-  --card-line:rgba(255,255,255,.07); --card-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 0 0 .5px var(--card-line),0 14px 34px -14px rgba(0,0,0,.7);
+  --amb1:transparent; --amb2:transparent; --amb3:transparent;
+  --glass:#1C1C1E; --glass-hi:transparent; --glass-line:var(--sep); --glass-shadow:0 0 0 .5px var(--sep);
+  --card-line:rgba(255,255,255,.07); --card-shadow:none;
   --pill:rgba(118,118,128,.28);
+  --panel:#1C1C1E; --panel-ink:#fff; --panel-fill:#2C2C2E; --panel-fill2:#3A3A3C; --panel-cal:#2C2C2E;
 }
 html{scroll-padding-top:84px}
 /* a soft wash of the logo's blue and orange behind everything, fixed, so the page feels lit from above */
 body::before{content:"";position:fixed;z-index:-1;left:-10vw;right:-10vw;top:-20vh;height:95vh;pointer-events:none;
-  background:radial-gradient(55% 55% at 18% 18%,var(--amb1),transparent 70%),radial-gradient(40% 45% at 92% 6%,var(--amb2),transparent 72%),radial-gradient(60% 50% at 62% 48%,var(--amb3),transparent 75%)}
+  display:none}
 
 /* ------------------------------------------------------------ the bar at the top: logo, the tabs, the round buttons */
 body .top-row{position:sticky;top:0;z-index:49;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:16px;
@@ -1145,12 +1148,12 @@ body .top-row{position:sticky;top:0;z-index:49;display:grid;grid-template-column
 body .top-row > *{position:relative;z-index:1}
 @media (min-width:1212px){body .top-row{padding-left:calc((100% - 1148px) / 2);padding-right:calc((100% - 1148px) / 2)}}
 .top-act{justify-self:end}
-.tb-pop{position:fixed;border-radius:24px;background:color-mix(in srgb,var(--card) 86%,transparent);-webkit-backdrop-filter:blur(30px) saturate(190%);backdrop-filter:blur(30px) saturate(190%);
-  box-shadow:inset 0 0 0 .5px var(--glass-hi),0 0 0 .5px var(--glass-line),0 24px 60px rgba(0,0,0,.22);padding:18px 18px 12px}
+.tb-pop{position:fixed;border-radius:24px;background:var(--card);
+  box-shadow:0 0 0 .5px var(--sep);padding:18px 18px 12px}
 
-/* the tabs: a capsule of glass, the chosen tab under a pill that glides (and squashes a little) as it moves */
+/* the tabs: a solid capsule with a hairline edge, the chosen tab under a flat pill that glides as it moves */
 .tabbar{display:flex;align-items:center;gap:10px;pointer-events:auto}
-.tabs{position:relative;display:flex;padding:4px;border-radius:999px;background:var(--glass);-webkit-backdrop-filter:blur(24px) saturate(190%);backdrop-filter:blur(24px) saturate(190%)}
+.tabs{position:relative;display:flex;padding:4px;border-radius:999px;background:var(--glass);}
 .tabs button{position:relative;z-index:1;appearance:none;border:0;background:none;display:flex;align-items:center;gap:7px;height:36px;padding:0 16px;border-radius:999px;
   font:600 .882rem/1 var(--font);letter-spacing:-.01em;color:var(--label);cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
 .tabs button svg{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
@@ -1170,20 +1173,10 @@ body .top-row > *{position:relative;z-index:1}
   footer{padding-bottom:calc(112px + env(safe-area-inset-bottom,0px))}
   .toast,.new-fig{bottom:calc(96px + env(safe-area-inset-bottom,0px))!important}
 }
-/* Liquid Glass, refined: an even specular rim all the way round (bright along the top edge, fading evenly down both
-   sides, so neither end looks heavier), a soft shadow straight below rather than offset, and the chosen tab under a
-   pill of lighter glass with its own rim, inset the same distance on every side so the two shapes stay concentric */
-.tabs{isolation:isolate;box-shadow:0 10px 30px rgba(0,0,0,.18),0 2px 6px rgba(0,0,0,.08)}
-.tabs::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;pointer-events:none;z-index:2;
-  background:linear-gradient(to bottom,rgba(255,255,255,.75),rgba(255,255,255,.18) 45%,rgba(255,255,255,.1) 70%,rgba(255,255,255,.32));
-  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0)}
-.tab-ind{background:color-mix(in srgb,var(--pill) 100%,rgba(255,255,255,.1));box-shadow:inset 0 .5px 0 rgba(255,255,255,.45),inset 0 0 0 .5px rgba(255,255,255,.12)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .tabs{box-shadow:0 12px 34px rgba(0,0,0,.55),0 2px 6px rgba(0,0,0,.3)}
-  :root:not([data-theme="light"]) .tabs::before{background:linear-gradient(to bottom,rgba(255,255,255,.34),rgba(255,255,255,.08) 45%,rgba(255,255,255,.05) 70%,rgba(255,255,255,.14))}
-  :root:not([data-theme="light"]) .tab-ind{background:rgba(255,255,255,.12);box-shadow:inset 0 .5px 0 rgba(255,255,255,.22)}}
-:root[data-theme="dark"] .tabs{box-shadow:0 12px 34px rgba(0,0,0,.55),0 2px 6px rgba(0,0,0,.3)}
-:root[data-theme="dark"] .tabs::before{background:linear-gradient(to bottom,rgba(255,255,255,.34),rgba(255,255,255,.08) 45%,rgba(255,255,255,.05) 70%,rgba(255,255,255,.14))}
-:root[data-theme="dark"] .tab-ind{background:rgba(255,255,255,.12);box-shadow:inset 0 .5px 0 rgba(255,255,255,.22)}
+/* flat: no rim, no drop shadow, just a hairline edge round the capsule */
+.tabs{isolation:isolate;box-shadow:0 0 0 .5px var(--sep)}
+.tabs::before{content:none}
+.tab-ind{background:var(--fill);box-shadow:none}
 @media (max-width:719px){.tabs{padding:5px}.tab-ind{top:5px;bottom:5px}}
 /* the icons share one optical size and sit on one line with their labels */
 .tabs button svg{display:block}
@@ -1210,11 +1203,11 @@ main{display:block;padding:6px max(16px,env(safe-area-inset-right,0px)) 40px var
 .section-h{margin:0 6px 14px;align-items:flex-end}
 .foot{margin:12px 6px 0}
 
-/* ------------------------------------------------------------ cards: plain and calm by day, a dark glass tint by night (no blur, so scrolling stays smooth) */
+/* ------------------------------------------------------------ cards: plain and calm by day, solid #1C1C1E by night (no blur, so scrolling stays smooth) */
 .card{border-radius:var(--r-card);padding:20px;background:var(--card);box-shadow:var(--card-shadow)}
-:root[data-theme="dark"] .card{background:rgba(28,28,31,.82);-webkit-backdrop-filter:none;backdrop-filter:none;box-shadow:var(--card-shadow)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .card{background:rgba(28,28,31,.82);-webkit-backdrop-filter:none;backdrop-filter:none;box-shadow:var(--card-shadow)}}
-.card.lift{box-shadow:var(--card-shadow),0 24px 48px -16px rgba(0,30,80,.22)}
+:root[data-theme="dark"] .card{background:var(--card);box-shadow:none}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .card{background:var(--card);box-shadow:none}}
+.card.lift{box-shadow:none}
 .mb .card.flush{padding:0}
 .mb .card.race-card,.mb .card.pat-card{padding:16px}
 .flip > div{padding:20px}
@@ -1240,19 +1233,19 @@ section[aria-labelledby="hWho"] .card{--tint:var(--indigo);--ic-d:block;--ic:url
 .val{font-size:2.4rem;letter-spacing:-.02em}
 @media (max-width:600px){.val{font-size:2.1rem}}
 
-/* ------------------------------------------------------------ Today: the map as a window, the day's figure on a panel of glass */
+/* ------------------------------------------------------------ Today: the map as a window, the day's figure on a solid panel */
 main .hero{margin:0;height:min(76vh,760px);height:min(76svh,760px);min-height:500px;
-  box-shadow:0 0 0 .5px var(--card-line),0 30px 70px -30px rgba(0,30,80,.45),0 4px 14px rgba(0,0,0,.08)}
+  box-shadow:none}
 .hero-in{width:auto;pointer-events:auto;animation:panelIn .9s var(--ease-spring) .15s both}
 @keyframes panelIn{from{opacity:0;transform:translateY(24px) scale(.96)}}
 .hero-quiet{margin:0}
-/* the date as a calendar tile: the month on a red band, the day in white on glass */
+/* the date as a calendar tile: the month on a red band, the day on a solid tile */
 .hero-quiet .cal{border-radius:22px;grid-template-rows:30px 1fr}
 .hero-quiet .cal span{background:#FF3B30;color:#fff;font-weight:700;letter-spacing:.08em;line-height:30px;font-size:.765rem;text-transform:uppercase}
-.hero-quiet .cal b{color:#fff;font-weight:500;font-size:2.9rem;letter-spacing:-.03em}
+.hero-quiet .cal b{color:var(--panel-ink);font-weight:500;font-size:2.9rem;letter-spacing:-.03em}
 .hero-chips{margin-top:16px}
-button.chip[aria-expanded="true"]{background:rgba(255,255,255,.3)}
-.map-news{padding:9px 9px 9px 12px;background:rgba(16,20,28,.42);-webkit-backdrop-filter:blur(28px) saturate(190%);backdrop-filter:blur(28px) saturate(190%)}
+button.chip[aria-expanded="true"]{background:var(--panel-fill2)}
+.map-news{padding:9px 9px 9px 12px;background:#1C1C1E;box-shadow:0 0 0 .5px rgba(255,255,255,.12)}
 @media (max-width:719px){
   .hero-quiet .cal{width:64px;height:68px;border-radius:17px;grid-template-rows:23px 1fr}
   .hero-quiet .cal span{font-size:.647rem;line-height:23px}
@@ -1265,7 +1258,7 @@ button.chip[aria-expanded="true"]{background:rgba(255,255,255,.3)}
 
 /* ------------------------------------------------------------ the share sheet (the old side card): a card in the middle on computers, a sheet from the bottom on phones */
 body .side-share{display:flex;flex-direction:column;position:fixed;z-index:80;left:50%;top:50%;bottom:auto;width:min(360px,calc(100vw - 32px));
-  transform:translate(-50%,-50%);border-radius:30px;overflow:hidden;background:#000;color:#fff;box-shadow:0 0 0 .5px rgba(255,255,255,.1),0 40px 100px rgba(0,0,0,.5);animation:ssIn .5s var(--ease-spring) both}
+  transform:translate(-50%,-50%);border-radius:30px;overflow:hidden;background:#000;color:#fff;box-shadow:0 0 0 .5px rgba(255,255,255,.14);animation:ssIn .5s var(--ease-spring) both}
 @keyframes ssIn{from{opacity:0;transform:translate(-50%,-46%) scale(.94)}}
 .side-share.out{animation:ssOut .2s ease-in both}
 @keyframes ssOut{to{opacity:0;transform:translate(-50%,-48%) scale(.96)}}
@@ -1277,41 +1270,40 @@ body .side-share{display:flex;flex-direction:column;position:fixed;z-index:80;le
 .ss-x::after{content:"";position:absolute;inset:-6px}   /* a 44pt tap target */
 .ss-x:focus-visible{outline:2px solid #0A84FF;outline-offset:2px}
 body .side-share{height:auto;max-height:calc(100dvh - 48px);overflow-y:auto;overscroll-behavior:contain}   /* short windows and phones on their side: it scrolls, so Copy link is never cut off */
-/* the pop-ups over the map: nearly solid, so the glass panel underneath doesn't show through the words */
-.info-pop,.info-pop.wx-pop{background-color:color-mix(in srgb,var(--card) 94%,transparent)}
+/* the pop-ups over the map: solid, so nothing shows through the words */
+.info-pop,.info-pop.wx-pop{background-color:var(--card)}
 
 /* ------------------------------------------------------------ reveal: a touch more lift, and a spring at the end */
 .rv{transform:translateY(28px) scale(.97);transition:opacity .8s var(--ease-out),transform .9s cubic-bezier(.2,.9,.25,1.04)}
 @media (prefers-reduced-motion:reduce){.rv{transform:none}}
 footer{max-width:1148px}
 
-/* ============================================================ Apple's Human Interface Guidelines, applied (October 2026)
-   Two layers, as Apple asks: Liquid Glass only for the controls that float above (the tab bar and the toolbar buttons),
-   and the content (the map, the figures, the cards) in plain materials beneath. The name and colour of the site live in
-   the content; the bars stay quiet and native. */
+/* ============================================================ Apple's Human Interface Guidelines, applied flat (November 2026)
+   Solid surfaces throughout: no frosted glass, no blur, no drop shadows or gradients. Layers are told apart by
+   colour (grouped grey behind white cards by day, black behind #1C1C1E by night) and by hairline dividers. */
 
-/* the toolbar: no bar behind it any more, just the controls floating on glass, and a soft scroll edge where content passes beneath */
+/* the toolbar: solid controls, and once the page scrolls, a solid bar with a hairline divider beneath them */
 .edge{position:fixed;left:0;right:0;z-index:48;pointer-events:none;opacity:0;transition:opacity .3s ease;
-  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+  }
 .edge-t{top:0}
 .edge-b{bottom:0;height:calc(env(safe-area-inset-bottom,0px) + 104px);display:none;background:linear-gradient(to top,color-mix(in srgb,var(--bg) 70%,transparent),color-mix(in srgb,var(--bg) 0%,transparent));
   -webkit-mask-image:linear-gradient(to top,#000 40%,transparent);mask-image:linear-gradient(to top,#000 40%,transparent)}
 .scrolled .edge-t{opacity:1}
-@media (max-width:719px){.edge-b{display:block;opacity:1;-webkit-backdrop-filter:none;backdrop-filter:none}}   /* a fade alone at the bottom: one less blur to redraw on every frame of a scroll */
-/* the toolbar's buttons share one capsule of glass, as related bar items do in iOS and macOS; symbols, no borders */
-.top-act{gap:2px;padding:3px;border-radius:999px;background:var(--glass);-webkit-backdrop-filter:blur(24px) saturate(190%);backdrop-filter:blur(24px) saturate(190%);
-  box-shadow:inset 0 0 0 .5px var(--glass-hi),var(--glass-shadow)}
+@media (max-width:719px){.edge-b{display:block;opacity:1;}}   /* a fade alone at the bottom: one less blur to redraw on every frame of a scroll */
+/* the toolbar's buttons share one solid capsule, as related bar items do in iOS and macOS */
+.top-act{gap:2px;padding:3px;border-radius:999px;background:var(--card);
+  box-shadow:0 0 0 .5px var(--sep)}
 @media (hover:hover){.tb-btn:not([aria-expanded="true"]):hover{background:var(--pill)}}
 .tb-btn svg{width:21px;height:21px}
 .tb-share svg{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;margin-top:-2px}
 /* the logo alone at the leading edge, like an account picture; the page's name appears beside it once its large title scrolls away */
 .top-brand{gap:10px}
-.top-brand .lt-logo{width:36px;height:36px;box-shadow:0 2px 8px rgba(0,60,160,.25)}
+.top-brand .lt-logo{width:36px;height:36px}
 .inline-title{font:600 1.06rem/1.2 var(--font);color:var(--label);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;opacity:0;transform:translateY(6px);transition:opacity .25s ease,transform .3s var(--ease-out)}
 .title-in .inline-title{opacity:1;transform:none}
-/* Liquid Glass answers a touch by swelling slightly and lighting up, rather than shrinking */
-.tabs button:active,.tb-btn:active{transform:scale(1.08);filter:brightness(1.12)}
-.tabs button,.tb-btn{transition:transform .35s var(--ease-spring),filter .2s ease,color .3s ease,background-color .2s ease}
+/* a touch dims the control briefly, as flat iOS controls do */
+.tabs button:active,.tb-btn:active{opacity:.6}
+.tabs button,.tb-btn{transition:opacity .15s ease,color .2s ease,background-color .2s ease}
 
 /* tabs: outline symbols at rest, filled for the chosen tab */
 .tabs .i-f{display:none}
@@ -1332,13 +1324,13 @@ footer{max-width:1148px}
 /* notes beside the section headings: Subheadline (15pt) */
 .section-h p{font-size:.882rem}
 
-/* the map: content, so the figure panel is a standard material (frosted, no glass highlights), with radii concentric with the map's */
+/* the map: content, so the figure panel is a solid card, with radii concentric with the map's */
 main .hero{border-radius:32px}
 .hero-in{inset:auto auto 12px 12px;max-width:min(640px,calc(100% - 24px));border-radius:20px;padding:16px 18px;
-  background:rgba(12,14,20,.42);-webkit-backdrop-filter:blur(30px) saturate(160%);backdrop-filter:blur(30px) saturate(160%);box-shadow:0 12px 40px rgba(0,0,0,.25)}
-.chip{background:rgba(255,255,255,.16);box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none}
-@media (hover:hover){button.chip:hover,a.chip:hover{background:rgba(255,255,255,.26)}}
-.map-news{top:12px;left:12px;right:12px;border-radius:20px;box-shadow:0 8px 26px rgba(0,0,0,.25)}
+  background:var(--panel);color:var(--panel-ink);box-shadow:0 0 0 .5px var(--sep)}
+.chip{background:var(--panel-fill);color:var(--panel-ink);box-shadow:none}
+@media (hover:hover){button.chip:hover,a.chip:hover{background:var(--panel-fill2)}}
+.map-news{top:12px;left:12px;right:12px;border-radius:20px;box-shadow:none}
 .ves-list{left:12px;top:12px;border-radius:20px}
 .hero.has-news .ves-list{top:calc(12px + var(--mn-h))}
 @media (max-width:719px){
@@ -1367,29 +1359,28 @@ main .hero{border-radius:32px}
 }
 
 /* pop-ups and cards that open over the page: Dark Mode's elevated colours, so they come forward */
-:root[data-theme="dark"] .tb-pop,:root[data-theme="dark"] .info-pop,:root[data-theme="dark"] .info-pop.wx-pop{background-color:rgba(44,44,46,.7)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .tb-pop,:root:not([data-theme="light"]) .info-pop,:root:not([data-theme="light"]) .info-pop.wx-pop{background-color:rgba(44,44,46,.7)}}
+:root[data-theme="dark"] .tb-pop,:root[data-theme="dark"] .info-pop,:root[data-theme="dark"] .info-pop.wx-pop{background-color:#2C2C2E}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .tb-pop,:root:not([data-theme="light"]) .info-pop,:root:not([data-theme="light"]) .info-pop.wx-pop{background-color:#2C2C2E}}
 
 /* the share sheet: dimmed behind, Close on the leading side */
 .share-scrim{background:rgba(0,0,0,.4)}
 @media (max-width:719px){.ss-x{top:18px}}
 /* scroll edges strong enough that the bars stay legible over busy content, as iOS does with its hard-style edge on phones */
-.edge-t{background:linear-gradient(to bottom,color-mix(in srgb,var(--bg) 94%,transparent) 0,color-mix(in srgb,var(--bg) 80%,transparent) 55%,color-mix(in srgb,var(--bg) 0%,transparent));
-  -webkit-mask-image:linear-gradient(to bottom,#000 72%,transparent);mask-image:linear-gradient(to bottom,#000 72%,transparent);height:calc(env(safe-area-inset-top,0px) + 92px)}
+.edge-t{background:var(--bg);box-shadow:0 .5px 0 var(--sep);height:calc(env(safe-area-inset-top,0px) + 60px)}
 @media (max-width:719px){
-  .edge-b{height:calc(env(safe-area-inset-bottom,0px) + 116px);background:linear-gradient(to top,color-mix(in srgb,var(--bg) 92%,transparent) 0,color-mix(in srgb,var(--bg) 78%,transparent) 55%,color-mix(in srgb,var(--bg) 0%,transparent));-webkit-mask-image:linear-gradient(to top,#000 70%,transparent);mask-image:linear-gradient(to top,#000 70%,transparent)}
-  .tabs{background:color-mix(in srgb,var(--glass) 100%,var(--bg) 25%)}
+  .edge-b{display:none!important}
+  .tabs{background:var(--card)}
 }
 
 /* graphs: the scale sits on the trailing side, so the bars line up with the card's leading edge */
 .chart text{font-variant-numeric:tabular-nums}
 
-/* accessibility settings: Reduce Transparency makes the glass solid; Increase Contrast gives it a clear edge */
+/* accessibility settings: everything is already solid; Increase Contrast gives it a clear edge */
 @media (prefers-reduced-transparency:reduce){
-  .tabs,.top-act,.tb-pop,.hero-in,.map-news,.ves-list{background:var(--card)!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+  .tabs,.top-act,.tb-pop,.hero-in,.map-news,.ves-list{background:var(--card)!important;}
   .hero-in{color:var(--label)}
   .chip{background:rgba(0,0,0,.45)}
-  .edge{-webkit-backdrop-filter:none;backdrop-filter:none}
+  .edge{}
 }
 @media (prefers-contrast:more){
   .tabs,.top-act{box-shadow:inset 0 0 0 1.5px var(--label)}
@@ -1407,7 +1398,7 @@ main .hero{border-radius:32px}
     max-height:calc(100dvh - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px) - 48px)!important;
     overflow-y:auto!important;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;
     border-radius:28px!important;transform:none;transform-origin:center!important;z-index:90!important;
-    box-shadow:0 0 0 .5px var(--sep),0 24px 70px rgba(0,0,0,.35)!important;animation:mCardIn .32s cubic-bezier(.2,.9,.3,1.1) both!important}
+    box-shadow:0 0 0 .5px var(--sep)!important;animation:mCardIn .32s cubic-bezier(.2,.9,.3,1.1) both!important}
   body .side-share{padding-bottom:0}
   body .side-share .ss-art{height:150px}
   body .side-share.out,body .tb-pop.out{animation:mCardOut .2s ease-in both!important}
@@ -1420,13 +1411,13 @@ main .hero{border-radius:32px}
   /* the dimmed page behind: drawn on the page itself, so a tap on it is a tap outside, which closes the card */
   body:has(.tb-pop:not([hidden]),.info-pop:not([hidden]),.am-sheet:not([hidden]))::after{content:"";position:fixed;inset:0;z-index:89;background:rgba(0,0,0,.4);animation:fadeScrim .25s ease both}
   .share-scrim{z-index:89!important}
-  /* every card is frosted glass on phones: the page shows through, blurred */
-  body .tb-pop,body .info-pop,body .am-sheet{background-color:color-mix(in srgb,var(--card) 74%,transparent)!important;-webkit-backdrop-filter:blur(40px) saturate(180%)!important;backdrop-filter:blur(40px) saturate(180%)!important}
-  body .side-share{background:rgba(0,0,0,.62)!important;-webkit-backdrop-filter:blur(40px) saturate(180%)!important;backdrop-filter:blur(40px) saturate(180%)!important}
-  :root[data-theme="dark"] body :is(.tb-pop,.info-pop,.am-sheet){background-color:rgba(44,44,46,.66)!important}
+  /* every card is a solid surface on phones */
+  body .tb-pop,body .info-pop,body .am-sheet{background-color:var(--card)!important}
+  body .side-share{background:#000!important}
+  :root[data-theme="dark"] body :is(.tb-pop,.info-pop,.am-sheet){background-color:#2C2C2E!important}
 }
-@media (max-width:719px) and (prefers-color-scheme:dark){:root:not([data-theme="light"]) body :is(.tb-pop,.info-pop,.am-sheet){background-color:rgba(44,44,46,.66)!important}}
-@media (max-width:719px) and (prefers-reduced-transparency:reduce){body :is(.tb-pop,.info-pop,.am-sheet){background-color:var(--card)!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}body .side-share{background:#000!important}}
+@media (max-width:719px) and (prefers-color-scheme:dark){:root:not([data-theme="light"]) body :is(.tb-pop,.info-pop,.am-sheet){background-color:#2C2C2E!important}}
+@media (max-width:719px) and (prefers-reduced-transparency:reduce){body :is(.tb-pop,.info-pop,.am-sheet){background-color:var(--card)!important;}body .side-share{background:#000!important}}
 @keyframes mCardIn{from{opacity:0;transform:scale(.92)}}
 @keyframes mCardOut{to{opacity:0;transform:scale(.95)}}
 </style>
@@ -1446,11 +1437,11 @@ main .hero{border-radius:32px}
   <p>Each post carries the latest daily figures and a link back here. Nothing loads from these sites until you tap.</p>
   <div class="ss-art"><svg viewBox="0 64 280 236" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
       <defs>
-        <linearGradient id="ssSky" gradientUnits="userSpaceOnUse" x1="0" y1="40" x2="0" y2="210"><stop offset="0" stop-color="#000"/><stop offset=".55" stop-color="#0B1630"/><stop offset="1" stop-color="#1C3566"/></linearGradient>
-        <linearGradient id="ssSea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1F4C8F"/><stop offset="1" stop-color="#0B2350"/></linearGradient>
-        <linearGradient id="ssCliff" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F4F1E8"/><stop offset="1" stop-color="#B9B4A6"/></linearGradient>
+        <linearGradient id="ssSky" gradientUnits="userSpaceOnUse" x1="0" y1="40" x2="0" y2="210"><stop offset="0" stop-color="#0B1630"/><stop offset="1" stop-color="#0B1630"/></linearGradient>
+        <linearGradient id="ssSea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#17407F"/><stop offset="1" stop-color="#17407F"/></linearGradient>
+        <linearGradient id="ssCliff" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E8E4D9"/><stop offset="1" stop-color="#E8E4D9"/></linearGradient>
         <linearGradient id="ssLight" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#FFE8A3" stop-opacity=".55"/><stop offset="1" stop-color="#FFE8A3" stop-opacity="0"/></linearGradient>
-        <radialGradient id="ssMoon" cx=".4" cy=".4" r=".6"><stop offset="0" stop-color="#FFFBEA"/><stop offset="1" stop-color="#E9DFC0"/></radialGradient>
+        <radialGradient id="ssMoon" cx=".4" cy=".4" r=".6"><stop offset="0" stop-color="#F4EDD6"/><stop offset="1" stop-color="#F4EDD6"/></radialGradient>
       </defs>
       <rect x="-400" y="-200" width="1080" height="420" fill="url(#ssSky)"/>
       <g fill="#fff"><circle class="ss-star" cx="30" cy="30" r="1.2"/><circle class="ss-star" cx="92" cy="58" r="1.6"/><circle class="ss-star" cx="150" cy="22" r="1"/><circle class="ss-star" cx="178" cy="74" r="1.3"/><circle class="ss-star" cx="236" cy="40" r="1.5"/><circle class="ss-star" cx="122" cy="96" r=".9"/><circle class="ss-star" cx="58" cy="104" r="1"/><circle class="ss-star" cx="262" cy="98" r="1"/><circle class="ss-star" cx="-40" cy="84" r="1.2"/><circle class="ss-star" cx="-96" cy="120" r="1"/><circle class="ss-star" cx="310" cy="70" r="1.3"/><circle class="ss-star" cx="352" cy="128" r="1"/><circle class="ss-star" cx="-150" cy="76" r="1.4"/><circle class="ss-star" cx="400" cy="92" r="1.1"/></g>
@@ -1483,7 +1474,7 @@ main .hero{border-radius:32px}
 <div class="top-row"><div class="top-brand"><a class="lt-logo" href="./" aria-label="Channel Crossings, back to the top"><svg viewBox="0 0 400 400" aria-hidden="true"><circle cx="200" cy="200" r="200" fill="#007AFF"></circle><path d="M302.9 149.1 A72 72 0 1 0 302.9 250.9" fill="none" stroke="#FF9F0A" stroke-width="30" stroke-linecap="round"></path><path d="M218.9 149.1 A72 72 0 1 0 209.3 259.0" fill="none" stroke="#FFFFFF" stroke-width="30" stroke-linecap="round"></path><path d="M239.5 270.9 A72 72 0 0 1 184.3 224.6" fill="none" stroke="#007AFF" stroke-width="44" stroke-linecap="butt"></path><path d="M243.2 271.5 A72 72 0 0 1 183.1 221.1" fill="none" stroke="#FF9F0A" stroke-width="30" stroke-linecap="butt"></path></svg></a><span class="inline-title" id="inlineTitle" aria-hidden="true">Channel Crossings</span></div><nav class="tabbar" aria-label="Pages"><div class="tabs" role="tablist" id="tabs"><span class="tab-ind" id="tabInd" aria-hidden="true"></span><button type="button" role="tab" id="tab-today" data-tab="today" aria-selected="true" aria-controls="pg-today"><svg class="i-o" viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 8.5c1.6-1.4 3.2-1.4 4.8 0s3.2 1.4 4.7 0 3.2-1.4 4.7 0 3.2 1.4 4.8 0M2.5 13c1.6-1.4 3.2-1.4 4.8 0s3.2 1.4 4.7 0 3.2-1.4 4.7 0 3.2 1.4 4.8 0M2.5 17.5c1.6-1.4 3.2-1.4 4.8 0s3.2 1.4 4.7 0 3.2-1.4 4.7 0 3.2 1.4 4.8 0"/></svg><svg class="i-f" viewBox="0 0 24 24" aria-hidden="true"><path class="thick" d="M2.5 8.5c1.6-1.4 3.2-1.4 4.8 0s3.2 1.4 4.7 0 3.2-1.4 4.7 0 3.2 1.4 4.8 0M2.5 13c1.6-1.4 3.2-1.4 4.8 0s3.2 1.4 4.7 0 3.2-1.4 4.7 0 3.2 1.4 4.8 0M2.5 17.5c1.6-1.4 3.2-1.4 4.8 0s3.2 1.4 4.7 0 3.2-1.4 4.7 0 3.2 1.4 4.8 0"/></svg><span>Today</span></button><button type="button" role="tab" id="tab-trends" data-tab="trends" aria-selected="false" aria-controls="pg-trends" tabindex="-1"><svg class="i-o" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="12" width="4" height="8.5" rx="1.3"/><rect x="10" y="7.5" width="4" height="13" rx="1.3"/><rect x="16.5" y="3.5" width="4" height="17" rx="1.3"/></svg><svg class="i-f" viewBox="0 0 24 24" aria-hidden="true"><rect class="solid" x="3" y="11.5" width="5" height="9.5" rx="1.6"/><rect class="solid" x="9.5" y="7" width="5" height="14" rx="1.6"/><rect class="solid" x="16" y="3" width="5" height="18" rx="1.6"/></svg><span>Trends</span></button><button type="button" role="tab" id="tab-people" data-tab="people" aria-selected="false" aria-controls="pg-people" tabindex="-1"><svg class="i-o" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.4"/><path d="M2.8 19.5c.6-3.4 3.1-5.4 6.2-5.4s5.6 2 6.2 5.4z"/><path d="M15.6 4.9a3.3 3.3 0 0 1 0 6.3M17.6 14.4c2 .7 3.3 2.4 3.6 5.1"/></svg><svg class="i-f" viewBox="0 0 24 24" aria-hidden="true"><circle class="solid" cx="9" cy="8" r="3.8"/><path class="solid" d="M2.4 20c.5-3.9 3.2-6.3 6.6-6.3s6.1 2.4 6.6 6.3a.8.8 0 0 1-.8.9H3.2a.8.8 0 0 1-.8-.9z"/><circle class="solid" cx="16.3" cy="8.3" r="3"/><path class="solid" d="M16.9 13.3c2.6.3 4.4 2.3 4.8 5.6a.8.8 0 0 1-.8.9h-3.7c-.2-2.6-1.4-4.8-3.3-6.1.9-.3 1.9-.5 3-.4z"/></svg><span>People</span></button></div></nav><div class="top-act"><button type="button" class="tb-btn" id="thBtn" aria-haspopup="menu" aria-controls="thPop" aria-expanded="false" aria-label="Appearance" title="Appearance"><span id="thIc" style="display:contents"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.6" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M12 3.4a8.6 8.6 0 0 1 0 17.2z" fill="currentColor"/></svg></span></button><button type="button" class="tb-btn" id="scBtn" aria-haspopup="dialog" aria-controls="scPop" aria-expanded="false" aria-label="Report Channel Crossing" title="Report Channel Crossing"><svg class="ic-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></button><button type="button" class="tb-btn" id="otBtn" aria-haspopup="dialog" aria-controls="otPop" aria-expanded="false" aria-label="On This Day" title="On This Day" hidden><svg class="ic-cal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="3.2"/><path d="M3.5 10h17M8 3v4M16 3v4"/><circle cx="12" cy="15.2" r="1.1" fill="currentColor" stroke="none"/></svg></button><button type="button" class="tb-btn tb-share" id="shareBtn" aria-label="Share Channel Crossings" title="Share" aria-haspopup="dialog" aria-controls="shareSheet" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 14.5V3M8 6.6L12 2.7l4 3.9"/><path d="M8.5 9.5H6.8a1.8 1.8 0 0 0-1.8 1.8v8.4a1.8 1.8 0 0 0 1.8 1.8h10.4a1.8 1.8 0 0 0 1.8-1.8v-8.4a1.8 1.8 0 0 0-1.8-1.8h-1.7"/></svg></button></div></div>
 
 <div class="info-pop fu-pop" id="popFU" role="dialog" aria-label="Figure updates" data-nosnippet hidden>
-  <svg class="fu-clock" viewBox="4 4 112 112" aria-hidden="true"><defs><radialGradient id="fuFace" cx="40%" cy="35%" r="75%"><stop offset="0" stop-color="var(--card)"/><stop offset="1" stop-color="var(--fill)"/></radialGradient></defs>
+  <svg class="fu-clock" viewBox="4 4 112 112" aria-hidden="true"><defs><radialGradient id="fuFace" cx="40%" cy="35%" r="75%"><stop offset="0" stop-color="var(--card)"/><stop offset="1" stop-color="var(--card)"/></radialGradient></defs>
     <circle cx="60" cy="60" r="54" fill="url(#fuFace)" stroke="currentColor" stroke-width="5"/>
     <g stroke="currentColor" stroke-linecap="round"><path d="M60 13v10M60 97v10M13 60h10M97 60h10" stroke-width="5"/><path d="M83.5 19.3l-3 5.2M100.7 36.5l-5.2 3M100.7 83.5l-5.2-3M83.5 100.7l-3-5.2M36.5 100.7l3-5.2M19.3 83.5l5.2-3M19.3 36.5l5.2 3M36.5 19.3l3 5.2" stroke-width="3"/></g>
     <path class="fu-hour" d="M60 60V34" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
@@ -1634,7 +1625,7 @@ main .hero{border-radius:32px}
               <div class="flip-h"><h3 id="ringYear">This year so far</h3><button type="button" class="flip-go" id="flipCal" aria-controls="calFace">Calendar<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg></button></div>
               <div class="ring-wrap">
                 <svg class="ring" viewBox="0 0 170 170" role="img" id="ringSvg" aria-label="This year against last year">
-                  <defs><linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="var(--viz1b)"/><stop offset="1" stop-color="var(--viz1)"/></linearGradient></defs>
+                  <defs><linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="var(--viz1)"/><stop offset="1" stop-color="var(--viz1)"/></linearGradient></defs>
                   <circle class="track" cx="85" cy="85" r="72" stroke-width="18"/>
                   <circle class="arc" id="ringArc" cx="85" cy="85" r="72" stroke-width="18" transform="rotate(-90 85 85)"/>
                   <text x="85" y="84" text-anchor="middle" class="ring-num" fill="var(--label)" id="ringPct">–</text>
@@ -3075,8 +3066,8 @@ main .hero{border-radius:32px}
     geo = {x: xc, y, data, vals, avg7, m, iw, ih, W, smooth, bars};
     const a0 = data[0].date, z0 = data[data.length-1].date;
     box.innerHTML = '<svg viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="Daily arrivals, ' + dShort.format(parse(a0)) + " " + a0.slice(0,4) + " to " + dShort.format(parse(z0)) + " " + z0.slice(0,4) + ", " + fmt(sum(data, "migrants")) + ' people"><defs><linearGradient id="areaG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--viz1)" stop-opacity=".24"/><stop offset="1" stop-color="var(--viz1)" stop-opacity="0"/></linearGradient>'
-      + '<linearGradient id="barG" gradientUnits="userSpaceOnUse" x1="0" y1="' + (m.t + ih) + '" x2="0" y2="' + m.t + '"><stop offset="0" stop-color="var(--viz1b)"/><stop offset="1" stop-color="var(--viz1)"/></linearGradient>'
-      + '<linearGradient id="lineG" gradientUnits="userSpaceOnUse" x1="0" y1="' + (m.t + ih) + '" x2="0" y2="' + m.t + '"><stop offset="0" stop-color="var(--viz1b)"/><stop offset="1" stop-color="var(--viz1)"/></linearGradient></defs>'
+      + '<linearGradient id="barG" gradientUnits="userSpaceOnUse" x1="0" y1="' + (m.t + ih) + '" x2="0" y2="' + m.t + '"><stop offset="0" stop-color="var(--viz1)"/><stop offset="1" stop-color="var(--viz1)"/></linearGradient>'
+      + '<linearGradient id="lineG" gradientUnits="userSpaceOnUse" x1="0" y1="' + (m.t + ih) + '" x2="0" y2="' + m.t + '"><stop offset="0" stop-color="var(--viz1)"/><stop offset="1" stop-color="var(--viz1)"/></linearGradient></defs>'
       + g + body + '<g id="chartSel" visibility="hidden"><line class="cursor"/><circle class="dot" r="5.5"/></g></svg>';
     setSel(sel);
     ddNotes[0] = (touchOnly ? "Drag across" : "Move across") + " to read any day" + (smooth > 1 ? " · line is a " + smooth + "-day average" : "");
@@ -3727,8 +3718,8 @@ main .hero{border-radius:32px}
     let s = '<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Running total of arrivals each year from 1 January, '+list[0].y+' to '+curYr+'. '
       + list.map(v=>v.y+(v.y===curYr?" so far":"")+": "+fmt(v.tot)).join(", ")+'.">'
       // this year in neon blue, last year orange to pink, each with a soft glow
-      + '<defs><linearGradient id="raceCur" gradientUnits="userSpaceOnUse" x1="'+m.l+'" x2="'+(W-m.r)+'" y1="0" y2="0"><stop offset="0" stop-color="var(--viz1b)"/><stop offset="1" stop-color="var(--viz1)"/></linearGradient>'
-      + '<linearGradient id="raceLast" gradientUnits="userSpaceOnUse" x1="'+m.l+'" x2="'+(W-m.r)+'" y1="0" y2="0"><stop offset="0" stop-color="var(--viz2b)"/><stop offset="1" stop-color="var(--viz2)"/></linearGradient>'
+      + '<defs><linearGradient id="raceCur" gradientUnits="userSpaceOnUse" x1="'+m.l+'" x2="'+(W-m.r)+'" y1="0" y2="0"><stop offset="0" stop-color="var(--viz1)"/><stop offset="1" stop-color="var(--viz1)"/></linearGradient>'
+      + '<linearGradient id="raceLast" gradientUnits="userSpaceOnUse" x1="'+m.l+'" x2="'+(W-m.r)+'" y1="0" y2="0"><stop offset="0" stop-color="var(--viz2)"/><stop offset="1" stop-color="var(--viz2)"/></linearGradient>'
       + '</defs>';
     for(let v=0; v<=top; v+=step){
       s += '<line x1="'+m.l+'" x2="'+(W-m.r)+'" y1="'+y(v)+'" y2="'+y(v)+'" stroke="var(--sep)" stroke-width=".5"'+(v?' stroke-dasharray="2 3"':'')+'/>';
@@ -3915,7 +3906,7 @@ main .hero{border-radius:32px}
       return "rgb(" + RAMP[k].map((c,n)=>Math.round(c+(RAMP[k+1][n]-c)*u)).join(",") + ")"; };
     let s = '<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Average people arriving a day, by '+(patMode==="dow"?"day of the week":"month")+', since '+STEADY.slice(0,4)+': '+labels.map((l,i)=>l+" "+Math.round(avg[i])).join(", ")+'."><defs>'
       + labels.map((l,i)=>{ const c = hue(mx > lo ? (avg[i]-lo)/(mx-lo) : 1);
-        return '<linearGradient id="patG'+i+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="'+c+'"/><stop offset="1" stop-color="'+c+'" stop-opacity=".7"/></linearGradient>'; }).join("") + '</defs>';
+        return '<linearGradient id="patG'+i+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="'+c+'"/><stop offset="1" stop-color="'+c+'"/></linearGradient>'; }).join("") + '</defs>';
     s += '<line x1="'+m.l+'" x2="'+(W-m.r)+'" y1="'+(m.t+ih)+'" y2="'+(m.t+ih)+'" stroke="var(--sep)" stroke-width=".5"/>';
     labels.forEach((l,i)=>{
       const h = Math.max(avg[i]/mx*ih, 2), x0 = m.l + i*slot + (slot-bw)/2;
