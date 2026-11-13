@@ -93,7 +93,9 @@ try{window.__data=fetch("data.json",{cache:"no-cache"}).then(function(r){if(!r.o
 html,body{height:100%;overflow:hidden}
 body{background:var(--bg);color:var(--ink);font-family:var(--mono);font-size:13px;line-height:1.45}
 /* The whole page is one screen: status bar, panels, news line. Nothing scrolls. */
-.app{height:100vh;height:100dvh;display:grid;grid-template-rows:auto auto minmax(0,1fr) auto;padding-bottom:env(safe-area-inset-bottom)}
+.app{height:100vh;height:100dvh;display:grid;grid-template-rows:auto auto auto minmax(0,1fr);padding-bottom:env(safe-area-inset-bottom)}
+/* fixed rows, so a row that is hidden on this screen size (the phone tabs) never shifts the others */
+.app>.status{grid-row:1}.app>.ptabs{grid-row:2}.app>.ticker{grid-row:3}.app>.deck{grid-row:4}
 
 .status{display:flex;align-items:center;gap:20px;padding:8px 16px;padding-top:max(8px,env(safe-area-inset-top));border-bottom:1px solid var(--line);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);white-space:nowrap;overflow:hidden}
 .status b{color:var(--ink);font-weight:700}
@@ -166,7 +168,7 @@ body{background:var(--bg);color:var(--ink);font-family:var(--mono);font-size:13p
 .link{all:unset;cursor:pointer;color:var(--hot);letter-spacing:.16em}
 .link:hover,.link:focus-visible{text-decoration:underline}
 
-.ticker{display:flex;border-top:1px solid var(--line);background:var(--panel);overflow:hidden;white-space:nowrap;font-size:12px}
+.ticker{display:flex;border-bottom:1px solid var(--line);background:var(--panel);overflow:hidden;white-space:nowrap;font-size:12px}
 .ticker .lab{position:relative;z-index:2;background:var(--red);color:#fff;padding:8px 14px;font-weight:700;letter-spacing:.14em;flex:none}
 .ticker .run{display:flex;gap:48px;padding:8px 20px;animation:tick 60s linear infinite}
 .ticker .run a{color:inherit;text-decoration:none}
@@ -253,6 +255,7 @@ td.r,th.r{text-align:right}
   </nav>
 </header>
 <nav class="ptabs" aria-label="Pages"><a href="./" aria-current="page">Live</a><a href="trends.html">Trends</a><a href="people.html">People</a><button data-open="dlgReport">Report</button></nav>
+<div class="ticker"><span class="lab">NEWS</span><div class="run" id="run"></div></div>
 
 <main class="deck">
   <section class="p radar">
@@ -286,7 +289,6 @@ td.r,th.r{text-align:right}
   </section>
 </main>
 
-<div class="ticker"><span class="lab">NEWS</span><div class="run" id="run"></div></div>
 </div>
 
 <dialog id="dlgVessels" aria-labelledby="hVes">
