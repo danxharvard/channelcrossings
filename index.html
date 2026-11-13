@@ -228,7 +228,7 @@ button,input,select,textarea{font:inherit;font-family:var(--font)}
 .am-ves.old{opacity:.5}
 /* the tip in the middle of the map, once per visitor: live boats appear here, the grey dinghies are the day's crossings */
 .live-tip{position:absolute;z-index:4;left:50%;top:clamp(170px,42%,50%);transform:translate(-50%,-50%);width:min(340px,calc(100% - 32px));display:grid;grid-template-columns:auto 1fr;gap:12px;padding:14px 40px 14px 14px;border-radius:22px;color:var(--label);font-size:.794rem;line-height:1.38;letter-spacing:-.01em;
-  background:var(--card);box-shadow:0 0 0 .5px var(--sep);animation:ltIn .55s cubic-bezier(.2,.9,.3,1.15) .6s both}
+  background:color-mix(in srgb,var(--card) var(--map-box),transparent);box-shadow:0 0 0 .5px var(--sep);animation:ltIn .55s cubic-bezier(.2,.9,.3,1.15) .6s both}
 @keyframes ltIn{from{opacity:0;transform:translate(-50%,-50%) scale(.92)}}
 .live-tip.out{animation:ltOut .22s ease-in both}
 @keyframes ltOut{to{opacity:0;transform:translate(-50%,-50%) scale(.95)}}
