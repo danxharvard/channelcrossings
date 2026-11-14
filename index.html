@@ -163,9 +163,10 @@ body{background:var(--bg);color:var(--ink);font-family:var(--mono);font-size:13p
 .hero .sub{display:block;font-size:12px;color:var(--dim);margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .hero .sub b{font-weight:700}
 .hero .sub b.down{color:var(--hot)}.hero .sub b.up{color:var(--red)}
-.dnum{display:flex;align-items:baseline;gap:10px;min-width:0}
-.dnum b{font:700 clamp(48px,min(6.4vw,10vh),104px)/.9 var(--sans);letter-spacing:-.03em;font-variant-numeric:tabular-nums;color:var(--ink)}
-.dnum b.on{color:var(--amber)}
+.dnum{display:flex;align-items:flex-end;gap:10px;min-width:0}
+/* the latest day in the same split-flap tiles as the year, white (ink) on a quiet day and amber when boats crossed */
+#dayN .flap{color:var(--ink);text-shadow:none}
+#dayN.on .flap{color:var(--amber);text-shadow:0 0 14px color-mix(in srgb,var(--amber) 25%,transparent)}
 .dnum span{font-size:13px;color:var(--dim);letter-spacing:.08em;text-transform:uppercase}
 .count .flaps{margin:0}
 .hero .sh{display:none}
@@ -242,8 +243,9 @@ td.r,th.r{text-align:right}
   .hero .lab{font-size:9.5px;letter-spacing:.1em;margin-bottom:3px}
   .hero .sub{font-size:10.5px;margin-top:2px}
   .dnum{gap:6px}
-  .dnum b{font-size:clamp(34px,6vh,52px)}
   .dnum span,.hero .lg{display:none}
+  #dayN .flap{width:clamp(21px,6.6vw,36px)}
+  #dayN .flap.sep{display:none}
   .hero .sh{display:inline}
   .tape svg{height:clamp(40px,8vh,90px);flex:none}
   .rlist li{font-size:11px;padding:3px 0}
@@ -306,7 +308,7 @@ td.r,th.r{text-align:right}
     <div class="hero">
       <div class="day">
         <span class="lab" id="dayLab">Latest day</span>
-        <div class="dnum"><b id="dayN">–</b><span id="dayU">people</span></div>
+        <div class="dnum"><div class="flaps" id="dayN"></div><span id="dayU">people</span></div>
         <span class="sub" id="daySub"></span>
       </div>
       <div class="ytd">
@@ -361,8 +363,8 @@ CC.load().then((D) => {
   const L = D.latest, wk = CC.sum(D.last7);
   $("wk").textContent = fmt(wk.people);
   $("dayLab").innerHTML = `<span class="lg">${CC.long(L.date)}</span><span class="sh">${CC.long(L.date).slice(0, 3)} ${CC.short(L.date)}</span>`;
-  $("dayN").textContent = fmt(L.migrants);
-  $("dayN").className = L.migrants ? "on" : "";
+  $("dayN").innerHTML = [...fmt(L.migrants)].map((c) => (c === "," ? '<div class="flap sep"></div>' : `<div class="flap">${c}</div>`)).join("");
+  $("dayN").classList.toggle("on", !!L.migrants);
   $("dayU").textContent = L.migrants === 1 ? "person" : "people";
   $("daySub").innerHTML = L.migrants
     ? `<span class="lg">in </span>${CC.plural(L.boats || 0, "boat", "boats")}`
