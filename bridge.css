@@ -169,3 +169,29 @@ footer.foot a{color:inherit}
   .rows li{grid-template-columns:minmax(0,7.5em) minmax(0,1fr) 10.5em}
   .page-h{padding:14px 12px 10px}
 }
+
+/* Phones: panels fold to their heading and the longer notes sit behind "About this".
+   The buttons are added by bridge.js; on wider screens they look and behave like the plain heading. */
+.fold-t{all:unset;display:flex;align-items:center;min-width:0;cursor:default}
+.fold-t>span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.note-t{display:none}
+@media (max-width:700px){
+  .page-h>div>p{display:none}
+  .fold-t{cursor:pointer;padding:6px 0;margin:-6px 0}
+  .fold-t::before{content:"";flex:none;width:6px;height:6px;border:solid var(--hot);border-width:0 1.5px 1.5px 0;transform:rotate(45deg);margin:0 12px -1px 2px;transition:transform .15s}
+  .fold-t:focus-visible{outline:1px solid var(--hot);outline-offset:2px}
+  .grid>.p.fold{padding-top:12px;padding-bottom:12px}
+  .grid>.p.fold>h2{margin-bottom:0}
+  .grid>.p.fold>h2 .fold-t::before{transform:rotate(-45deg);margin-bottom:0}
+  .grid>.p.fold>h2>:not(.fold-t):not(b){display:none}
+  .grid>.p.fold>:not(h2){display:none!important}
+  .fold-t{flex:0 1 auto;max-width:64%}
+  .grid>.p>h2>b{min-width:0;overflow:hidden;text-overflow:ellipsis}
+  .grid>.p>h2:not(:has(>b,>.seg))>.fold-t,.grid>.p.fold>h2:not(:has(>b))>.fold-t{max-width:none}
+  .grid>.p>p.note:not([data-keep]):not(.on){display:none}
+  .note-t{all:unset;display:inline-block;cursor:pointer;margin-top:10px;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+  .note-t::after{content:" +";color:var(--hot)}
+  .note-t[aria-expanded="true"]::after{content:" −"}
+  .note-t:has(+ .note:empty){display:none}
+  .grid>.p>p.note.on{margin-top:6px}
+}
