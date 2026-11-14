@@ -147,8 +147,18 @@ body{background:var(--bg);color:var(--ink);font-family:var(--mono);font-size:13p
 .kv span{display:block;font-size:10px;color:var(--dim);letter-spacing:.12em;text-transform:uppercase;white-space:nowrap}
 .kv b{display:block;font:600 clamp(15px,2.3vh,22px)/1.2 var(--sans);margin-top:2px;font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .kv b.down{color:var(--hot)}.kv b.up{color:var(--red)}
-.msg{font-size:12.5px;color:var(--ink);border-left:2px solid var(--amber);padding:5px 10px;margin-top:8px;background:var(--hot2)}
-.msg em{color:var(--amber);font-style:normal}
+/* The headline: the latest day on the left, the year so far on the right */
+.hero{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:clamp(16px,3vw,40px);align-items:end;margin:4px 0 12px}
+.hero .lab{display:block;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hero .sub{display:block;font-size:12px;color:var(--dim);margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hero .sub b{font-weight:700}
+.hero .sub b.down{color:var(--hot)}.hero .sub b.up{color:var(--red)}
+.dnum{display:flex;align-items:baseline;gap:10px;min-width:0}
+.dnum b{font:700 clamp(48px,min(6.4vw,10vh),104px)/.9 var(--sans);letter-spacing:-.03em;font-variant-numeric:tabular-nums;color:var(--ink)}
+.dnum b.on{color:var(--amber)}
+.dnum span{font-size:13px;color:var(--dim);letter-spacing:.08em;text-transform:uppercase}
+.count .flaps{margin:0}
+.hero .sh{display:none}
 
 /* Tape */
 .tape{display:flex;flex-direction:column}
@@ -212,12 +222,17 @@ td.r,th.r{text-align:right}
   .p>h2{margin-bottom:5px}
   .legend{gap:10px;font-size:10px;margin-top:3px}
   .legend .rr{display:none}
-  .count .flaps{margin-bottom:6px}
   .flap{width:clamp(26px,8vw,40px);height:clamp(34px,5.4vh,52px);font-size:clamp(22px,3.8vh,36px)}
   .kv div{padding:4px 8px}
   .kv span{font-size:9px;letter-spacing:.08em}
   .kv b{font-size:clamp(13px,2.1vh,17px)}
-  .msg{font-size:11.5px;padding:4px 8px;margin-top:6px}
+  .hero{gap:12px;margin:0 0 8px}
+  .hero .lab{font-size:9.5px;letter-spacing:.1em;margin-bottom:3px}
+  .hero .sub{font-size:10.5px;margin-top:2px}
+  .dnum{gap:6px}
+  .dnum b{font-size:clamp(34px,6vh,52px)}
+  .dnum span,.hero .lg{display:none}
+  .hero .sh{display:inline}
   .tape svg{height:clamp(40px,8vh,90px);flex:none}
   .vlist li{font-size:11px;padding:3px 0}
   .vlist li:nth-child(n+3){display:none}
@@ -229,8 +244,9 @@ td.r,th.r{text-align:right}
 }
 @media (max-width:820px) and (max-height:700px){
   .vlist li:nth-child(n+2){display:none}
-  .kv div:nth-child(n+4){display:none}
-  .msg{display:none}
+}
+@media (max-width:820px) and (max-height:600px){
+  .vessels{display:none}
 }
 /* Short, wide screens (laptops with small windows, phones on their side) */
 @media (min-width:821px) and (max-height:760px){
@@ -239,7 +255,6 @@ td.r,th.r{text-align:right}
   .legend{display:none}
 }
 @media (min-width:821px) and (max-height:560px){
-  .msg,.kv div:nth-child(n+4){display:none}
   .vessels{display:none}
 }
 </style>
@@ -249,9 +264,7 @@ td.r,th.r{text-align:right}
 <header class="status">
   <h1 class="logo">CHANNEL CROSSINGS</h1>
   <span class="hide-s"><span class="dot"></span>Feed <b>live</b></span>
-  <span class="hide-s">UTC <b id="utc">--:--</b></span>
   <span class="hide-s">Gov.uk data to <b id="dataTo">–</b></span>
-  <span class="hide-s">AIS contacts <b id="aisN">–</b></span>
   <span class="sp"></span>
   <nav class="tabs hide-s" aria-label="Pages"><a href="./" aria-current="page">Live</a><a href="trends.html">Trends</a><a href="people.html">People</a></nav>
   <nav>
@@ -268,21 +281,29 @@ td.r,th.r{text-align:right}
   <section class="p radar">
     <h2><span>Strait of Dover · AIS plot</span><b id="radarN"></b></h2>
     <svg id="radar" viewBox="0 0 800 800" role="img" aria-label="Plot of rescue, Border Force and navy vessels in the Strait"></svg>
-    <div class="legend"><span><i class="rescue"></i>Lifeboat / rescue</span><span><i class="border"></i>Border Force</span><span><i class="navy"></i>Navy</span><span class="rr" style="margin-left:auto">Range rings 10 km</span></div>
+    <div class="legend"><span><i class="rescue"></i>Lifeboat / rescue</span><span><i class="border"></i>Border Force</span><span><i class="navy"></i>Navy</span></div>
   </section>
 
   <section class="p count">
-    <h2><span>People detected · <span id="yr"></span> to date</span><b id="asof"></b></h2>
-    <div class="flaps" id="flaps"></div>
-    <div class="kv">
-      <div><span>Vs <span id="py"></span></span><b id="chg"></b></div>
-      <div><span>Boats</span><b id="boats"></b></div>
-      <div><span>Per boat</span><b id="pb"></b></div>
-      <div><span>Last crossing</span><b id="lc"></b></div>
-      <div><span>Quiet days</span><b id="quiet"></b></div>
-      <div><span>Peak day</span><b id="peak"></b></div>
+    <h2><span>Latest figures</span><b id="asof"></b></h2>
+    <div class="hero">
+      <div class="day">
+        <span class="lab" id="dayLab">Latest day</span>
+        <div class="dnum"><b id="dayN">–</b><span id="dayU">people</span></div>
+        <span class="sub" id="daySub"></span>
+      </div>
+      <div class="ytd">
+        <span class="lab"><span id="yr"></span> so far</span>
+        <div class="flaps" id="flaps"></div>
+        <span class="sub"><b id="chg"></b> on the same point in <span id="py"></span></span>
+      </div>
     </div>
-    <div class="msg"><em>&gt;</em> <span id="heroSr" aria-live="polite">No crossings detected for Thursday, 12 November 2026</span></div>
+    <div class="kv">
+      <div><span>Last 7 days</span><b id="wk"></b></div>
+      <div><span>Boats this year</span><b id="boats"></b></div>
+      <div><span>Last crossing</span><b id="lc"></b></div>
+    </div>
+    <p class="sr" id="heroSr" aria-live="polite">No crossings detected for Thursday, 12 November 2026</p>
   </section>
 
   <section class="p tape">
@@ -310,20 +331,25 @@ const $ = (id) => document.getElementById(id), { fmt } = CC;
 CC.load().then((D) => {
   CCUI.setShare(CCUI.shareFrom(D));
   $("dataTo").textContent = CC.short(D.latest.date);
-  $("aisN").textContent = D.vessels.length;
   $("yr").textContent = D.year; $("py").textContent = D.year - 1;
-  $("asof").textContent = "AS OF " + CC.short(D.latest.date).toUpperCase();
+  $("asof").textContent = "HOME OFFICE";
 
   // Split-flap total
   const s = fmt(D.cur.total);
   $("flaps").innerHTML = [...s].map((c) => (c === "," ? '<div class="flap sep"></div>' : `<div class="flap">${c}</div>`)).join("");
   const ch = Math.round(D.change);
-  $("chg").textContent = (ch > 0 ? "+" : "") + ch + "%"; $("chg").className = ch < 0 ? "down" : "up";
+  $("chg").textContent = (ch > 0 ? "+" : ch < 0 ? "−" : "") + Math.abs(ch) + "%"; $("chg").className = ch < 0 ? "down" : "up";
   $("boats").textContent = fmt(D.cur.boats);
-  $("pb").textContent = Math.round(D.avgPerBoat);
   $("lc").textContent = `${CC.short(D.latestCrossing.date)} · ${fmt(D.latestCrossing.migrants)}`;
-  $("quiet").textContent = D.quietStreak;
-  $("peak").textContent = `${CC.short(D.cur.best.date)} · ${fmt(D.cur.best.migrants)}`;
+  const L = D.latest, wk = CC.sum(D.last7);
+  $("wk").textContent = fmt(wk.people);
+  $("dayLab").innerHTML = `<span class="lg">${CC.long(L.date)}</span><span class="sh">${CC.long(L.date).slice(0, 3)} ${CC.short(L.date)}</span>`;
+  $("dayN").textContent = fmt(L.migrants);
+  $("dayN").className = L.migrants ? "on" : "";
+  $("dayU").textContent = L.migrants === 1 ? "person" : "people";
+  $("daySub").innerHTML = L.migrants
+    ? `<span class="lg">in </span>${CC.plural(L.boats || 0, "boat", "boats")}`
+    : `<span class="lg">No boats · quiet for </span><span class="sh">Quiet </span>${CC.plural(D.quietStreak, "day", "days")}`;
   $("heroSr").textContent = D.latest.migrants
     ? `${fmt(D.latest.migrants)} people crossed in ${D.latest.boats} small boat${D.latest.boats > 1 ? "s" : ""} on ${CC.long(D.latest.date)}.`
     : `No small boats detected on ${CC.long(D.latest.date)}. ${D.quietStreak} consecutive quiet day${D.quietStreak > 1 ? "s" : ""}.`;
