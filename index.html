@@ -118,7 +118,18 @@ body{background:var(--bg);color:var(--ink);font-family:var(--mono);font-size:13p
 
 /* Radar */
 .radar{grid-row:1/4;display:flex;flex-direction:column}
-.radar svg{width:100%;flex:1;min-height:0;display:block}
+.rwrap{position:relative;flex:1;min-height:0;container-type:size}
+.radar svg{width:100%;height:100%;display:block}
+/* The sweep is an HTML layer turned by the GPU: spinning it inside the SVG repainted the whole plot every frame */
+.radar .sweep{--d:calc(min(100cqw,100cqh) * .98);position:absolute;left:50%;top:50%;width:var(--d);height:var(--d);margin:calc(var(--d) / -2) 0 0 calc(var(--d) / -2);border-radius:50%;pointer-events:none;
+  background:conic-gradient(transparent 0deg 55deg,color-mix(in srgb,var(--hot) 30%,transparent) 89.3deg,color-mix(in srgb,var(--hot) 75%,transparent) 89.4deg 90deg,transparent 90.1deg);
+  opacity:.75;will-change:transform;animation:spin 6s linear infinite}
+.radar .v{cursor:pointer}
+.radar .v .hit{fill:transparent}
+.radar .v.sel circle:not(.hit){stroke:var(--ink);stroke-width:2.5}
+.vtip{position:absolute;z-index:3;transform:translate(-50%,calc(-100% - 14px));background:var(--panel);border:1px solid var(--hot);padding:6px 9px;font-size:11.5px;line-height:1.35;white-space:nowrap;pointer-events:none;box-shadow:0 4px 18px rgba(0,0,0,.25)}
+.vtip b{display:block;font-size:12px}
+.vtip span{color:var(--dim)}
 .radar .sea{fill:var(--sea)}
 .radar .land{fill:var(--land);stroke:var(--coast);stroke-width:1.4}
 .radar .ring{fill:none;stroke:var(--hot);stroke-opacity:.22;stroke-dasharray:2 4}
@@ -128,9 +139,8 @@ body{background:var(--bg);color:var(--ink);font-family:var(--mono);font-size:13p
 .radar .place text{fill:var(--dim);font:11px var(--mono);letter-spacing:.06em;text-transform:uppercase}
 .radar .country{fill:var(--faint);font:12px var(--mono);letter-spacing:.5em}
 .radar .lane{stroke:var(--amber);stroke-opacity:.35;stroke-dasharray:6 6;fill:none}
-.radar .sweep{transform-origin:400px 400px;animation:spin 6s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
-.radar .v circle{filter:var(--glow)}
+.radar .v circle:not(.hit){filter:var(--glow)}
 .radar .v text{font:10px var(--mono);fill:var(--ink)}
 .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:11px;color:var(--dim);margin-top:6px}
 .legend i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:0}
@@ -182,7 +192,7 @@ body{background:var(--bg);color:var(--ink);font-family:var(--mono);font-size:13p
 
 .ticker{display:flex;border-bottom:1px solid var(--line);background:var(--panel);overflow:hidden;white-space:nowrap;font-size:12px}
 .ticker .lab{position:relative;z-index:2;background:var(--red);color:#fff;padding:8px 14px;font-weight:700;letter-spacing:.14em;flex:none}
-.ticker .run{display:flex;gap:48px;padding:8px 20px;animation:tick 60s linear infinite}
+.ticker .run{display:flex;gap:48px;padding:8px 20px;animation:tick 60s linear infinite;will-change:transform;backface-visibility:hidden}
 .ticker .run a{color:inherit;text-decoration:none}
 .ticker .run a:hover{text-decoration:underline}
 .ticker .run b{color:var(--amber);font-weight:400;margin-right:8px}
@@ -239,7 +249,8 @@ td.r,th.r{text-align:right}
   .rlist li{font-size:11px;padding:3px 0}
   .rlist li:nth-child(n+3){display:none}
   .radar .v text{font-size:19px}.radar .place text{font-size:21px}.radar .rl{font-size:18px}.radar .country{font-size:22px}
-  .radar .v circle{r:9}
+  .radar .v circle:not(.hit){r:9}
+  .radar .v .hit{r:40}
   /* phones: the vessel names crowd the plot, the list below names them */
   .radar .v text{display:none}
   .tape h2 .pre{display:none}
@@ -282,7 +293,11 @@ td.r,th.r{text-align:right}
 <main class="deck">
   <section class="p radar">
     <h2><span>Strait of Dover · AIS plot</span><button class="link" data-open="dlgVessels" id="radarN" aria-label="List every vessel"></button></h2>
-    <svg id="radar" viewBox="0 0 800 800" role="img" aria-label="Plot of rescue, Border Force and navy vessels in the Strait"></svg>
+    <div class="rwrap">
+      <svg id="radar" viewBox="0 0 800 800" role="img" aria-label="Plot of rescue, Border Force and navy vessels in the Strait. Tap or hover a vessel for its details."></svg>
+      <div class="sweep" aria-hidden="true"></div>
+      <div class="vtip" id="vtip" role="status" hidden></div>
+    </div>
     <div class="legend"><span><i class="rescue"></i>Lifeboat / rescue</span><span><i class="border"></i>Border Force</span><span><i class="navy"></i>Navy</span></div>
   </section>
 
@@ -382,13 +397,11 @@ CC.load().then((D) => {
   const C = CC.COAST;
   const ukLand = poly(C.england) + "L800,0L0,0L0," + P(...C.england[0])[1].toFixed(1) + "Z";
   const frLand = poly(C.france) + `L800,${P(...C.france[C.france.length - 1])[1].toFixed(1)}L800,800L${P(...C.france[0])[0].toFixed(1)},800Z`;
-  let r = `<defs><clipPath id="clip"><circle cx="400" cy="400" r="392"/></clipPath>
-    <linearGradient id="sw" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="var(--hot)" stop-opacity="0"/><stop offset="1" stop-color="var(--hot)" stop-opacity=".35"/></linearGradient></defs>
+  let r = `<defs><clipPath id="clip"><circle cx="400" cy="400" r="392"/></clipPath></defs>
     <g clip-path="url(#clip)"><rect class="sea" width="800" height="800"/><path class="land" d="${ukLand}"/><path class="land" d="${frLand}"/>`;
   r += `<path class="lane" d="M${P(51.28, 1.62).join(",")}L${P(50.72, 1.0).join(",")}"/><path class="lane" d="M${P(51.18, 1.95).join(",")}L${P(50.82, 1.35).join(",")}"/>`;
   for (let km = 10; km <= 60; km += 10) r += `<circle class="ring" cx="400" cy="400" r="${km * S}"/><text class="rl" x="${404 + km * S * 0.707}" y="${396 - km * S * 0.707}">${km}</text>`;
   r += `<line class="axis" x1="400" y1="0" x2="400" y2="800"/><line class="axis" x1="0" y1="400" x2="800" y2="400"/>`;
-  r += `<g class="sweep"><path d="M400,400L800,400A400,400 0 0,0 ${400 + 400 * Math.cos(-0.6)},${400 + 400 * Math.sin(-0.6)}Z" fill="url(#sw)"/><line x1="400" y1="400" x2="800" y2="400" stroke="var(--hot)" stroke-opacity=".7"/></g>`;
   r += `<text class="country" x="${P(51.2, 0.85)[0]}" y="${P(51.2, 0.85)[1]}">ENGLAND</text><text class="country" x="${P(50.62, 1.85)[0]}" y="${P(50.62, 1.85)[1]}">FRANCE</text>`;
   C.places.forEach((p) => { const [x, y] = P(p.lat, p.lon); r += `<g class="place"><circle cx="${x}" cy="${y}" r="3"/><text x="${x + (p.side === "uk" ? -8 : 8)}" y="${y + 4}" text-anchor="${p.side === "uk" ? "end" : "start"}">${p.n}</text></g>`; });
   const vs = D.strait;
@@ -396,7 +409,7 @@ CC.load().then((D) => {
     const [x, y] = P(v.lat, v.lon), moving = v.sog > 1;
     let head = "";
     if (moving && v.cog != null) { const a = ((v.cog - 90) * Math.PI) / 180; head = `<line x1="${x}" y1="${y}" x2="${x + Math.cos(a) * 22}" y2="${y + Math.sin(a) * 22}" stroke="currentColor" class="${v.kind}" style="stroke:var(--${v.kind === "rescue" ? "amber" : v.kind === "border" ? "blue" : "violet"})"/>`; }
-    r += `<g class="v">${head}<circle class="${v.kind}" cx="${x}" cy="${y}" r="${moving ? 6 : 4.5}"/>${moving ? `<text x="${x + 10}" y="${y - 8}">${(v.name || "UNKNOWN").slice(0, 16)} ${v.sog.toFixed(0)}kn</text>` : ""}</g>`;
+    r += `<g class="v" data-i="${i}">${head}<circle class="hit" cx="${x}" cy="${y}" r="22"/><circle class="${v.kind}" cx="${x}" cy="${y}" r="${moving ? 6 : 4.5}"/>${moving ? `<text x="${x + 10}" y="${y - 8}">${(v.name || "UNKNOWN").slice(0, 16)} ${v.sog.toFixed(0)}kn</text>` : ""}</g>`;
   });
   r += `</g><circle cx="400" cy="400" r="392" fill="none" stroke="var(--hot)" stroke-opacity=".5"/>`;
   for (let a = 0; a < 360; a += 10) { const rad = ((a - 90) * Math.PI) / 180, l = a % 30 ? 6 : 12; r += `<line x1="${400 + Math.cos(rad) * 392}" y1="${400 + Math.sin(rad) * 392}" x2="${400 + Math.cos(rad) * (392 - l)}" y2="${400 + Math.sin(rad) * (392 - l)}" stroke="var(--hot)" stroke-opacity=".6"/>`; }
@@ -408,6 +421,26 @@ CC.load().then((D) => {
   const sorted = [...vs].sort((a, b) => new Date(b.seen) - new Date(a.seen));
   $("roster").innerHTML = `<tr><th>Vessel</th><th>Type</th><th class="r">Speed</th><th class="r">Seen</th></tr>` + sorted.map((v) =>
     `<tr><td><span class="k ${v.kind}"></span>${v.name || "Unnamed"}</td><td>${kindName[v.kind]}</td><td class="r">${v.sog == null ? "–" : v.sog.toFixed(1) + " kn"}</td><td class="r">${CC.ago(v.seen).replace(" ago", "")}</td></tr>`).join("");
+
+  // Tap or hover a vessel on the plot for its name, type, speed and when it was seen
+  const tip = $("vtip"), wrap = tip.parentNode;
+  let pinned = null;
+  const show = (g) => {
+    const v = vs[+g.dataset.i], c = g.querySelector("circle.hit").getBoundingClientRect(), w = wrap.getBoundingClientRect();
+    tip.innerHTML = `<b><span class="k ${v.kind}"></span>${CC.esc(v.name || "Unnamed")}</b><span>${kindName[v.kind]} · ${v.sog == null ? "–" : v.sog.toFixed(1) + " kn"} · ${CC.ago(v.seen)}</span>`;
+    tip.hidden = false;
+    const x = Math.min(Math.max(c.left + c.width / 2 - w.left, tip.offsetWidth / 2 + 4), w.width - tip.offsetWidth / 2 - 4);
+    tip.style.left = x + "px"; tip.style.top = Math.max(c.top + c.height / 2 - w.top, tip.offsetHeight + 18) + "px";
+    document.querySelectorAll(".radar .v.sel").forEach((e) => e.classList.remove("sel")); g.classList.add("sel");
+  };
+  const hide = () => { tip.hidden = true; document.querySelectorAll(".radar .v.sel").forEach((e) => e.classList.remove("sel")); };
+  const svgR = $("radar");
+  svgR.addEventListener("pointerover", (e) => { const g = e.target.closest(".v"); if (g && e.pointerType === "mouse" && !pinned) show(g); });
+  svgR.addEventListener("pointerout", (e) => { if (e.pointerType === "mouse" && !pinned && !e.relatedTarget?.closest?.(".v")) hide(); });
+  document.addEventListener("click", (e) => {
+    const g = e.target.closest && e.target.closest("#radar .v");
+    if (g && pinned !== g) { pinned = g; show(g); } else { pinned = null; hide(); }
+  });
 
   // Records: the all-time highs, with the full list on Trends
   const days = D.days, ymd = (x) => `${CC.short(x)} ${x.slice(0, 4)}`;
