@@ -219,6 +219,9 @@ td.r,th.r{text-align:right}
   .vlist li:nth-child(n+3){display:none}
   .radar .v text{font-size:19px}.radar .place text{font-size:21px}.radar .rl{font-size:18px}.radar .country{font-size:22px}
   .radar .v circle{r:9}
+  /* phones: the vessel names crowd the plot, the list below names them */
+  .radar .v text{display:none}
+  .tape h2 .pre{display:none}
 }
 @media (max-width:820px) and (max-height:700px){
   .vlist li:nth-child(n+2){display:none}
@@ -279,7 +282,7 @@ td.r,th.r{text-align:right}
   </section>
 
   <section class="p tape">
-    <h2><span>Daily log · last 60 days</span><span><b id="tapeSum"></b> <a class="link" href="trends.html">Trends →</a></span></h2>
+    <h2><span><span class="pre">Daily log · </span>Last 60 days</span><span><b id="tapeSum"></b> <a class="link" href="trends.html">Trends →</a></span></h2>
     <svg id="tape" aria-label="People detected each day for the last 60 days"></svg>
   </section>
 

@@ -59,14 +59,14 @@ try{var t=localStorage.getItem("cc-theme");ccTheme(t==="light"||t==="auto"?t:"da
 <main>
 <div class="page-h"><div><h1>People</h1><p>Who crosses, who is sent back and what happens to their claims</p></div><p id="pageNote">Home Office quarterly statistics</p></div>
 <div class="grid">
-  <section class="p s6">
+  <section data-m-open class="p s6">
     <h2><span>Sex and age</span><span class="seg" id="sexSeg"><button data-k="lastYear" aria-pressed="true">Last year</button><button data-k="since2018">Since 2018</button></span></h2>
     <div class="kv" style="margin-bottom:10px"><div><span>People</span><b id="gT"></b></div><div><span>Men and boys</span><b id="gM"></b></div><div><span>Aged 17 or under</span><b id="gK"></b></div></div>
     <ul class="rows" id="sex"></ul>
     <ul class="rows" id="age" style="margin-top:8px"></ul>
     <p class="note" id="gNote"></p>
   </section>
-  <section class="p s6">
+  <section data-m-open class="p s6">
     <h2><span>Who is crossing · top nationalities</span><b id="natP"></b></h2>
     <ul class="rows" id="nat"></ul>
     <p class="note" id="natNote"></p>
@@ -103,7 +103,7 @@ try{var t=localStorage.getItem("cc-theme");ccTheme(t==="light"||t==="auto"?t:"da
   <section class="p s6">
     <h2><span>Asylum support</span><b>end of June 2026</b></h2>
     <div class="big num">93,293<small>people on asylum support</small></div>
-    <p class="note" style="margin-top:2px">12% fewer than a year before</p>
+    <p class="note" data-keep style="margin-top:2px">12% fewer than a year before</p>
     <div class="stack" role="img" aria-label="16,021 in hotels, 73,068 in other housing, 4,204 on cash support only"><i style="width:17.2%;background:var(--amber)"></i><i style="width:78.3%;background:var(--hot)"></i><i style="width:4.5%;background:var(--blue)"></i></div>
     <ul class="key"><li><i style="background:var(--amber)"></i>In hotels <b>16,021</b></li><li><i style="background:var(--hot)"></i>Other housing <b>73,068</b></li><li><i style="background:var(--blue)"></i>Cash only <b>4,204</b></li></ul>
     <div class="kv" style="margin-top:10px"><div><span>A week, self-catering</span><b>£49.18</b></div><div><span>A week, in a hotel</span><b>£9.95</b></div><div><span>In hotels, a year before</span><b>about 2×</b></div></div>
@@ -122,7 +122,7 @@ try{var t=localStorage.getItem("cc-theme");ccTheme(t==="light"||t==="auto"?t:"da
 <script>
 const $ = (id) => document.getElementById(id), { fmt, esc } = CC;
 const pc = (a, b) => (b ? Math.round((a / b) * 100) : 0);
-const onResize = (el, fn) => { let w = 0; fn(); if (window.ResizeObserver) new ResizeObserver(() => { if (el.clientWidth !== w) { w = el.clientWidth; fn(); } }).observe(el); };
+const onResize = (el, fn) => { let w = 0; if (el.clientWidth) { w = el.clientWidth; fn(); } if (window.ResizeObserver) new ResizeObserver(() => { if (el.clientWidth && el.clientWidth !== w) { w = el.clientWidth; fn(); } }).observe(el); };
 const rows = (items, max, cls) => items.map(([k, v, extra]) => `<li><span>${esc(k)}</span><span class="bar"><i class="${cls || ""}" style="width:${(v / max) * 100}%"></i></span><b>${fmt(v)}${extra ? `<small>${extra}</small>` : ""}</b></li>`).join("");
 // Bars at the chart's real width: groups of one or two series
 function bars(svg, labels, series, opts = {}) {

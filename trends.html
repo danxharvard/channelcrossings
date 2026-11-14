@@ -59,13 +59,13 @@ svg.chart .hover{stroke:var(--ink);stroke-width:1}
 <main>
 <div class="page-h"><div><h1>Trends</h1><p>Every day since 2018, from the Home Office's daily figures</p></div><p id="pageNote"></p></div>
 <div class="grid">
-  <section class="p s12">
+  <section data-m-open class="p s12">
     <h2><span>Crossings over time · <span id="ddRange">last 3 months</span></span><span class="seg" id="rangeSeg"><button data-r="30">1M</button><button data-r="90" aria-pressed="true">3M</button><button data-r="365">1Y</button><button data-r="0">All</button></span></h2>
     <div class="readout" id="read"><b class="num">–</b><span></span></div>
     <svg class="chart" id="daily" height="230" role="img" aria-label="People detected each day"></svg>
   </section>
 
-  <section class="p s4">
+  <section data-m-open class="p s4">
     <h2><span>At a glance</span></h2>
     <ul class="list" id="glance"></ul>
   </section>
@@ -130,7 +130,7 @@ const NS = "http://www.w3.org/2000/svg";
 const MON = CC.MONTHS.map((m) => m.slice(0, 3));
 const shortY = (s) => `${CC.short(s)} ${s.slice(0, 4)}`;
 // Redraw a chart whenever its box changes width
-const onResize = (el, fn) => { let w = 0; fn(); if (window.ResizeObserver) new ResizeObserver(() => { if (el.clientWidth !== w) { w = el.clientWidth; fn(); } }).observe(el); };
+const onResize = (el, fn) => { let w = 0; if (el.clientWidth) { w = el.clientWidth; fn(); } if (window.ResizeObserver) new ResizeObserver(() => { if (el.clientWidth && el.clientWidth !== w) { w = el.clientWidth; fn(); } }).observe(el); };
 const niceStep = (raw) => { const p = Math.pow(10, Math.floor(Math.log10(raw || 1))), n = raw / p; return (n <= 1 ? 1 : n <= 2 ? 2 : n <= 5 ? 5 : 10) * p; };
 const PERIODS = { labour: "2024-07-05", burnham: "2026-07-20" };   // Labour took office; Andy Burnham became PM
 

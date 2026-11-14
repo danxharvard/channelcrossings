@@ -219,3 +219,37 @@
   window.CCUI = { mount, toast, setShare, shareFrom };
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", mount); else mount();
 })();
+
+/* ---- Phones: fold panels down to their heading, and keep the explanations behind "About this" ----
+   Desktop is untouched: the fold buttons only act, and only show, below 700px wide (see bridge.css). */
+(function () {
+  const phone = matchMedia("(max-width:700px)");
+  function setup() {
+    document.querySelectorAll(".grid>.p").forEach((p, i) => {
+      const h = p.querySelector(":scope>h2"), title = h && h.querySelector(":scope>span:first-child");
+      if (!title || h.querySelector(".fold-t")) return;
+      const b = document.createElement("button");
+      b.type = "button"; b.className = "fold-t";
+      h.insertBefore(b, title); b.appendChild(title);
+      const open = p.hasAttribute("data-m-open");
+      p.classList.toggle("fold", !open);
+      b.setAttribute("aria-expanded", String(open));
+      b.addEventListener("click", () => {
+        if (!phone.matches) return;
+        const nowOpen = p.classList.toggle("fold") === false;
+        b.setAttribute("aria-expanded", String(nowOpen));
+      });
+    });
+    document.querySelectorAll(".grid>.p>p.note:not([data-keep])").forEach((n) => {
+      const b = document.createElement("button");
+      b.type = "button"; b.className = "note-t"; b.textContent = "About this";
+      b.setAttribute("aria-expanded", "false");
+      n.before(b);
+      b.addEventListener("click", () => {
+        const on = n.classList.toggle("on");
+        b.setAttribute("aria-expanded", String(on));
+      });
+    });
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", setup); else setup();
+})();
