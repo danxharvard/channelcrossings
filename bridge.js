@@ -15,6 +15,9 @@
     const [data, news, vessels, nat, gender, returns, perboat, status] = await Promise.all(
       ["data.json", "news.json", "vessels.json", "nationalities.json", "gender.json", "returns.json", "perboat.json", "status.json"].map(get)
     );
+    // "Results updated": when the latest figures came in, in UK time
+    const upd = document.getElementById("upd"), at = (status && status.dataAt) || data.checkedAt;
+    if (upd && at) upd.textContent = new Date(at).toLocaleString("en-GB", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit", timeZone: "Europe/London" }).replace(",", " ·");
     const days = data.days;
     const latest = days[days.length - 1];
     const year = +latest.date.slice(0, 4);
@@ -198,8 +201,6 @@
       else if (c) c.closest("dialog").close();
       else if (e.target.tagName === "DIALOG") e.target.close();   // a tap on the dark backdrop
     });
-    // UTC clock in the status bar
-    const utc = $("utc"); if (utc) { const t = () => (utc.textContent = new Date().toISOString().slice(11, 16)); t(); setInterval(t, 10000); }
     CC.theme($("theme"));
     if ("serviceWorker" in navigator) addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {}));
   }

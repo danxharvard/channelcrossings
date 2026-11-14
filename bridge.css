@@ -32,6 +32,7 @@ a{color:inherit}
 .status .dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--hot);margin-right:6px;box-shadow:0 0 8px var(--hot);animation:blink 2s infinite}
 @keyframes blink{50%{opacity:.35}}
 .status .sp{flex:1}
+.status .upd{overflow:hidden;text-overflow:ellipsis}
 .status nav{display:flex;gap:6px}
 .tabs{display:flex;gap:0}
 .tabs a{text-decoration:none;padding:5px 10px;border:1px solid var(--line);margin-left:-1px;color:var(--dim)}
