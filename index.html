@@ -169,10 +169,12 @@ body{background:var(--bg);color:var(--ink);font-family:var(--mono);font-size:13p
 .tape .pk{fill:var(--ink)}
 
 /* Vessels: the latest few, the rest behind a button */
-.vlist{list-style:none}
-.vlist li{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:14px;padding:4px 0;border-top:1px solid var(--line2);font-size:12px;white-space:nowrap}
-.vlist li span:first-child{overflow:hidden;text-overflow:ellipsis}
-.vlist li span+span{color:var(--dim);text-align:right}
+.rlist{list-style:none}
+.rlist li{display:grid;grid-template-columns:minmax(0,1fr) auto 5.5em;gap:14px;padding:4px 0;border-top:1px solid var(--line2);font-size:12px;white-space:nowrap}
+.rlist li:first-child{border-top:0}
+.rlist li span:first-child{overflow:hidden;text-overflow:ellipsis}
+.rlist li span+span{color:var(--dim);text-align:right}
+.rlist li b{text-align:right;font-weight:700;font-variant-numeric:tabular-nums}
 .k{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:8px}
 .rescue{background:var(--amber);fill:var(--amber)}.border{background:var(--blue);fill:var(--blue)}.navy{background:var(--violet);fill:var(--violet)}
 .link{all:unset;cursor:pointer;color:var(--hot);letter-spacing:.16em}
@@ -234,8 +236,8 @@ td.r,th.r{text-align:right}
   .dnum span,.hero .lg{display:none}
   .hero .sh{display:inline}
   .tape svg{height:clamp(40px,8vh,90px);flex:none}
-  .vlist li{font-size:11px;padding:3px 0}
-  .vlist li:nth-child(n+3){display:none}
+  .rlist li{font-size:11px;padding:3px 0}
+  .rlist li:nth-child(n+3){display:none}
   .radar .v text{font-size:19px}.radar .place text{font-size:21px}.radar .rl{font-size:18px}.radar .country{font-size:22px}
   .radar .v circle{r:9}
   /* phones: the vessel names crowd the plot, the list below names them */
@@ -243,19 +245,19 @@ td.r,th.r{text-align:right}
   .tape h2 .pre{display:none}
 }
 @media (max-width:820px) and (max-height:700px){
-  .vlist li:nth-child(n+2){display:none}
+  .rlist li:nth-child(n+2){display:none}
 }
 @media (max-width:820px) and (max-height:600px){
-  .vessels{display:none}
+  .recs{display:none}
 }
 /* Short, wide screens (laptops with small windows, phones on their side) */
 @media (min-width:821px) and (max-height:760px){
   .kv div{padding:5px 8px}
-  .vlist li:nth-child(n+3){display:none}
+  .rlist li:nth-child(n+3){display:none}
   .legend{display:none}
 }
 @media (min-width:821px) and (max-height:560px){
-  .vessels{display:none}
+  .recs{display:none}
 }
 </style>
 </head>
@@ -279,7 +281,7 @@ td.r,th.r{text-align:right}
 
 <main class="deck">
   <section class="p radar">
-    <h2><span>Strait of Dover · AIS plot</span><b id="radarN"></b></h2>
+    <h2><span>Strait of Dover · AIS plot</span><button class="link" data-open="dlgVessels" id="radarN" aria-label="List every vessel"></button></h2>
     <svg id="radar" viewBox="0 0 800 800" role="img" aria-label="Plot of rescue, Border Force and navy vessels in the Strait"></svg>
     <div class="legend"><span><i class="rescue"></i>Lifeboat / rescue</span><span><i class="border"></i>Border Force</span><span><i class="navy"></i>Navy</span></div>
   </section>
@@ -311,9 +313,9 @@ td.r,th.r{text-align:right}
     <svg id="tape" aria-label="People detected each day for the last 60 days"></svg>
   </section>
 
-  <section class="p vessels">
-    <h2><span>Latest contacts</span><button class="link" data-open="dlgVessels" id="allV">All vessels</button></h2>
-    <ul class="vlist" id="vlist"></ul>
+  <section class="p recs">
+    <h2><span>Records</span><a class="link" href="trends.html">All records →</a></h2>
+    <ul class="rlist" id="rlist"></ul>
   </section>
 </main>
 
@@ -399,17 +401,25 @@ CC.load().then((D) => {
   r += `</g><circle cx="400" cy="400" r="392" fill="none" stroke="var(--hot)" stroke-opacity=".5"/>`;
   for (let a = 0; a < 360; a += 10) { const rad = ((a - 90) * Math.PI) / 180, l = a % 30 ? 6 : 12; r += `<line x1="${400 + Math.cos(rad) * 392}" y1="${400 + Math.sin(rad) * 392}" x2="${400 + Math.cos(rad) * (392 - l)}" y2="${400 + Math.sin(rad) * (392 - l)}" stroke="var(--hot)" stroke-opacity=".6"/>`; }
   $("radar").innerHTML = r;
-  $("radarN").textContent = `${vs.length} CONTACTS`;
+  $("radarN").textContent = `${vs.length} contacts →`;
 
-  // Vessels: the latest few on the page, all of them in a pop-up
+  // Vessels: all of them in a pop-up, opened from the plot's heading
   const kindName = { rescue: "Rescue", border: "Border Force", navy: "Navy" };
   const sorted = [...vs].sort((a, b) => new Date(b.seen) - new Date(a.seen));
-  $("vlist").innerHTML = sorted.slice(0, 3).map((v) =>
-    `<li><span><span class="k ${v.kind}"></span>${v.name || "Unnamed"}</span><span>${v.sog == null ? "–" : v.sog.toFixed(1) + " kn"}</span><span>${CC.ago(v.seen).replace(" ago", "")}</span></li>`).join("")
-    || "<li><span>No vessels reporting in the Strait</span></li>";
-  $("allV").textContent = `All ${vs.length} vessels`;
   $("roster").innerHTML = `<tr><th>Vessel</th><th>Type</th><th class="r">Speed</th><th class="r">Seen</th></tr>` + sorted.map((v) =>
     `<tr><td><span class="k ${v.kind}"></span>${v.name || "Unnamed"}</td><td>${kindName[v.kind]}</td><td class="r">${v.sog == null ? "–" : v.sog.toFixed(1) + " kn"}</td><td class="r">${CC.ago(v.seen).replace(" ago", "")}</td></tr>`).join("");
+
+  // Records: the all-time highs, with the full list on Trends
+  const days = D.days, ymd = (x) => `${CC.short(x)} ${x.slice(0, 4)}`;
+  const rec = days.reduce((a, d) => (d.migrants > a.migrants ? d : a)), recB = days.reduce((a, d) => ((d.boats || 0) > (a.boats || 0) ? d : a));
+  const months = {}; days.forEach((d) => (months[d.date.slice(0, 7)] = (months[d.date.slice(0, 7)] || 0) + d.migrants));
+  const bestM = Object.entries(months).sort((a, c) => c[1] - a[1])[0];
+  $("rlist").innerHTML = [
+    ["Record day", ymd(rec.date), fmt(rec.migrants)],
+    ["Most boats in a day", ymd(recB.date), fmt(recB.boats)],
+    ["Busiest month", `${CC.MONTHS[+bestM[0].slice(5) - 1].slice(0, 3)} ${bestM[0].slice(0, 4)}`, fmt(bestM[1])],
+    [`Busiest day of ${D.year}`, CC.short(D.cur.best.date), fmt(D.cur.best.migrants)],
+  ].map((r) => `<li><span>${r[0]}</span><span>${r[1]}</span><b>${r[2]}</b></li>`).join("");
 
   // Ticker
   const esc = (t) => String(t).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
