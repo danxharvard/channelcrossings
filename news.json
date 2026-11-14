@@ -1,41 +1,48 @@
 {
- "checkedAt": "2026-11-14T12:19:16Z",
+ "checkedAt": "2026-11-14T13:24:44Z",
  "items": [
   {
-   "title": "Burnham says Welsh Labour lost sight of devolution as review criticises ex-first minister",
-   "url": "https://www.bbc.co.uk/news/articles/cmgj340w6g8yo?at_medium=RSS&at_campaign=rss",
+   "title": "Welsh Labour leader says party focused too much on powers for Senedd",
+   "url": "https://www.bbc.co.uk/news/articles/c6jre3q9jjwro?at_medium=RSS&at_campaign=rss",
    "source": "BBC News",
-   "published": "2026-11-14T12:06:36Z",
+   "published": "2026-11-14T13:19:36Z",
+   "breaking": true
+  },
+  {
+   "title": "Channel migrant found dead on French beach after failed small boat crossing",
+   "url": "https://www.gbnews.com/news/channel-migrant-found-dead-french-beach-failed-small-boat-crossing",
+   "source": "GB News",
+   "published": "2026-11-14T13:11:25Z",
    "breaking": true
   },
   {
    "title": "Young people should have legal guarantee of job or training, Milburn tells BBC",
    "url": "https://www.bbc.co.uk/news/articles/c69vwp09d7vvo?at_medium=RSS&at_campaign=rss",
    "source": "BBC News",
-   "published": "2026-11-14T12:05:59Z",
+   "published": "2026-11-14T12:39:41Z",
    "breaking": true
   },
   {
-   "title": "Torture survivors may have been sent to Sussex asylum camp unlawfully, documentary reveals",
-   "url": "https://www.theguardian.com/uk-news/2026/nov/14/asylum-seekers-crowborough-torture-survivors-military-camp",
-   "source": "The Guardian",
-   "published": "2026-11-14T11:00:43Z",
-   "breaking": true
-  },
-  {
-   "title": "Piddington villagers: We\u2019ll use Andy Burnham\u2019s own Hillsborough Law against him",
-   "url": "https://www.gbnews.com/politics/piddington-villagers-hillsborough-law-andy-burnham",
+   "title": "Nigel Farage hack exposed: Reform UK leader targeted by French spy",
+   "url": "https://www.gbnews.com/politics/nigel-farage-hack-exposed-reform-uk-leader-targeted-french-spy",
    "source": "GB News",
-   "published": "2026-11-14T10:58:52Z",
+   "published": "2026-11-14T12:27:01Z",
    "breaking": true
   },
   {
-   "title": "Golden Jesus Christ statue stolen and smashed by 'drunk British tourist' as police launch investigation",
-   "url": "https://www.gbnews.com/news/world/lithuania-jesus-christ-statue-stolen-smashed-drunk-british-tourist",
-   "source": "GB News",
-   "published": "2026-11-14T09:43:40Z",
+   "title": "Neets review won't be for the faint-hearted - and will test Burnham's appetite for a welfare fight",
+   "url": "https://www.bbc.co.uk/news/articles/cmg46qgkl7r4o?at_medium=RSS&at_campaign=rss",
+   "source": "BBC News",
+   "published": "2026-11-14T12:22:43Z",
    "breaking": true
   }
  ],
- "reported": null
+ "reported": {
+  "date": "2026-11-14",
+  "title": "Channel migrant found dead on French beach after failed small boat crossing",
+  "url": "https://www.gbnews.com/news/channel-migrant-found-dead-french-beach-failed-small-boat-crossing",
+  "source": "GB News",
+  "published": "2026-11-14T13:11:25Z",
+  "ground": false
+ }
 }
