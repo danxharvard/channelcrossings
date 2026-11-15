@@ -1,18 +1,25 @@
 {
- "checkedAt": "2026-11-15T03:16:09Z",
+ "checkedAt": "2026-11-15T04:24:25Z",
  "items": [
+  {
+   "title": "Downing Street speechwriter accused of using ChatGPT to help craft Andy Burnham's keynote address",
+   "url": "https://www.gbnews.com/politics/chatgpt-downing-street-speechwriter-accused-ai-andy-burnham-keynote-address",
+   "source": "GB News",
+   "published": "2026-11-15T03:27:22Z",
+   "breaking": true
+  },
+  {
+   "title": "Unauthorised traveller camp must be cleared of caravans after appeal dismissed",
+   "url": "https://www.gbnews.com/news/lichfield-news-traveller-camp-cleared-appeal-dismissed",
+   "source": "GB News",
+   "published": "2026-11-15T02:25:46Z",
+   "breaking": true
+  },
   {
    "title": "Senior Hamas commander who helped plot October 7 attacks killed in Israeli airstrike",
    "url": "https://www.gbnews.com/news/world/gaza-senior-hamas-commander-october-7-attacks-killed-in-israeli-airstrike",
    "source": "GB News",
    "published": "2026-11-15T01:35:11Z",
-   "breaking": true
-  },
-  {
-   "title": "One missing after 87 migrants rescued while attempting to cross the Channel",
-   "url": "https://www.gbnews.com/news/migrant-crisis-one-missing-rescued-attempting-cross-channel",
-   "source": "GB News",
-   "published": "2026-11-15T00:56:56Z",
    "breaking": true
   }
  ],
