@@ -1,5 +1,5 @@
 {
- "checkedAt": "2026-11-14T22:47:11Z",
+ "checkedAt": "2026-11-15T00:04:26Z",
  "items": [
   {
    "title": "Labour accused of using taxpayer cash to fund 'pro-EU propaganda' at UK universities championing 'European values'",
@@ -21,21 +21,7 @@
    "source": "BBC News",
    "published": "2026-11-14T21:14:52Z",
    "breaking": true
-  },
-  {
-   "title": "Paris engulfed in violence AGAIN as thousands of left-wing protesters wreak havoc in French capital",
-   "url": "https://www.gbnews.com/news/world/paris-riots-left-wing-protests",
-   "source": "GB News",
-   "published": "2026-11-14T20:43:26Z",
-   "breaking": true
   }
  ],
- "reported": {
-  "date": "2026-11-14",
-  "title": "Channel migrant found dead on French beach after failed small boat crossing",
-  "url": "https://www.gbnews.com/news/channel-migrant-found-dead-french-beach-failed-small-boat-crossing",
-  "source": "GB News",
-  "published": "2026-11-14T13:11:25Z",
-  "ground": false
- }
+ "reported": null
 }
