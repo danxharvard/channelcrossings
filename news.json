@@ -1,6 +1,13 @@
 {
- "checkedAt": "2026-11-15T00:04:26Z",
+ "checkedAt": "2026-11-15T01:17:00Z",
  "items": [
+  {
+   "title": "Andy Burnham faces his biggest Labour rebellion as 75 MPs oppose Rosebank oilfield",
+   "url": "https://www.gbnews.com/politics/rosebank-andy-burnham-faces-biggest-labour-rebellion",
+   "source": "GB News",
+   "published": "2026-11-15T00:12:12Z",
+   "breaking": true
+  },
   {
    "title": "Labour accused of using taxpayer cash to fund 'pro-EU propaganda' at UK universities championing 'European values'",
    "url": "https://www.gbnews.com/politics/labour-eu-propaganda-uk-universities",
@@ -13,13 +20,6 @@
    "url": "https://www.gov.uk/government/news/90000-young-people-furthest-from-work-to-be-given-guaranteed-job-no-matter-where-they-live",
    "source": "GOV.UK",
    "published": "2026-11-14T22:30:03Z",
-   "breaking": true
-  },
-  {
-   "title": "UK ethics watchdog chief steps back from role over sexual misconduct claims",
-   "url": "https://www.bbc.co.uk/news/articles/cmewv2kzq2e5o?at_medium=RSS&at_campaign=rss",
-   "source": "BBC News",
-   "published": "2026-11-14T21:14:52Z",
    "breaking": true
   }
  ],
