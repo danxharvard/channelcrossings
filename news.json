@@ -1,18 +1,25 @@
 {
- "checkedAt": "2026-11-15T21:06:44Z",
+ "checkedAt": "2026-11-15T21:49:04Z",
  "items": [
+  {
+   "title": "Trident submarine returns home after record-breaking undersea patrol",
+   "url": "https://www.bbc.co.uk/news/articles/c32l5ny1r7x9o?at_medium=RSS&at_campaign=rss",
+   "source": "BBC News",
+   "published": "2026-11-15T21:48:10Z",
+   "breaking": true
+  },
+  {
+   "title": "Thames Water warns asylum seekers will face insects and strong smells due to nearby sewage pumping station",
+   "url": "https://www.gbnews.com/news/thames-water-oxfordshire-sewage-pumping-station",
+   "source": "GB News",
+   "published": "2026-11-15T20:55:22Z",
+   "breaking": true
+  },
   {
    "title": "Trans law should be scrapped, say church leaders as it would 'criminalise' Christian preaching",
    "url": "https://www.gbnews.com/politics/trans-row-church-leaders-law-scrap-preaching-outlawed",
    "source": "GB News",
    "published": "2026-11-15T19:24:47Z",
-   "breaking": true
-  },
-  {
-   "title": "Nato member to shut Russian border within weeks after 'clear evidence' of sabotage",
-   "url": "https://www.gbnews.com/news/world/estonia-russia-border-closure-clear-evidence-sabotage",
-   "source": "GB News",
-   "published": "2026-11-15T18:22:37Z",
    "breaking": true
   }
  ],
