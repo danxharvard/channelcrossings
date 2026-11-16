@@ -57,14 +57,14 @@
  ],
  "partialYear": "2026",
  "last90": {
-  "people": 8336,
-  "boats": 120,
+  "people": 8086,
+  "boats": 117,
   "avg": 69,
-  "to": "2026-11-14"
+  "to": "2026-11-15"
  },
  "recordMonth": {
   "month": "2026-08",
   "avg": 77
  },
- "updatedAt": "2026-11-15T12:10:36Z"
+ "updatedAt": "2026-11-16T16:32:06Z"
 }
