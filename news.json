@@ -1,48 +1,20 @@
 {
- "checkedAt": "2026-11-15T23:13:38Z",
+ "checkedAt": "2026-11-16T01:13:02Z",
  "items": [
+  {
+   "title": "Cold homes blamed for 4.5 million extra A&E visits as experts warn of deadly fuel poverty crisis",
+   "url": "https://www.gbnews.com/health/energy-crisis-extra-ae-visits",
+   "source": "GB News",
+   "published": "2026-11-16T00:01:03Z",
+   "breaking": true
+  },
   {
    "title": "Cut national insurance for under-25s to create jobs, Milburn report to say",
    "url": "https://www.bbc.co.uk/news/articles/c6p9dzmj514ko?at_medium=RSS&at_campaign=rss",
    "source": "BBC News",
    "published": "2026-11-15T22:30:03Z",
    "breaking": true
-  },
-  {
-   "title": "Tories pledge to halt screen-based school exams and cut coursework",
-   "url": "https://www.bbc.co.uk/news/articles/cwr7gnkd7m04o?at_medium=RSS&at_campaign=rss",
-   "source": "BBC News",
-   "published": "2026-11-15T22:00:37Z",
-   "breaking": true
-  },
-  {
-   "title": "UK will have 'voice' but no vote on EU food rules in Brexit reset",
-   "url": "https://www.bbc.co.uk/news/articles/c6wy4l8nl42wo?at_medium=RSS&at_campaign=rss",
-   "source": "BBC News",
-   "published": "2026-11-15T22:00:24Z",
-   "breaking": true
-  },
-  {
-   "title": "Trident submarine returns home after record-breaking undersea patrol",
-   "url": "https://www.bbc.co.uk/news/articles/c32l5ny1r7x9o?at_medium=RSS&at_campaign=rss",
-   "source": "BBC News",
-   "published": "2026-11-15T21:48:10Z",
-   "breaking": true
-  },
-  {
-   "title": "British holiday hotspot declares emergency after RECORD number of illegal migrants overwhelm tiny island",
-   "url": "https://www.gbnews.com/news/world/migrant-crisis-canary-islands-declare-emergency-record-number-of-illegal-migrants",
-   "source": "GB News",
-   "published": "2026-11-15T21:40:18Z",
-   "breaking": true
   }
  ],
- "reported": {
-  "date": "2026-11-15",
-  "title": "One missing after 87 migrants rescued while attempting to cross the Channel",
-  "url": "https://www.gbnews.com/news/migrant-crisis-one-missing-rescued-attempting-cross-channel",
-  "source": "GB News",
-  "published": "2026-11-15T00:56:56Z",
-  "ground": false
- }
+ "reported": null
 }
