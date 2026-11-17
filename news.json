@@ -1,6 +1,13 @@
 {
- "checkedAt": "2026-11-17T00:09:49Z",
+ "checkedAt": "2026-11-17T01:23:03Z",
  "items": [
+  {
+   "title": "Five EU states announce plans for immigration \u2018return hubs\u2019 in Rwanda",
+   "url": "https://www.theguardian.com/world/2026/nov/16/eu-states-immigration-return-hubs-rwanda",
+   "source": "The Guardian",
+   "published": "2026-11-17T01:10:59Z",
+   "breaking": true
+  },
   {
    "title": "Shock map reveals England's worst waste crime hotspots as criminals 'run rings' around authorities",
    "url": "https://www.gbnews.com/news/england-worst-waste-crime-hotspots-revealed-map-criminals",
@@ -27,13 +34,6 @@
    "url": "https://www.bbc.co.uk/news/articles/c38xzy980924o?at_medium=RSS&at_campaign=rss",
    "source": "BBC News",
    "published": "2026-11-16T22:32:47Z",
-   "breaking": true
-  },
-  {
-   "title": "Children dropping out of school: What can politicians do about it?",
-   "url": "https://www.bbc.co.uk/news/articles/cje39lx9267vo?at_medium=RSS&at_campaign=rss",
-   "source": "BBC News",
-   "published": "2026-11-16T22:23:41Z",
    "breaking": true
   }
  ],
