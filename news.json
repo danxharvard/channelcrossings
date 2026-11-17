@@ -1,11 +1,25 @@
 {
- "checkedAt": "2026-11-17T17:44:27Z",
+ "checkedAt": "2026-11-17T18:38:02Z",
  "items": [
   {
    "title": "UK sanctions firms over Israeli West Bank settlements",
    "url": "https://www.bbc.co.uk/news/articles/cvglr977x3z0o?at_medium=RSS&at_campaign=rss",
    "source": "BBC News",
-   "published": "2026-11-17T17:41:49Z",
+   "published": "2026-11-17T18:27:27Z",
+   "breaking": true
+  },
+  {
+   "title": "Government backs welfare shake-up to prevent 'lost generation'",
+   "url": "https://www.bbc.co.uk/news/articles/ck79210y125xo?at_medium=RSS&at_campaign=rss",
+   "source": "BBC News",
+   "published": "2026-11-17T18:18:40Z",
+   "breaking": true
+  },
+  {
+   "title": "Ex-Reform Wales leader Dan Thomas faces no further police action after assault arrest",
+   "url": "https://www.bbc.co.uk/news/articles/cq98xl8jgp0go?at_medium=RSS&at_campaign=rss",
+   "source": "BBC News",
+   "published": "2026-11-17T18:13:27Z",
    "breaking": true
   },
   {
@@ -20,20 +34,6 @@
    "url": "https://www.gbnews.com/news/world/tuscany-holiday-hotspot-revolts-plans-massive-wind-turbines",
    "source": "GB News",
    "published": "2026-11-17T15:53:09Z",
-   "breaking": true
-  },
-  {
-   "title": "Police 'retreating from Britain's streets' as officers vanish under Labour's watch",
-   "url": "https://www.gbnews.com/news/police-britain-streets-officers-labour-watch-mark-rowley-early-release-scheme",
-   "source": "GB News",
-   "published": "2026-11-17T15:52:33Z",
-   "breaking": true
-  },
-  {
-   "title": "Britain now has more economically inactive migrants than entire population of Birmingham",
-   "url": "https://www.gbnews.com/politics/migrant-crisis-labour-rise-foreign-nationals-claiming-benefits",
-   "source": "GB News",
-   "published": "2026-11-17T15:39:06Z",
    "breaking": true
   }
  ],
