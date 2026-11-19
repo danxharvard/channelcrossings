@@ -1,6 +1,20 @@
 {
- "checkedAt": "2026-11-19T18:18:21Z",
+ "checkedAt": "2026-11-19T19:30:56Z",
  "items": [
+  {
+   "title": "UK and EU plan first talks on sending refused asylum seekers to third countries",
+   "url": "https://www.theguardian.com/uk-news/2026/nov/19/uk-eu-talks-asylum-seekers-third-country-hubs",
+   "source": "The Guardian",
+   "published": "2026-11-19T19:02:45Z",
+   "breaking": true
+  },
+  {
+   "title": "EU-UK talks going down to the wire, says No 10",
+   "url": "https://www.bbc.co.uk/news/articles/c623j4kpg94go?at_medium=RSS&at_campaign=rss",
+   "source": "BBC News",
+   "published": "2026-11-19T18:55:52Z",
+   "breaking": true
+  },
   {
    "title": "PM speech at Coalition of the Willing in Berlin: 19 November 2026",
    "url": "https://www.gov.uk/government/speeches/pm-speech-at-coalition-of-the-willing-in-berlin-19-november-2026",
@@ -20,20 +34,6 @@
    "url": "https://www.bbc.co.uk/news/articles/c65y193gpvkgo?at_medium=RSS&at_campaign=rss",
    "source": "BBC News",
    "published": "2026-11-19T17:59:16Z",
-   "breaking": true
-  },
-  {
-   "title": "UK to provide Ukraine with 1,000 long-range strike drones",
-   "url": "https://www.bbc.co.uk/news/articles/c5n4em9mkkzeo?at_medium=RSS&at_campaign=rss",
-   "source": "BBC News",
-   "published": "2026-11-19T17:59:01Z",
-   "breaking": true
-  },
-  {
-   "title": "Irish government denies 'foot-dragging' over Omagh Bombing Inquiry",
-   "url": "https://www.bbc.co.uk/news/articles/cx1l0p50g23ro?at_medium=RSS&at_campaign=rss",
-   "source": "BBC News",
-   "published": "2026-11-19T17:53:57Z",
    "breaking": true
   }
  ],
