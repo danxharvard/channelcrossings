@@ -1,11 +1,25 @@
 {
- "checkedAt": "2026-11-19T10:38:45Z",
+ "checkedAt": "2026-11-19T11:36:40Z",
  "items": [
   {
    "title": "Cleverly to run as Tory London mayor candidate",
    "url": "https://www.bbc.co.uk/news/articles/cmy0ep02wn3lo?at_medium=RSS&at_campaign=rss",
    "source": "BBC News",
-   "published": "2026-11-19T10:33:34Z",
+   "published": "2026-11-19T11:26:44Z",
+   "breaking": true
+  },
+  {
+   "title": "Call for corporate homicide probe over claims NHS Grampian patients unnecessarily bled to death",
+   "url": "https://www.bbc.co.uk/news/articles/crjeqxexyq05o?at_medium=RSS&at_campaign=rss",
+   "source": "BBC News",
+   "published": "2026-11-19T11:18:48Z",
+   "breaking": true
+  },
+  {
+   "title": "Google rejects UK request for Russell Brand YouTube video to be removed, sources say",
+   "url": "https://www.bbc.co.uk/news/articles/cmgrenln8p29o?at_medium=RSS&at_campaign=rss",
+   "source": "BBC News",
+   "published": "2026-11-19T10:51:35Z",
    "breaking": true
   },
   {
@@ -20,20 +34,6 @@
    "url": "https://www.gov.uk/government/news/minister-for-scotland-sets-out-plans-to-tackle-poverty",
    "source": "GOV.UK",
    "published": "2026-11-19T09:47:46Z",
-   "breaking": true
-  },
-  {
-   "title": "Leasehold system set to be scrapped in England and Wales",
-   "url": "https://www.bbc.co.uk/news/articles/cw987ynpd0n1o?at_medium=RSS&at_campaign=rss",
-   "source": "BBC News",
-   "published": "2026-11-19T09:26:59Z",
-   "breaking": true
-  },
-  {
-   "title": "Google rejects UK request for Russell Brand YouTube video to be removed, sources say",
-   "url": "https://www.bbc.co.uk/news/articles/cmgrenln8p29o?at_medium=RSS&at_campaign=rss",
-   "source": "BBC News",
-   "published": "2026-11-19T08:35:07Z",
    "breaking": true
   }
  ],
