@@ -1,6 +1,13 @@
 {
- "checkedAt": "2026-11-20T18:23:46Z",
+ "checkedAt": "2026-11-20T19:30:55Z",
  "items": [
+  {
+   "title": "White supremacist convicted of plotting to firebomb migrant hotel",
+   "url": "https://news.sky.com/story/white-supremacist-convicted-of-plotting-to-firebomb-migrant-hotel-13614434",
+   "source": "Sky News",
+   "published": "2026-11-20T18:46:00Z",
+   "breaking": true
+  },
   {
    "title": "Burnham seals trade and youth mobility deals in biggest step towards EU since Brexit",
    "url": "https://www.theguardian.com/politics/2026/nov/20/burnham-trade-youth-mobility-deals-biggest-step-towards-eu-since-brexit",
@@ -27,13 +34,6 @@
    "url": "https://www.bbc.co.uk/news/articles/c6lywjpn5levo?at_medium=RSS&at_campaign=rss",
    "source": "BBC News",
    "published": "2026-11-20T16:39:49Z",
-   "breaking": true
-  },
-  {
-   "title": "Henry Zeffman: Burnham's first taste of EU deal-making unlikely to be his last",
-   "url": "https://www.bbc.co.uk/news/articles/cm4gn092gydwo?at_medium=RSS&at_campaign=rss",
-   "source": "BBC News",
-   "published": "2026-11-20T16:19:08Z",
    "breaking": true
   }
  ],
