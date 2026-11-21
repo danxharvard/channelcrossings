@@ -1,18 +1,18 @@
 {
- "checkedAt": "2026-11-20T23:14:36Z",
+ "checkedAt": "2026-11-21T01:23:18Z",
  "items": [
+  {
+   "title": "'Closest ties since Brexit' and 'Grand Theft EU'",
+   "url": "https://www.bbc.co.uk/news/articles/cw7829pl3xklo?at_medium=RSS&at_campaign=rss",
+   "source": "BBC News",
+   "published": "2026-11-21T01:07:01Z",
+   "breaking": true
+  },
   {
    "title": "Andy Burnham warned EU reset deal pushes British businesses to breaking point",
    "url": "https://www.gbnews.com/news/eu-reset-deal-andy-burnham-british-industry",
    "source": "GB News",
    "published": "2026-11-20T23:04:41Z",
-   "breaking": true
-  },
-  {
-   "title": "What the new UK-EU deal could mean for future post-Brexit relations",
-   "url": "https://www.bbc.co.uk/news/videos/c90k6gl3lyxeo?at_medium=RSS&at_campaign=rss",
-   "source": "BBC News",
-   "published": "2026-11-20T21:43:22Z",
    "breaking": true
   }
  ],
