@@ -1,11 +1,18 @@
 {
- "checkedAt": "2026-11-22T13:42:49Z",
+ "checkedAt": "2026-11-22T14:33:17Z",
  "items": [
   {
    "title": "Cop31 climate summit fails to reach agreement \u2014 but produces enough CO2 to power 60,000 British homes for a year",
    "url": "https://www.gbnews.com/news/world/cop31-climate-summit-agreement-co2-emissions",
    "source": "GB News",
    "published": "2026-11-22T13:25:17Z",
+   "breaking": true
+  },
+  {
+   "title": "Tories would scrap Burnham's deal with EU, deputy leader says",
+   "url": "https://www.bbc.co.uk/news/articles/cr868jnlllpgo?at_medium=RSS&at_campaign=rss",
+   "source": "BBC News",
+   "published": "2026-11-22T13:15:57Z",
    "breaking": true
   },
   {
@@ -20,13 +27,6 @@
    "url": "https://www.gbnews.com/opinion/labour-shabana-mahmood-andy-burnham-migrants-migrant-crime-britain",
    "source": "GB News",
    "published": "2026-11-22T11:37:11Z",
-   "breaking": true
-  },
-  {
-   "title": "Hillsborough-style inquiry into nuclear test veterans 'cover-up' set to be announced in days",
-   "url": "https://www.gbnews.com/politics/nuclear-test-veterans-labour-hillsborough-style-inquiry-cover-up",
-   "source": "GB News",
-   "published": "2026-11-22T10:52:17Z",
    "breaking": true
   }
  ],
