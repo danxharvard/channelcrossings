@@ -1,6 +1,13 @@
 {
- "checkedAt": "2026-11-23T12:44:52Z",
+ "checkedAt": "2026-11-23T14:08:05Z",
  "items": [
+  {
+   "title": "Pip assessments need 'fundamental overhaul', report to say",
+   "url": "https://www.bbc.co.uk/news/articles/cvlyj3rn201xo?at_medium=RSS&at_campaign=rss",
+   "source": "BBC News",
+   "published": "2026-11-23T13:20:32Z",
+   "breaking": true
+  },
   {
    "title": "Asylum seekers removed from UK subjected to \u2018unnecessary and intimidating\u2019 force",
    "url": "https://www.theguardian.com/uk-news/2026/nov/23/asylum-seekers-removed-from-uk-unnecessary-and-intimidating-force",
@@ -9,7 +16,7 @@
    "breaking": true
   },
   {
-   "title": "Rupert Lowe\u2019s bot problem raises some very serious questions about Restore",
+   "title": "How I exposed Rupert Lowe's bot army.. and why it matters",
    "url": "https://www.gbnews.com/opinion/rupert-lowe-restore-britain-bots-fake-accounts-reform-nigel-farage-david-shipley",
    "source": "GB News",
    "published": "2026-11-23T12:19:54Z",
@@ -20,13 +27,6 @@
    "url": "https://www.gbnews.com/news/manchester-co-op-live-arena-troubled-history-venue-andy-burnham",
    "source": "GB News",
    "published": "2026-11-23T11:22:57Z",
-   "breaking": true
-  },
-  {
-   "title": "Why William would be dead right to strip Harry of his titles",
-   "url": "https://www.gbnews.com/opinion/prince-william-prince-harry-royals-royal-family-princess-of-wales-meghan-markle-lee-cohen",
-   "source": "GB News",
-   "published": "2026-11-23T10:53:26Z",
    "breaking": true
   }
  ],
