@@ -1,11 +1,18 @@
 {
- "checkedAt": "2026-11-23T21:24:00Z",
+ "checkedAt": "2026-11-23T22:18:38Z",
  "items": [
   {
    "title": "Burnham does not view Wales as an equal nation, claims first minister",
    "url": "https://www.bbc.co.uk/news/articles/cqr7gzmgm33ko?at_medium=RSS&at_campaign=rss",
    "source": "BBC News",
    "published": "2026-11-23T21:10:24Z",
+   "breaking": true
+  },
+  {
+   "title": "Police force makes humiliating Pride U-turn as taxpayers face huge legal bill",
+   "url": "https://www.gbnews.com/news/wiltshire-police-humiliating-pride-u-turn",
+   "source": "GB News",
+   "published": "2026-11-23T21:03:06Z",
    "breaking": true
   },
   {
@@ -20,13 +27,6 @@
    "url": "https://www.gbnews.com/politics/richard-tice-cop-climate-summit-failure",
    "source": "GB News",
    "published": "2026-11-23T19:21:48Z",
-   "breaking": true
-  },
-  {
-   "title": "My approach to EU is pragmatic, says Burnham",
-   "url": "https://www.bbc.co.uk/news/articles/c6vg2v9xkr40o?at_medium=RSS&at_campaign=rss",
-   "source": "BBC News",
-   "published": "2026-11-23T19:10:44Z",
    "breaking": true
   }
  ],
