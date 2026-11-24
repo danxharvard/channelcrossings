@@ -4,10 +4,7 @@ A one-page site showing how many people cross the English Channel in small boats
 
 ## Files
 
-- `index.html` – the page: the "Bridge" instrument panel (radar of the Strait, year total, daily log, vessels, news)
-- `trends.html` – every day since 2018: the daily chart, records, running totals, patterns, quiet spells, a date calculator and the arrival outlook
-- `people.html` – who crosses: sex and age, nationalities, people per boat, returns, asylum claims and support, petitions
-- `bridge.css`, `bridge.js` – the look, the figures loader, the menu, Report a crossing and Share, shared by all three pages
+- `index.html` – the page
 - `privacy.html` – the Privacy Policy and Terms of Use, linked from the page footer
 - `favicon.svg` – the CC logo shown in the browser tab
 - `apple-touch-icon.png` – the icon used when someone adds the site to their iPhone home screen
@@ -22,13 +19,13 @@ A one-page site showing how many people cross the English Channel in small boats
 - `data.csv` – the same daily figures as a spreadsheet download, linked from the footer
 - `how-it-works.html` – where the figures come from
 - `embed.html` – the small "latest figure" box other sites can embed
-- `404.html` – shown for any address that doesn't exist (including the retired beta, classic, Beach Radar and previous-design pages); sends visitors to the homepage
+- `404.html` – shown for any address that doesn't exist (including the retired beta, classic, Beach Radar and previous-design pages, and the old Trends and People pages); sends visitors to the homepage
 - `sw.js` – offline mode: keeps a copy of the site on visitors' devices
 - `robots.txt`, `sitemap.xml` – help search engines find and index the site
 - `week-card.png` – the "Week in numbers" picture, redrawn daily for the last full week
 - `manifest.webmanifest`, `icon-192.png`, `icon-512.png` – let visitors add the site to their home screen as an app
 - Report Channel Crossing (the eye button) is a private form sent through Web3Forms; the access key `RS_KEY` in `index.html` decides which inbox reports go to
-- `vendor/inter/`, `vendor/inter-tight/`, `vendor/jetbrains-mono/` – the Inter, Inter Tight and JetBrains Mono fonts (SIL Open Font License): JetBrains Mono for the homepage's panels, Inter Tight for its big figures
+- `vendor/inter/`, `vendor/inter-tight/` – the Inter and Inter Tight fonts (SIL Open Font License), used on every device: Inter for text, Inter Tight for headings and big figures
 - `scripts/update.py` – fetches the latest figures from GOV.UK and updates `data.json`
 - `scripts/news.py`, `news.json`, `.github/workflows/news.yml` – breaking news about small boats from UK news feeds, every 15 minutes (create `news-override.json` to hide or pin a story)
 - `scripts/build-towns.js`, `towns.json` – the extra town names on the homepage map (GeoNames, CC BY 4.0), shown more as you zoom in; rebuilt by hand, not on a schedule
