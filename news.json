@@ -1,6 +1,13 @@
 {
- "checkedAt": "2026-11-24T01:47:26Z",
+ "checkedAt": "2026-11-24T02:49:05Z",
  "items": [
+  {
+   "title": "'I MADE the deal!' Donald Trump takes credit for Jensen Huang's return to Nvidia",
+   "url": "https://www.gbnews.com/politics/us/donald-trump-jensen-huang-return-nvidia",
+   "source": "GB News",
+   "published": "2026-11-24T02:07:47Z",
+   "breaking": true
+  },
   {
    "title": "UK papers: 'Huang returns to Nvidia hotseat' and 'Burnham opens door to second referendum'",
    "url": "https://www.bbc.co.uk/news/articles/c69vwg0kxvy9o?at_medium=RSS&at_campaign=rss",
@@ -20,6 +27,13 @@
    "url": "https://www.bbc.co.uk/news/articles/c6rrg7jx5gdgo?at_medium=RSS&at_campaign=rss",
    "source": "BBC News",
    "published": "2026-11-24T00:31:28Z",
+   "breaking": true
+  },
+  {
+   "title": "Just a THIRD of Britons like 'God Save the King' as bombshell poll reveals apathy to national anthem",
+   "url": "https://www.gbnews.com/news/god-save-the-king-poll-third-britons-apathy-national-anthem",
+   "source": "GB News",
+   "published": "2026-11-24T00:01:03Z",
    "breaking": true
   }
  ],
