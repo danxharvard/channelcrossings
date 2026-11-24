@@ -2,7 +2,7 @@
  "ytdBase": 0,
  "ytdBaseDate": "2026-01-00",
  "prevYearSamePoint": 39292,
- "checkedAt": "2026-11-24T12:56:53Z",
+ "checkedAt": "2026-11-24T14:14:57Z",
  "source": "https://www.gov.uk/government/publications/migrants-detected-crossing-the-english-channel-in-small-boats",
  "days": [
 {"date":"2018-01-01","migrants":0,"boats":0,"uncontrolled":null},
@@ -3252,6 +3252,7 @@
 {"date":"2026-11-19","migrants":0,"boats":0,"uncontrolled":0},
 {"date":"2026-11-20","migrants":0,"boats":0,"uncontrolled":0},
 {"date":"2026-11-21","migrants":0,"boats":0,"uncontrolled":0},
-{"date":"2026-11-22","migrants":0,"boats":0,"uncontrolled":0}
+{"date":"2026-11-22","migrants":0,"boats":0,"uncontrolled":0},
+{"date":"2026-11-23","migrants":0,"boats":0,"uncontrolled":0}
 ]
 }
