@@ -1,32 +1,39 @@
 {
- "checkedAt": "2026-11-24T10:50:52Z",
+ "checkedAt": "2026-11-24T11:50:42Z",
  "items": [
+  {
+   "title": "Prince William meets Burnham on first Downing Street visit",
+   "url": "https://www.bbc.co.uk/news/articles/cm5y1xk1gpqvo?at_medium=RSS&at_campaign=rss",
+   "source": "BBC News",
+   "published": "2026-11-24T11:37:53Z",
+   "breaking": true
+  },
+  {
+   "title": "What is Pip?",
+   "url": "https://www.bbc.co.uk/news/videos/cqm2jyj77xm5o?at_medium=RSS&at_campaign=rss",
+   "source": "BBC News",
+   "published": "2026-11-24T11:25:03Z",
+   "breaking": true
+  },
+  {
+   "title": "England's unprecedented summer heatwave linked to record 5,250 deaths",
+   "url": "https://www.gbnews.com/weather/uk-weather-heat-deaths-england-summer-heatwave-5250",
+   "source": "GB News",
+   "published": "2026-11-24T10:56:39Z",
+   "breaking": true
+  },
+  {
+   "title": "Fears lollipop ladies could be going EXTINCT as councils struggling to recruit",
+   "url": "https://www.gbnews.com/news/lollipop-ladies-job-extinct-councils-struggling-recruit",
+   "source": "GB News",
+   "published": "2026-11-24T10:24:07Z",
+   "breaking": true
+  },
   {
    "title": "Items from Ann Widdecombe's estate go up for sale including portraits of murdered politician",
    "url": "https://www.gbnews.com/news/ann-widdecombe-items-auction-portrait-murder",
    "source": "GB News",
    "published": "2026-11-24T10:18:17Z",
-   "breaking": true
-  },
-  {
-   "title": "Benefits review to suggest quicker payment for some disabled people",
-   "url": "https://www.bbc.co.uk/news/articles/cvx2xjed2r3ro?at_medium=RSS&at_campaign=rss",
-   "source": "BBC News",
-   "published": "2026-11-24T10:04:13Z",
-   "breaking": true
-  },
-  {
-   "title": "'NO point in coming forward and reporting crime,' warns Victims' Commissioner in damning review of Britain's justice system",
-   "url": "https://www.gbnews.com/news/crime-victims-commissioner-report-no-point-reporting",
-   "source": "GB News",
-   "published": "2026-11-24T09:23:58Z",
-   "breaking": true
-  },
-  {
-   "title": "Gisele Pelicot's nude photographs sent by publisher to promote book leaving rape survivor 'humiliated'",
-   "url": "https://www.gbnews.com/news/world/gisele-pelicot-nude-photographs-publisher-sabine-prokhoris",
-   "source": "GB News",
-   "published": "2026-11-24T07:54:28Z",
    "breaking": true
   }
  ],
