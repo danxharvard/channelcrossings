@@ -1,11 +1,25 @@
 {
- "checkedAt": "2026-11-25T16:37:00Z",
+ "checkedAt": "2026-11-25T17:29:36Z",
  "items": [
   {
-   "title": "Badenoch presses PM over university fees for EU students",
-   "url": "https://www.bbc.co.uk/news/videos/cv8e04gz1gwjo?at_medium=RSS&at_campaign=rss",
+   "title": "Badenoch challenges Burnham over university fees for EU students",
+   "url": "https://www.bbc.co.uk/news/articles/cw4gn8lxj5r1o?at_medium=RSS&at_campaign=rss",
    "source": "BBC News",
-   "published": "2026-11-25T16:35:32Z",
+   "published": "2026-11-25T16:46:17Z",
+   "breaking": true
+  },
+  {
+   "title": "EU offers UK fresh deal on 'Made in Europe' scheme",
+   "url": "https://www.bbc.co.uk/news/articles/c50md8x9gdgro?at_medium=RSS&at_campaign=rss",
+   "source": "BBC News",
+   "published": "2026-11-25T16:45:09Z",
+   "breaking": true
+  },
+  {
+   "title": "Nurses demand protection from Labour\u2019s trans law over fears conversations around gender could be criminalised",
+   "url": "https://www.gbnews.com/politics/labour-trans-law-nurses-demand-protection-legislation-fears-conversations-criminalised",
+   "source": "GB News",
+   "published": "2026-11-25T16:35:24Z",
    "breaking": true
   },
   {
@@ -20,20 +34,6 @@
    "url": "https://www.gbnews.com/news/christian-persecution-silent-prayer-woman-trial-abortion-clinic-isabel-vaughan-spruce",
    "source": "GB News",
    "published": "2026-11-25T15:37:37Z",
-   "breaking": true
-  },
-  {
-   "title": "Pope Francis felt tempted by the Devil during two-year crisis, private diaries reveal",
-   "url": "https://www.gbnews.com/news/pope-francis-tempted-devil-two-year-crisis-private-diaries",
-   "source": "GB News",
-   "published": "2026-11-25T15:34:07Z",
-   "breaking": true
-  },
-  {
-   "title": "Donald Trump set to hit EU and China with fresh tariffs as Britain dodges trade blow",
-   "url": "https://www.gbnews.com/politics/us/donald-trump-eu-china-tariffs",
-   "source": "GB News",
-   "published": "2026-11-25T15:33:51Z",
    "breaking": true
   }
  ],
