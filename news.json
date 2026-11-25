@@ -1,6 +1,13 @@
 {
- "checkedAt": "2026-11-25T02:02:43Z",
+ "checkedAt": "2026-11-25T03:08:00Z",
  "items": [
+  {
+   "title": "Labour MPs urge Andy Burnham to make key disability benefit more accessible as PM faces backbench rebellion",
+   "url": "https://www.gbnews.com/politics/labour-mps-urge-andy-burnham-pip-more-accessible",
+   "source": "GB News",
+   "published": "2026-11-25T02:28:26Z",
+   "breaking": true
+  },
   {
    "title": "Ministers ask public for views on changing age of consent",
    "url": "https://www.bbc.co.uk/news/articles/cwgkl31kmnddo?at_medium=RSS&at_campaign=rss",
@@ -13,13 +20,6 @@
    "url": "https://www.bbc.co.uk/news/articles/crq5v3g5jq13o?at_medium=RSS&at_campaign=rss",
    "source": "BBC News",
    "published": "2026-11-25T01:34:53Z",
-   "breaking": true
-  },
-  {
-   "title": "Britons likely to turn their heating this winter, report warns, as gas bills surge once again",
-   "url": "https://www.gbnews.com/money/gas-bills-heating-winter-prices",
-   "source": "GB News",
-   "published": "2026-11-25T00:01:01Z",
    "breaking": true
   }
  ],
