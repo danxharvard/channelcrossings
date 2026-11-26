@@ -1,38 +1,38 @@
 {
- "source": "https://assets.publishing.service.gov.uk/media/6a85c41d3d82f78d5c514551/illegal-entry-routes-to-the-uk-dataset-jun-2026.xlsx",
- "latestQuarter": "2026 Q2",
- "period": "year ending June 2026",
+ "source": "https://assets.publishing.service.gov.uk/media/6afd7e47f24e0dfc46aa7f75/illegal-entry-routes-to-the-uk-dataset-sep-2026.xlsx",
+ "latestQuarter": "2026 Q3",
+ "period": "year ending September 2026",
  "lastYear": {
   "sex": {
-   "Male": 26973,
-   "Female": 5260,
-   "Unknown": 1141
+   "Male": 21324,
+   "Female": 4224,
+   "Unknown": 1033
   },
   "age": {
-   "17 and under": 4993,
-   "18 to 24": 10637,
-   "25 to 39": 14341,
-   "40 and over": 2263,
-   "Unknown": 1140
+   "17 and under": 4163,
+   "18 to 24": 8653,
+   "25 to 39": 11054,
+   "40 and over": 1678,
+   "Unknown": 1033
   },
-  "adultMen": 23110,
-  "total": 33374
+  "adultMen": 17998,
+  "total": 26581
  },
  "since2018": {
   "sex": {
-   "Male": 174171,
-   "Female": 26077,
-   "Unknown": 4269
+   "Male": 180063,
+   "Female": 27333,
+   "Unknown": 4433
   },
   "age": {
-   "17 and under": 32306,
-   "18 to 24": 66808,
-   "25 to 39": 86529,
-   "40 and over": 14924,
-   "Unknown": 3950
+   "17 and under": 33675,
+   "18 to 24": 69168,
+   "25 to 39": 89463,
+   "40 and over": 15409,
+   "Unknown": 4114
   },
-  "adultMen": 148786,
-  "total": 204517
+  "adultMen": 153564,
+  "total": 211829
  },
- "updatedAt": "2026-09-27T18:15:08Z"
+ "updatedAt": "2026-11-26T12:59:21Z"
 }

@@ -1,10 +1,10 @@
 {
- "source": "https://assets.publishing.service.gov.uk/media/6a85c576b0504df9f2c89805/returns-summary-jun-2026-tables.ods",
- "latestQuarter": "2026 Q2",
- "period": "year ending June 2026",
- "year": 3310,
- "change": 35,
- "arrived": 33374,
+ "source": "https://assets.publishing.service.gov.uk/media/6b0473d3992d28898996bcb3/returns-summary-sep-2026-tables.ods",
+ "latestQuarter": "2026 Q3",
+ "period": "year ending September 2026",
+ "year": 4025,
+ "change": 56,
+ "arrived": 26581,
  "quarters": [
   {
    "q": "2018 Q1",
@@ -112,66 +112,70 @@
   },
   {
    "q": "2024 Q3",
-   "n": 589,
-   "p": true
+   "n": 589
   },
   {
    "q": "2024 Q4",
-   "n": 555,
+   "n": 583,
    "p": true
   },
   {
    "q": "2025 Q1",
-   "n": 616,
+   "n": 634,
    "p": true
   },
   {
    "q": "2025 Q2",
-   "n": 685,
+   "n": 710,
    "p": true
   },
   {
    "q": "2025 Q3",
-   "n": 631,
+   "n": 648,
    "p": true
   },
   {
    "q": "2025 Q4",
-   "n": 885,
+   "n": 913,
    "p": true
   },
   {
    "q": "2026 Q1",
-   "n": 695,
+   "n": 744,
    "p": true
   },
   {
    "q": "2026 Q2",
-   "n": 1099,
+   "n": 1241,
+   "p": true
+  },
+  {
+   "q": "2026 Q3",
+   "n": 1127,
    "p": true
   }
  ],
  "top": [
   {
    "name": "Albania",
-   "n": 1321
-  },
-  {
-   "name": "Turkey",
-   "n": 269
-  },
-  {
-   "name": "Eritrea",
-   "n": 230
+   "n": 1318
   },
   {
    "name": "Afghanistan",
-   "n": 225
+   "n": 347
+  },
+  {
+   "name": "Eritrea",
+   "n": 337
+  },
+  {
+   "name": "Turkey",
+   "n": 313
   },
   {
    "name": "Iraq",
-   "n": 173
+   "n": 236
   }
  ],
- "updatedAt": "2026-10-16T08:07:49Z"
+ "updatedAt": "2026-11-26T12:59:24Z"
 }
