@@ -1,6 +1,13 @@
 {
- "checkedAt": "2026-11-26T19:47:48Z",
+ "checkedAt": "2026-11-26T20:47:13Z",
  "items": [
+  {
+   "title": "Net migration to UK falls to lowest level since 1997 excluding pandemic",
+   "url": "https://www.theguardian.com/uk-news/2026/nov/26/net-migration-to-uk-falls-to-lowest-level-since-1997-excluding-pandemic",
+   "source": "The Guardian",
+   "published": "2026-11-26T20:01:47Z",
+   "breaking": true
+  },
   {
    "title": "Burnham says UK net migration now under 'sufficient' control",
    "url": "https://www.bbc.co.uk/news/articles/ck792l8ndqyqo?at_medium=RSS&at_campaign=rss",
@@ -27,13 +34,6 @@
    "url": "https://www.bbc.co.uk/news/articles/cvglrn4p1np0o?at_medium=RSS&at_campaign=rss",
    "source": "BBC News",
    "published": "2026-11-26T18:26:09Z",
-   "breaking": true
-  },
-  {
-   "title": "Mandelson kept shares as ambassador despite conflict of interest fears, documents show",
-   "url": "https://www.bbc.co.uk/news/articles/c6808dv4e817o?at_medium=RSS&at_campaign=rss",
-   "source": "BBC News",
-   "published": "2026-11-26T18:22:31Z",
    "breaking": true
   }
  ],
