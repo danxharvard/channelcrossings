@@ -1,18 +1,25 @@
 {
- "checkedAt": "2026-11-26T01:51:37Z",
+ "checkedAt": "2026-11-26T02:48:34Z",
  "items": [
+  {
+   "title": "UK government set to publish new treaties agreed with EU",
+   "url": "https://www.bbc.co.uk/news/articles/c98r7p65edvgo?at_medium=RSS&at_campaign=rss",
+   "source": "BBC News",
+   "published": "2026-11-26T02:13:00Z",
+   "breaking": true
+  },
+  {
+   "title": "New James Bond actor Robert Pattinson wished 'luck' by Donald Trump",
+   "url": "https://www.gbnews.com/celebrity/james-bond-actor-robert-pattinson-donald-trump",
+   "source": "GB News",
+   "published": "2026-11-26T01:47:08Z",
+   "breaking": true
+  },
   {
    "title": "BBC to be investigated by Government antisemitism adviser over 'hostile' work environment",
    "url": "https://www.gbnews.com/news/bbc-investigation-antisemitism-claims-hostile-work-environment",
    "source": "GB News",
    "published": "2026-11-26T00:45:50Z",
-   "breaking": true
-  },
-  {
-   "title": "Nigel Farage predicts 'some Labour MPs' will back Keep Britain Out campaign",
-   "url": "https://www.gbnews.com/politics/video-nigel-farage-predicts-labour-mps-back-keep-britain-out-campaign",
-   "source": "GB News",
-   "published": "2026-11-25T22:53:18Z",
    "breaking": true
   }
  ],
