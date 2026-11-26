@@ -1,18 +1,18 @@
 {
- "checkedAt": "2026-11-26T22:47:56Z",
+ "checkedAt": "2026-11-26T23:47:15Z",
  "items": [
+  {
+   "title": "UK to pay 'participation' fee to deliver EU deals",
+   "url": "https://www.bbc.co.uk/news/articles/ck2057x387ego?at_medium=RSS&at_campaign=rss",
+   "source": "BBC News",
+   "published": "2026-11-26T23:17:12Z",
+   "breaking": true
+  },
   {
    "title": "Britain's grid operator spends record \u00a360m in a day keeping the lights on as power alerts issued",
    "url": "https://www.gbnews.com/news/britains-grid-operator-power-alerts-issued",
    "source": "GB News",
    "published": "2026-11-26T20:52:04Z",
-   "breaking": true
-  },
-  {
-   "title": "Net migration to UK falls to lowest level since 1997 excluding pandemic",
-   "url": "https://www.theguardian.com/uk-news/2026/nov/26/net-migration-to-uk-falls-to-lowest-level-since-1997-excluding-pandemic",
-   "source": "The Guardian",
-   "published": "2026-11-26T20:01:47Z",
    "breaking": true
   }
  ],
