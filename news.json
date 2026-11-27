@@ -1,6 +1,20 @@
 {
- "checkedAt": "2026-11-27T08:36:11Z",
+ "checkedAt": "2026-11-27T09:47:15Z",
  "items": [
+  {
+   "title": "Department for Work and Pensions takes some services offline after 'cyber incident'",
+   "url": "https://www.bbc.co.uk/news/articles/c8wy5p6pv2e2o?at_medium=RSS&at_campaign=rss",
+   "source": "BBC News",
+   "published": "2026-11-27T09:08:50Z",
+   "breaking": true
+  },
+  {
+   "title": "Kim Jong-un cuts off military aid to Vladimir Putin as authoritarian alliance fractures",
+   "url": "https://www.gbnews.com/news/world/kim-jong-un-vladimir-putin-north-korea-russia-military-aid-cit-off",
+   "source": "GB News",
+   "published": "2026-11-27T08:34:21Z",
+   "breaking": true
+  },
   {
    "title": "Britain is dangerously unprepared for war and the Government must wake up before it is too late",
    "url": "https://www.gbnews.com/opinion/britain-war-government-army-military-funding-security-threats-russia-putin-lord-richard-dannatt",
@@ -9,31 +23,10 @@
    "breaking": true
   },
   {
-   "title": "Labour on brink of civil war over Rosebank oilfield as 92MPs demand Andy Burnham abandons it",
+   "title": "Labour on brink of civil war over Rosebank oilfield as 96MPs demand Andy Burnham abandons it",
    "url": "https://www.gbnews.com/politics/politics-news-andy-burnham-labour-nigel-farage-kemi-badenoch",
    "source": "GB News",
    "published": "2026-11-27T07:31:13Z",
-   "breaking": true
-  },
-  {
-   "title": "Chris Mason: Immigration stats are down but will that be the end of the issue?",
-   "url": "https://www.bbc.co.uk/news/articles/cmvg23ql63ypo?at_medium=RSS&at_campaign=rss",
-   "source": "BBC News",
-   "published": "2026-11-27T06:12:19Z",
-   "breaking": true
-  },
-  {
-   "title": "Reform UK pledges to scrap hospital parking fees in England",
-   "url": "https://www.bbc.co.uk/news/articles/cw62pn8mdn39o?at_medium=RSS&at_campaign=rss",
-   "source": "BBC News",
-   "published": "2026-11-27T06:00:41Z",
-   "breaking": true
-  },
-  {
-   "title": "Have social media stars demeaned No 10?",
-   "url": "https://news.sky.com/story/have-social-media-stars-demeaned-no-10-13616937",
-   "source": "Sky News",
-   "published": "2026-11-27T05:50:00Z",
    "breaking": true
   }
  ],
